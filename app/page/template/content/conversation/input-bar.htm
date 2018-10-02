@@ -29,6 +29,7 @@
                   dir="auto">
         </textarea>
         <div class="shadow-input" data-bind="html: richTextInput, scrollSync: '#conversation-input-bar-text'" data-uie-name="input-message-rich-text"></div>
+        <rich-text-input params="placeholder: inputPlaceholder, mentionsObservable: currentMentions"></rich-text-input>
       </div>
       <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '#conversation-input-bar-text', onSelectionValidated: addMention"></mention-suggestions>
 
