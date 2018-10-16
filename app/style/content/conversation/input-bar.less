@@ -37,7 +37,7 @@
   .custom-scrollbar;
   .reset-textarea;
 
-  overflow: hidden;
+  width: 100%;
   max-width: @conversation-max-width - @conversation-message-sender-width - @conversation-message-timestamp-width;
   height: @conversation-input-line-height;
   min-height: @conversation-input-line-height;
@@ -47,6 +47,8 @@
   margin-bottom: (@conversation-input-min-height - @conversation-input-line-height) / 2;
   background-color: transparent;
   line-height: @conversation-input-line-height;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &::placeholder {
     .label-xs;

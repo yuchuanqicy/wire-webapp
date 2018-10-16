@@ -127,7 +127,6 @@ z.event.WebApp = {
   },
   EVENT: {
     NOTIFICATION_HANDLING_STATE: 'wire.webapp.event.notification_handling',
-    UPDATE_TIME_OFFSET: 'wire.webapp.event.update_time_offset',
   },
   EXTENSIONS: {
     GIPHY: {
@@ -149,7 +148,6 @@ z.event.WebApp = {
     UNREAD_COUNT: 'wire.webapp.lifecycle.unread_count',
     UPDATE: 'wire.webapp.lifecycle.update',
   },
-  LOADED: 'wire.webapp.loaded', // todo: deprecated - remove when user base of wrappers version >= 2.12 is large enough
   NOTIFICATION: {
     CLICK: 'wire.webapp.notification.click',
     NOTIFY: 'wire.webapp.notification.notify',
@@ -200,11 +198,12 @@ z.event.WebApp = {
     CALL_REJECT: 'wire.webapp.shortcut.call_reject',
     DELETE: 'wire.webapp.shortcut.delete',
     NEXT: 'wire.webapp.shortcut.next',
+    NOTIFICATIONS: 'wire.webapp.shortcut.notifications',
     PEOPLE: 'wire.webapp.shortcut.people',
     PICTURE: 'wire.webapp.shortcut.picture',
     PING: 'wire.webapp.shortcut.ping',
     PREV: 'wire.webapp.shortcut.prev',
-    SILENCE: 'wire.webapp.shortcut.silence',
+    SILENCE: 'wire.webapp.shortcut.silence', // todo: deprecated - remove when user base of wrappers version >= 3.4 is large enough
     START: 'wire.webapp.shortcut.start',
   },
   SIGN_OUT: 'wire.webapp.logout',
