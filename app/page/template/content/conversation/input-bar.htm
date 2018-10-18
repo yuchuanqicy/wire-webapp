@@ -13,7 +13,7 @@
 
     <!-- ko if: !conversationEntity().removed_from_conversation() -->
       <div class="controls-center" data-bind="template: {afterRender: setElements}">
-        <textarea id="conversation-input-bar-text"
+        <!--textarea id="conversation-input-bar-text"
                   class="conversation-input-bar-text border-theme"
                   data-bind="event: {'keydown': onInputKeyDown, 'keyup': onInputKeyUp, 'select click': handleMentionFlow, 'input': updateMentions},
                              focus_on_keydown: true,
@@ -30,8 +30,15 @@
         <div class="shadow-input" data-bind="html: richTextInput,
                                              scrollSync: '#conversation-input-bar-text',
                                              heightSync: {target: '#conversation-input-bar-text', trigger: richTextInput, callback: scrollMessageList}"
-             data-uie-name="input-message-rich-text"></div>
-        <rich-text-input params="placeholder: inputPlaceholder, mentionsObservable: currentMentions"></rich-text-input>
+             data-uie-name="input-message-rich-text"></div-->
+        <rich-text-input params="
+          placeholder: inputPlaceholder, 
+          mentionsObservable: currentMentions, 
+          inputObservable: input,
+          onKeyDown: onInputKeyDown,
+          onKeyUp: onInputKeyUp,
+          onEnter: onInputEnter
+        "></rich-text-input>
       </div>
       <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '#conversation-input-bar-text', onSelectionValidated: addMention"></mention-suggestions>
 

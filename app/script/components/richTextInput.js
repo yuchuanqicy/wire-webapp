@@ -23,22 +23,125 @@ window.z = window.z || {};
 window.z.components = z.components || {};
 
 z.components.RichTextInput = class RichTextInput {
+  static get CONFIG() {
+    return {
+      MENTION_CLASS: 'input-mention',
+    };
+  }
   constructor(params, {element}) {
     this.inputElement = element.querySelector('.rich-text-editable');
     this.placeholder = params.placeholder;
     this.mentionsObservable = params.mentionsObservable;
     this.inputObservable = params.inputObservable;
     this.addTextObservable = params.addTextObservable;
+    this.onKeyDown = params.onKeyDown;
+    this.onKeyUp = params.onKeyUp;
+    this.onEnter = params.onEnter;
+    this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
+
+    this.richText = ko.pureComputed(() => {
+      const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
+      const pieces = this.mentionsObservable()
+        .slice()
+        .reverse()
+        .reduce(
+          (currentPieces, mentionEntity) => {
+            const currentPiece = currentPieces.shift();
+            currentPieces.unshift(currentPiece.substr(mentionEntity.endIndex));
+            currentPieces.unshift(currentPiece.substr(mentionEntity.startIndex, mentionEntity.length));
+            currentPieces.unshift(currentPiece.substr(0, mentionEntity.startIndex));
+            return currentPieces;
+          },
+          [this.inputObservable()]
+        );
+
+      return pieces
+        .map((piece, index) => {
+          const textPiece = z.util.SanitizationUtil.escapeString(piece).replace(/[\r\n]/g, '<br>');
+          return `<span${index % 2 ? mentionAttributes : ''}>${textPiece}</span>`;
+        })
+        .join('')
+        .replace(/<br><\/span>$/, '<br>&nbsp;</span>');
+    });
+
+    //this.richText.subscribe(richText => this.inputElement.innerHTML = richText)
   }
 
-  onKeyDown() {}
-  onKeyUp() {}
   onSelectStart() {}
+  onClick() {}
   onInput() {
+    this.updateSelection();
     this.inputObservable(this.inputElement.textContent);
   }
-  onEnter() {}
-  onClick() {}
+  updateSelection() {
+    // DONE: extend selection to completely include mentions
+    // DONE: set internal selection state
+    const selection = document.getSelection();
+    const anchorMention = this.getClosestMention(selection.anchorNode);
+    const focusMention = this.getClosestMention(selection.focusNode);
+    const range = selection.getRangeAt(0);
+    const position = selection.anchorNode.compareDocumentPosition(selection.focusNode);
+    const isBeforeInSameNode = !position && selection.anchorOffset < selection.focusOffset;
+    const isLtr = isBeforeInSameNode || position !== Node.DOCUMENT_POSITION_PRECEDING;
+    if (anchorMention) {
+      if (isLtr) {
+        range.setStartBefore(anchorMention);
+      } else {
+        range.setEndAfter(anchorMention);
+      }
+    }
+    if (focusMention) {
+      if (isLtr) {
+        range.setEndAfter(focusMention);
+      } else {
+        range.setStartBefore(focusMention);
+      }
+    }
+    this.selectionStart = this.getStartFromRange(range.startContainer, range.startOffset);
+    const length = range.toString().length;
+    this.selectionEnd = this.selectionStart + length;
+
+    return true;
+  }
+  getClosestMention(node) {
+    const element = node.nodeType === 3 ? node.parentNode : node;
+    return element.closest(RichTextInput.CONFIG.MENTION_CLASS);
+  }
+
+  restoreSelection() {
+    const inputNodes = Array.from(this.inputElement.childNodes);
+    const len = node => node.textContent.length;
+    const findNodeAt = (nodes, pos) => {
+      let index = 0;
+      let lenSum = len(nodes[index]);
+      while (nodes[index + 1] && pos > lenSum) {
+        index += 1;
+        lenSum += len(nodes[index]);
+      }
+      return {
+        node: nodes[index],
+        offset: pos - (lenSum - len(nodes[index])),
+      };
+    };
+    const selection = document.getSelection();
+    const range = document.createRange();
+    const start = findNodeAt(inputNodes, this.selectionStart);
+    const end = findNodeAt(inputNodes, this.selectionEnd);
+    range.setStart(start.node, start.offset);
+    range.setEnd(end.node, end.offset);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+
+  getStartFromRange(startContainer, startOffset) {
+    const inputNodes = Array.from(this.inputElement.childNodes);
+    const isTextNode = startContainer.nodeType === 3;
+    const startLength = isTextNode ? startOffset : 0;
+    const countNodes = isTextNode ? inputNodes.indexOf(startContainer) : startOffset;
+    return inputNodes
+      .slice(0, countNodes)
+      .reduce((textLength, node) => textLength + node.textContent.length, startLength);
+  }
 };
 
 ko.components.register('rich-text-input', {
@@ -46,12 +149,13 @@ ko.components.register('rich-text-input', {
     <div
       class="rich-text-editable"
       contenteditable
+      dir="auto"
       data-bind="
-        events:{
+        event:{
           keydown: onKeyDown,
           keyup: onKeyUp,
-          selectstart: onSelectStart
-          input: onInput
+          input: onInput,
+          mouseup: getSelection
         },
         click: onClick,
         enter: onEnter,

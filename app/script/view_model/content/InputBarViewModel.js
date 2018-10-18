@@ -48,6 +48,9 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.onWindowClick = this.onWindowClick.bind(this);
     this.setElements = this.setElements.bind(this);
     this.updateSelectionState = this.updateSelectionState.bind(this);
+    this.onInputEnter = this.onInputEnter.bind(this);
+    this.onInputKeyDown = this.onInputKeyDown.bind(this);
+    this.onInputKeyUp = this.onInputKeyUp.bind(this);
 
     this.shadowInput = null;
     this.textarea = null;
@@ -436,7 +439,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
   }
 
   onInputKeyDown(data, keyboardEvent) {
-    const inputHandledByEmoji = !this.editedMention() && this.emojiInput.onInputKeyDown(data, keyboardEvent);
+    const inputHandledByEmoji = !this.editedMention() && false; //&& this.emojiInput.onInputKeyDown(data, keyboardEvent);
 
     if (!inputHandledByEmoji) {
       switch (keyboardEvent.key) {
@@ -583,10 +586,10 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
   onInputKeyUp(data, keyboardEvent) {
     if (!this.editedMention()) {
-      this.emojiInput.onInputKeyUp(data, keyboardEvent);
+      //this.emojiInput.onInputKeyUp(data, keyboardEvent);
     }
     if (keyboardEvent.key !== z.util.KeyboardUtil.KEY.ESC) {
-      this.handleMentionFlow();
+      //this.handleMentionFlow();
     }
   }
 
