@@ -589,7 +589,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
       //this.emojiInput.onInputKeyUp(data, keyboardEvent);
     }
     if (keyboardEvent.key !== z.util.KeyboardUtil.KEY.ESC) {
-      //this.handleMentionFlow();
+      this.handleMentionFlow();
     }
   }
 

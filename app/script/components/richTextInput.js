@@ -74,8 +74,6 @@ z.components.RichTextInput = class RichTextInput {
     this.inputObservable(this.inputElement.textContent);
   }
   updateSelection() {
-    // DONE: extend selection to completely include mentions
-    // DONE: set internal selection state
     const selection = document.getSelection();
     const anchorMention = this.getClosestMention(selection.anchorNode);
     const focusMention = this.getClosestMention(selection.focusNode);
