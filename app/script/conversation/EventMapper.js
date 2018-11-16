@@ -331,7 +331,7 @@ z.conversation.EventMapper = class EventMapper {
 
     const messageEntity = new z.entity.MemberMessage();
 
-    const isSingleModeConversation = conversationEntity.is_one2one() || conversationEntity.is_request();
+    const isSingleModeConversation = conversationEntity.is1to1() || conversationEntity.isRequest();
     messageEntity.visible(!isSingleModeConversation);
 
     if (conversationEntity.isGroup()) {
@@ -381,6 +381,11 @@ z.conversation.EventMapper = class EventMapper {
     messageEntity.assets.push(this._mapAssetText(eventData));
     messageEntity.replacing_message_id = eventData.replacing_message_id;
     messageEntity.edited_timestamp = new Date(editedTime || eventData.edited_time).getTime();
+
+    if (eventData.quote) {
+      const {message_id: messageId, user_id: userId, error} = eventData.quote;
+      messageEntity.quote(new z.message.QuoteEntity({error, messageId, userId}));
+    }
 
     return messageEntity;
   }

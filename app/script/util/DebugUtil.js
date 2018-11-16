@@ -23,19 +23,23 @@ window.z = window.z || {};
 window.z.util = z.util || {};
 
 z.util.DebugUtil = class DebugUtil {
-  constructor({calling, client, conversation, cryptography, event, user, storage}) {
+  constructor(repositories) {
+    const {calling, client, connection, conversation, cryptography, event, user, storage} = repositories;
+
     this.callingRepository = calling;
     this.clientRepository = client;
     this.conversationRepository = conversation;
+    this.connectionRepository = connection;
     this.cryptographyRepository = cryptography;
     this.eventRepository = event;
     this.storageRepository = storage;
     this.userRepository = user;
+
     this.logger = new z.util.Logger('z.util.DebugUtil', z.config.LOGGER.OPTIONS);
   }
 
   blockAllConnections() {
-    const blockUsers = this.userRepository.users().map(user_et => this.userRepository.blockUser(user_et));
+    const blockUsers = this.userRepository.users().map(userEntity => this.connectionRepository.blockUser(userEntity));
     return Promise.all(blockUsers);
   }
 
@@ -181,7 +185,7 @@ z.util.DebugUtil = class DebugUtil {
       const additionalNotifications = !remoteUserId
         ? notifications
         : notifications.filter(notification => {
-            const {payload} = notification;
+            const payload = notification.payload;
             for (const {data, from} of payload) {
               if (data && [localUserId, remoteUserId].includes(from)) {
                 const {sender, recipient} = data;

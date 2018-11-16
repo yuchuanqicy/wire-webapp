@@ -61,13 +61,13 @@ ko.components.register('conversation-list-cell', {
         <!-- /ko -->
       </div>
       <div class="conversation-list-cell-center">
-        <!-- ko if: conversation.is_one2one() && conversation.selfUser().inTeam() -->
+        <!-- ko if: conversation.is1to1() && conversation.selfUser().inTeam() -->
           <availability-state class="conversation-list-cell-availability"
                               data-uie-name="status-availability-item"
                               params="availability: conversation.availabilityOfUser, label: conversation.display_name(), theme: is_selected(conversation)">
           </availability-state>
         <!-- /ko -->
-        <!-- ko ifnot: conversation.is_one2one() && conversation.selfUser().inTeam() -->
+        <!-- ko ifnot: conversation.is1to1() && conversation.selfUser().inTeam() -->
           <span class="conversation-list-cell-name" data-bind="text: conversation.display_name(), css: {'text-theme': is_selected(conversation)}"></span>
         <!-- /ko -->
         <span class="conversation-list-cell-description" data-bind="text: cell_state().description" data-uie-name="secondary-line"></span>
@@ -80,6 +80,9 @@ ko.components.register('conversation-list-cell', {
           <!-- /ko -->
           <!-- ko if: cell_state().icon === z.conversation.ConversationStatusIcon.UNREAD_MENTION -->
             <span class="conversation-list-cell-badge cell-badge-light" data-uie-name="status-mention"><mention-icon class="svg-icon"></mention-icon></span>
+          <!-- /ko -->
+          <!-- ko if: cell_state().icon === z.conversation.ConversationStatusIcon.UNREAD_REPLY -->
+            <span class="conversation-list-cell-badge cell-badge-light" data-uie-name="status-reply"><reply-icon class="svg-icon"></reply-icon></span>
           <!-- /ko -->
           <!-- ko if: cell_state().icon === z.conversation.ConversationStatusIcon.UNREAD_PING -->
             <span class="conversation-list-cell-badge cell-badge-light" data-uie-name="status-ping"><ping-icon class="svg-icon"></ping-icon></span>

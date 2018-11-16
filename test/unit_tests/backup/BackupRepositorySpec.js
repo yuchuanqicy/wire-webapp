@@ -35,31 +35,22 @@ const messages = [
 
 describe('z.backup.BackupRepository', () => {
   const test_factory = new TestFactory();
+  let backupRepository = undefined;
 
-  beforeAll(done => {
-    test_factory
-      .exposeBackupActors()
-      .then(done)
-      .catch(done.fail);
+  beforeEach(() => {
+    jasmine.clock().install();
+    return test_factory.exposeBackupActors().then(() => (backupRepository = TestFactory.backup_repository));
   });
-
-  beforeEach(() => jasmine.clock().install());
 
   afterEach(() => jasmine.clock().uninstall());
 
   afterAll(() => jasmine.clock().uninstall());
 
-  describe('"createMetaData"', () => {
-    it('creates backup meta data', () => {
+  describe('createMetaData', () => {
+    it('creates backup metadata', () => {
       const freezedTime = new Date();
       jasmine.clock().mockDate(freezedTime);
 
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
       const metaDescription = backupRepository.createMetaData();
 
       expect(metaDescription.client_id).toBe(TestFactory.client_repository.currentClient().id);
@@ -70,7 +61,7 @@ describe('z.backup.BackupRepository', () => {
     });
   });
 
-  describe('"generateHistory"', () => {
+  describe('generateHistory', () => {
     const eventStoreName = z.storage.StorageSchemata.OBJECT_STORE.EVENTS;
 
     beforeEach(() => {
@@ -80,18 +71,9 @@ describe('z.backup.BackupRepository', () => {
       ]);
     });
 
-    afterEach(() => {
-      return TestFactory.storage_service.clearStores();
-    });
+    afterEach(() => TestFactory.storage_service.clearStores());
 
     it('generates an archive of the database', () => {
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
-
       const filesToCheck = [
         z.backup.BackupRepository.CONFIG.FILENAME.CONVERSATIONS,
         z.backup.BackupRepository.CONFIG.FILENAME.EVENTS,
@@ -101,31 +83,29 @@ describe('z.backup.BackupRepository', () => {
 
       return archivePromise.then(zip => {
         const fileNames = Object.keys(zip.files);
+
         expect(fileNames).toContain('export.json');
         filesToCheck.map(filename => expect(fileNames).toContain(filename));
 
         const validateConversationsPromise = zip.files[z.backup.BackupRepository.CONFIG.FILENAME.CONVERSATIONS]
           .async('string')
           .then(conversationsStr => JSON.parse(conversationsStr))
-          .then(conversations => expect(conversations).toEqual([conversation]));
+          .then(conversations => {
+            expect(conversations).toEqual([conversation]);
+          });
 
         const validateEventsPromise = zip.files[z.backup.BackupRepository.CONFIG.FILENAME.EVENTS]
           .async('string')
           .then(eventsStr => JSON.parse(eventsStr))
-          .then(events => expect(events).toEqual(messages));
+          .then(events => {
+            expect(events).toEqual(messages);
+          });
 
         return Promise.all([validateConversationsPromise, validateEventsPromise]);
       });
     });
 
     it('ignores verification events in the backup', () => {
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
-
       const verificationEvent = {
         conversation: conversationId,
         type: z.event.Client.CONVERSATION.VERIFICATION,
@@ -149,19 +129,16 @@ describe('z.backup.BackupRepository', () => {
     });
 
     it('cancels export', () => {
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
-
       spyOn(backupRepository, 'isCanceled').and.returnValue(true);
 
       const promise = backupRepository
         .generateHistory(noop)
-        .then(() => fail('export show fail with a CancelError'))
-        .catch(error => expect(error instanceof z.backup.CancelError).toBe(true));
+        .then(() => {
+          throw new Error('Export should fail with a CancelError');
+        })
+        .catch(error => {
+          expect(error instanceof z.backup.CancelError).toBe(true);
+        });
 
       backupRepository.cancelAction();
 
@@ -169,15 +146,8 @@ describe('z.backup.BackupRepository', () => {
     });
   });
 
-  describe('"importHistory"', () => {
-    it("fails if metadata don't match", () => {
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
-
+  describe('importHistory', () => {
+    it('fails if metadata doesn´t match', () => {
       const tests = [
         {
           expectedError: z.backup.DifferentAccountError,
@@ -204,26 +174,18 @@ describe('z.backup.BackupRepository', () => {
 
         return backupRepository
           .importHistory(archive, noop, noop)
-          .then(() => fail('import should fail'))
-          .catch(error =>
-            expect(error instanceof testDescription.expectedError).toBe(
-              true,
-              `${error} not instanceof of ${testDescription.expectedError}`
-            )
-          );
+          .then(() => {
+            throw new Error('Import should fail');
+          })
+          .catch(error => {
+            expect(error instanceof testDescription.expectedError).toBe(true);
+          });
       });
 
       return Promise.all(promises);
     });
 
     it('successfully import backup', () => {
-      const backupRepository = new z.backup.BackupRepository(
-        TestFactory.backup_service,
-        TestFactory.client_repository,
-        TestFactory.conversation_repository,
-        TestFactory.user_repository
-      );
-
       const archive = new JSZip();
 
       archive.file(
@@ -236,10 +198,12 @@ describe('z.backup.BackupRepository', () => {
       return backupRepository.importHistory(archive, noop, noop).then(() => {
         const conversationsTest = TestFactory.storage_service
           .getAll(z.storage.StorageSchemata.OBJECT_STORE.CONVERSATIONS)
-          .then(conversations => {
-            expect(conversations.length).toEqual(1);
-            expect(conversations[0].name).toEqual(conversation.name);
-            expect(conversations[0].id).toEqual(conversation.id);
+          .then(conversationsData => {
+            expect(conversationsData.length).toEqual(1);
+            const [conversationData] = conversationsData;
+
+            expect(conversationData.name).toEqual(conversation.name);
+            expect(conversationData.id).toEqual(conversation.id);
           });
 
         const eventsTest = TestFactory.storage_service

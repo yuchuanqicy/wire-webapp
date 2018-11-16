@@ -27,43 +27,18 @@ describe('User Service', () => {
     restUrl: 'http://localhost.com',
     websocket_url: 'wss://localhost',
   };
-  let user_service = null;
+  let userService = null;
 
   beforeEach(() => {
     server = sinon.fakeServer.create();
 
-    const client = new z.service.BackendClient(urls);
-
-    user_service = new z.user.UserService(client);
+    const backendClient = new z.service.BackendClient(urls);
+    userService = new z.user.UserService(backendClient);
   });
 
-  afterEach(() => {
-    server.restore();
-  });
+  afterEach(() => server.restore());
 
-  it('can get the users connections', done => {
-    const request_url = `${urls.restUrl}/connections?size=500`;
-    server.respondWith('GET', request_url, [
-      200,
-      {'Content-Type': 'application/json'},
-      JSON.stringify(payload.connections.get),
-    ]);
-
-    user_service
-      .get_own_connections()
-      .then(response => {
-        expect(response.has_more).toBeFalsy();
-        expect(response.connections.length).toBe(2);
-        expect(response.connections[0].status).toEqual('accepted');
-        expect(response.connections[1].conversation).toEqual('45c8f986-6c8f-465b-9ac9-bd5405e8c944');
-        done();
-      })
-      .catch(done.fail);
-
-    server.respond();
-  });
-
-  describe('get_users', () => {
+  describe('getUsers', () => {
     it('can get a single existing user from the server', done => {
       const request_url = `${urls.restUrl}/users?ids=7025598b-ffac-4993-8a81-af3f35b7147f`;
       server.respondWith('GET', request_url, [
@@ -72,8 +47,8 @@ describe('User Service', () => {
         JSON.stringify(payload.users.get.one),
       ]);
 
-      user_service
-        .get_users(['7025598b-ffac-4993-8a81-af3f35b7147f'])
+      userService
+        .getUsers(['7025598b-ffac-4993-8a81-af3f35b7147f'])
         .then(response => {
           expect(response.length).toBe(1);
           expect(response[0].id).toBe('d5a39ffb-6ce3-4cc8-9048-0e15d031b4c5');
@@ -88,8 +63,8 @@ describe('User Service', () => {
       const request_url = `${urls.restUrl}/users?ids=7025598b-ffac-4993-8a81-af3f35b71414`;
       server.respondWith('GET', request_url, [404, {'Content-Type': 'application/json'}, '']);
 
-      user_service
-        .get_users(['7025598b-ffac-4993-8a81-af3f35b71414'])
+      userService
+        .getUsers(['7025598b-ffac-4993-8a81-af3f35b71414'])
         .then(done.fail)
         .catch(error => {
           expect(error.code).toBe(z.error.BackendClientError.STATUS_CODE.NOT_FOUND);
@@ -109,8 +84,8 @@ describe('User Service', () => {
         JSON.stringify(payload.users.get.many),
       ]);
 
-      user_service
-        .get_users(['7025598b-ffac-4993-8a81-af3f35b7147f', '7025598b-ffac-4993-8a81-af3f35b71414'])
+      userService
+        .getUsers(['7025598b-ffac-4993-8a81-af3f35b7147f', '7025598b-ffac-4993-8a81-af3f35b71414'])
         .then(response => {
           expect(response.length).toBe(2);
           expect(response[0].id).toBe('d5a39ffb-6ce3-4cc8-9048-0e15d031b4c5');
@@ -127,8 +102,8 @@ describe('User Service', () => {
       }/users?ids=7025598b-ffac-4993-8a81-af3f35b71488%2C7025598b-ffac-4993-8a81-af3f35b71414`;
       server.respondWith('GET', request_url, [404, {'Content-Type': 'application/json'}, '']);
 
-      user_service
-        .get_users(['7025598b-ffac-4993-8a81-af3f35b71488', '7025598b-ffac-4993-8a81-af3f35b71414'])
+      userService
+        .getUsers(['7025598b-ffac-4993-8a81-af3f35b71488', '7025598b-ffac-4993-8a81-af3f35b71414'])
         .then(done.fail)
         .catch(error => {
           expect(error.code).toBe(z.error.BackendClientError.STATUS_CODE.NOT_FOUND);
@@ -148,8 +123,8 @@ describe('User Service', () => {
         JSON.stringify(payload.users.get.one),
       ]);
 
-      user_service
-        .get_users(['d5a39ffb-6ce3-4cc8-9048-0e15d031b4c5', '7025598b-ffac-4993-8a81-af3f35b71425'])
+      userService
+        .getUsers(['d5a39ffb-6ce3-4cc8-9048-0e15d031b4c5', '7025598b-ffac-4993-8a81-af3f35b71425'])
         .then(response => {
           expect(response.length).toBe(1);
           expect(response[0].id).toBe('d5a39ffb-6ce3-4cc8-9048-0e15d031b4c5');

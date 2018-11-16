@@ -55,7 +55,7 @@ describe('when entering account data', () => {
   const passwordInput = () => wrapper.find('[data-uie-name="enter-password"]').first();
   const doNextButton = () => wrapper.find('[data-uie-name="do-next"]').first();
   const doTermsCheckbox = () => wrapper.find('[data-uie-name="do-terms"]').first();
-  const validationErrorMessage = () => wrapper.find('[data-uie-name="error-message"]').at(2);
+  const validationErrorMessage = () => wrapper.find('[data-uie-name="error-message"]').last();
 
   const createAccountState = account => {
     return {
@@ -91,6 +91,7 @@ describe('when entering account data', () => {
       };
 
       wrapper = mountWithIntl(<AccountForm />, mockStore(createAccountState(prefilledAccount)));
+
       expect(doNextButton().props().disabled).toBe(false);
     });
   });
@@ -109,12 +110,12 @@ describe('when entering account data', () => {
       wrapper = mountWithIntl(<AccountForm />, mockStore(createAccountState(prefilledAccount)));
 
       expect(doNextButton().props().disabled).toBe(true);
-
       nameInput().simulate('change', {target: {value: expectedName}});
+
       expect(nameInput().props().value).toBe(expectedName);
       expect(doNextButton().props().disabled).toBe(false);
-
       doNextButton().simulate('submit');
+
       expect(validationErrorMessage().text()).toBe(expectedErrorMessage);
 
       done();
@@ -134,12 +135,12 @@ describe('when entering account data', () => {
       wrapper = mountWithIntl(<AccountForm />, mockStore(createAccountState(prefilledAccount)));
 
       expect(doNextButton().props().disabled).toBe(true);
-
       nameInput().simulate('change', {target: {value: actualName}});
+
       expect(nameInput().props().value).toBe(expectedName);
       expect(doNextButton().props().disabled).toBe(false);
-
       doNextButton().simulate('submit');
+
       expect(validationErrorMessage().text()).toBe(expectedErrorMessage);
 
       done();

@@ -49,7 +49,7 @@ import {Redirect, RouteComponentProps, withRouter} from 'react-router';
 import {Link as RRLink} from 'react-router-dom';
 import {loginStrings, logoutReasonStrings} from '../../strings';
 import AppAlreadyOpen from '../component/AppAlreadyOpen';
-import * as Environment from '../Environment';
+import * as config from '../config';
 import EXTERNAL_ROUTE from '../externalRoute';
 import ROOT_ACTIONS from '../module/action/';
 import BackendError from '../module/action/BackendError';
@@ -63,6 +63,12 @@ import {isDesktopApp} from '../Runtime';
 import {parseError, parseValidationErrors} from '../util/errorUtil';
 import * as URLUtil from '../util/urlUtil';
 import Page from './Page';
+
+declare global {
+  interface Window {
+    wSSOCapable: boolean;
+  }
+}
 
 interface Props extends React.HTMLAttributes<Login>, RouteComponentProps {}
 
@@ -87,7 +93,6 @@ interface State {
   conversationCode: string;
   conversationKey: string;
   email: string;
-  hideSSOLogin: boolean;
   isValidLink: boolean;
   logoutReason: string;
   password: string;
@@ -110,7 +115,6 @@ class Login extends React.Component<CombinedProps, State> {
     conversationCode: null,
     conversationKey: null,
     email: '',
-    hideSSOLogin: false,
     isValidLink: true,
     logoutReason: null,
     password: '',
@@ -156,8 +160,6 @@ class Login extends React.Component<CombinedProps, State> {
           }));
         });
     }
-
-    this.setState((state, props) => ({hideSSOLogin: URLUtil.hasURLParameter(QUERY_KEY.HIDE_SSO)}));
   };
 
   componentDidMount = () => {
@@ -267,8 +269,8 @@ class Login extends React.Component<CombinedProps, State> {
   };
 
   isValidPhoneNumber = (phoneNumber: string) => {
-    const isProductionBackend = Environment.isEnvironment(Environment.ENVIRONMENT.PRODUCTION);
-    const e164regex = isProductionBackend ? /^\+[1-9]\d{1,14}$/ : /^\+[0-9]\d{1,14}$/;
+    const allowDebugPhoneNumbers = config.FEATURE.ENABLE_DEBUG;
+    const e164regex = allowDebugPhoneNumbers ? /^\+[0-9]\d{1,14}$/ : /^\+[1-9]\d{1,14}$/;
 
     return e164regex.test(phoneNumber);
   };
@@ -287,21 +289,13 @@ class Login extends React.Component<CombinedProps, State> {
       intl: {formatMessage: _},
       loginError,
     } = this.props;
-    const {
-      logoutReason,
-      isValidLink,
-      hideSSOLogin,
-      email,
-      password,
-      persist,
-      validInputs,
-      validationErrors,
-    } = this.state;
+    const {logoutReason, isValidLink, email, password, persist, validInputs, validationErrors} = this.state;
     const backArrow = (
       <Link to={ROUTE.INDEX} component={RRLink} data-uie-name="go-index">
         <ArrowIcon direction="left" color={COLOR.TEXT} style={{opacity: 0.56}} />
       </Link>
     );
+    const isSSOCapable = !isDesktopApp() || (isDesktopApp() && window.wSSOCapable === true);
     return (
       <Page>
         <IsMobile>
@@ -406,7 +400,7 @@ class Login extends React.Component<CombinedProps, State> {
                     )}
                   </Form>
                 </div>
-                {Environment.isInternalEnvironment() && !isDesktopApp() && !hideSSOLogin ? (
+                {isSSOCapable ? (
                   <div style={{marginTop: '36px'}}>
                     <Link center onClick={this.forgotPassword} data-uie-name="go-forgot-password">
                       {_(loginStrings.forgotPassword)}

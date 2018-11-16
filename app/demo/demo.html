@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Wire, Copyright (C) 2018 Wire Swiss GmbH -->
-<!-- {{config.CURRENT_VERSION_ID}} -->
+<!-- {{@config.VERSION}} -->
 <html id="wire-main-app">
   <head>
     <title>Wire</title>
@@ -106,18 +106,23 @@
       .box-list-dark {
         background: #222;
       }
-
-      #icons * {
-        font-size: 0;
-        margin: 8px;
+      .iconpreview {
+        display: flex;
+        margin-top: 8px;
       }
-
-      #icons *:not(.override-color) svg path{
+      .iconpreview__icon{
+        flex-basis: 32px;
+      }
+      .iconpreview__icon svg{
+        max-width: 16px;
+        max-height: 16px;
+      }
+      .iconpreview__icon:not(.override-color) svg path{
         fill: currentColor;
       }
     </style>
   </head>
-  
+
   <body class="theme-blue main-accent-color-1">
   #include('../../page/template/#dest/vendor.htm')
   #include('../../page/template/#dest/component.htm')

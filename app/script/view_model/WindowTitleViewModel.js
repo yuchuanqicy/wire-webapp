@@ -54,16 +54,20 @@ z.viewModel.WindowTitleViewModel = class WindowTitleViewModel {
         const unreadConversations = this.conversationRepository
           .conversations_unarchived()
           .filter(conversationEntity => {
-            const {allMessages: unreadMessages, selfMentions: unreadSelfMentions} = conversationEntity.unreadState();
+            const {
+              allMessages: unreadMessages,
+              selfMentions: unreadSelfMentions,
+              selfReplies: unreadSelfReplies,
+            } = conversationEntity.unreadState();
 
-            const isIgnored = conversationEntity.is_request() || conversationEntity.showNotificationsNothing();
+            const isIgnored = conversationEntity.isRequest() || conversationEntity.showNotificationsNothing();
 
             if (isIgnored) {
               return false;
             }
 
-            return conversationEntity.showNotificationsOnlyMentions()
-              ? unreadSelfMentions.length
+            return conversationEntity.showNotificationsMentionsAndReplies()
+              ? unreadSelfMentions.length || unreadSelfReplies.length
               : unreadMessages.length > 0 || conversationEntity.hasJoinableCall();
           }).length;
 

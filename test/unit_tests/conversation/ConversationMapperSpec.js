@@ -29,30 +29,35 @@ describe('Conversation Mapper', () => {
   describe('mapConversations', () => {
     it('throws an error for unexpected parameters', () => {
       const functionCallUndefinedParam = () => conversation_mapper.mapConversations();
+
       expect(functionCallUndefinedParam).toThrowError(
         z.error.ConversationError,
         z.error.BaseError.MESSAGE.MISSING_PARAMETER
       );
 
       const functionCallEmtpyArray = () => conversation_mapper.mapConversations([]);
+
       expect(functionCallEmtpyArray).toThrowError(
         z.error.ConversationError,
         z.error.BaseError.MESSAGE.INVALID_PARAMETER
       );
 
       const functionCallWrongType = () => conversation_mapper.mapConversations('Conversation');
+
       expect(functionCallWrongType).toThrowError(
         z.error.ConversationError,
         z.error.BaseError.MESSAGE.INVALID_PARAMETER
       );
 
       const functionCallUndefinedInArray = () => conversation_mapper.mapConversations([undefined]);
+
       expect(functionCallUndefinedInArray).toThrowError(
         z.error.ConversationError,
         z.error.BaseError.MESSAGE.MISSING_PARAMETER
       );
 
       const functionCallStringInArray = () => conversation_mapper.mapConversations(['Conversation']);
+
       expect(functionCallStringInArray).toThrowError(
         z.error.ConversationError,
         z.error.BaseError.MESSAGE.INVALID_PARAMETER
@@ -60,7 +65,7 @@ describe('Conversation Mapper', () => {
     });
 
     it('maps a single conversation', () => {
-      const {conversation} = entities;
+      const conversation = entities.conversation;
       const initial_timestamp = Date.now();
       const [conversation_et] = conversation_mapper.mapConversations([conversation], initial_timestamp);
 
@@ -81,18 +86,20 @@ describe('Conversation Mapper', () => {
       expect(conversation_et.type()).toBe(z.conversation.ConversationType.GROUP);
 
       const expectedMutedTimestamp = new Date(conversation.members.self.otr_muted_ref).getTime();
+
       expect(conversation_et.mutedTimestamp()).toEqual(expectedMutedTimestamp);
       expect(conversation_et.last_event_timestamp()).toBe(initial_timestamp);
       expect(conversation_et.last_server_timestamp()).toBe(initial_timestamp);
     });
 
     it('maps multiple conversations', () => {
-      const {conversations} = payload.conversations.get;
+      const conversations = payload.conversations.get.conversations;
       const conversation_ets = conversation_mapper.mapConversations(conversations);
 
       expect(conversation_ets.length).toBe(conversations.length);
 
       const [first_conversation_et, second_conversation_et] = conversation_ets;
+
       expect(first_conversation_et.id).toBe(conversations[0].id);
       expect(first_conversation_et.last_event_timestamp()).toBe(1);
       expect(first_conversation_et.last_server_timestamp()).toBe(1);
@@ -111,6 +118,7 @@ describe('Conversation Mapper', () => {
       /* eslint-disable comma-spacing, key-spacing, sort-keys, quotes */
 
       const [conversation_et] = conversation_mapper.mapConversations([payload]);
+
       expect(conversation_et.name()).toBe(payload.name);
       expect(conversation_et.team_id).toBe(payload.team);
     });
@@ -162,6 +170,7 @@ describe('Conversation Mapper', () => {
     it('returns without updating if conversation entity does not exist', () => {
       conversation_et = undefined;
       const self_status = {muted: false};
+
       expect(conversation_et).toBe(undefined);
       expect(conversation_mapper.updateSelfStatus(conversation_et, self_status)).toBeFalsy();
     });
@@ -169,12 +178,14 @@ describe('Conversation Mapper', () => {
     it('can update the self status if the user leaves a conversation', () => {
       const self_status = {status: z.conversation.ConversationStatus.PAST_MEMBER};
       const updated_conversation_et = conversation_mapper.updateSelfStatus(conversation_et, self_status);
+
       expect(updated_conversation_et.removed_from_conversation()).toBeTruthy();
     });
 
     it('can update the self status if the user joins a conversation', () => {
       const self_status = {status: z.conversation.ConversationStatus.CURRENT_MEMBER};
       const updated_conversation_et = conversation_mapper.updateSelfStatus(conversation_et, self_status);
+
       expect(updated_conversation_et.removed_from_conversation()).toBeFalsy();
     });
 
@@ -330,10 +341,12 @@ describe('Conversation Mapper', () => {
       expect(merged_conversation.verification_state).toBe(local_data.verification_state);
 
       const expectedArchivedTimestamp = new Date(remote_data.members.self.otr_archived_ref).getTime();
+
       expect(merged_conversation.archived_timestamp).toBe(expectedArchivedTimestamp);
       expect(merged_conversation.archived_state).toBe(remote_data.members.self.otr_archived);
 
       const expectedNotificationTimestamp = new Date(remote_data.members.self.otr_muted_ref).getTime();
+
       expect(merged_conversation.muted_state).toBe(false);
       expect(merged_conversation.muted_timestamp).toBe(expectedNotificationTimestamp);
 
@@ -400,10 +413,12 @@ describe('Conversation Mapper', () => {
 
       // remote one is newer
       const expectedArchivedTimestamp = new Date(remote_data.members.self.otr_archived_ref).getTime();
+
       expect(merged_conversation.archived_timestamp).toBe(expectedArchivedTimestamp);
       expect(merged_conversation.archived_state).toBe(remote_data.members.self.otr_archived);
 
       const expectedNotificationTimestamp = new Date(remote_data.members.self.otr_muted_ref).getTime();
+
       expect(merged_conversation.muted_state).toBe(true);
       expect(merged_conversation.muted_timestamp).toBe(expectedNotificationTimestamp);
     });
@@ -435,47 +450,52 @@ describe('Conversation Mapper', () => {
   });
 
   describe('getMutedState', () => {
+    let expectedState;
     const NOTIFICATION_STATE = z.conversation.NotificationSetting.STATE;
 
     it('returns states if only a muted state is given', () => {
-      const expectedTrueState = conversation_mapper.getMutedState(true);
-      expect(expectedTrueState).toBe(true);
+      expectedState = conversation_mapper.getMutedState(true);
 
-      const expectedFalseState = conversation_mapper.getMutedState(false);
-      expect(expectedFalseState).toBe(false);
+      expect(expectedState).toBe(true);
+      expectedState = conversation_mapper.getMutedState(false);
+
+      expect(expectedState).toBe(false);
     });
 
     it('returns states if congruent states are given', () => {
-      const expectNothingState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.NOTHING);
-      expect(expectNothingState).toBe(NOTIFICATION_STATE.NOTHING);
+      expectedState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.NOTHING);
 
-      const expectOnlyMentionsState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.ONLY_MENTIONS);
-      expect(expectOnlyMentionsState).toBe(NOTIFICATION_STATE.ONLY_MENTIONS);
+      expect(expectedState).toBe(NOTIFICATION_STATE.NOTHING);
+      expectedState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.MENTIONS_AND_REPLIES);
 
-      const expectEverythingState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.EVERYTHING);
-      expect(expectEverythingState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expect(expectedState).toBe(NOTIFICATION_STATE.MENTIONS_AND_REPLIES);
+      expectedState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.EVERYTHING);
+
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
     });
 
     it('returns states if conflicting states are given', () => {
-      const expectNothingState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.NOTHING);
-      expect(expectNothingState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.NOTHING);
 
-      const expectOnlyMentionsState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.ONLY_MENTIONS);
-      expect(expectOnlyMentionsState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState(false, NOTIFICATION_STATE.MENTIONS_AND_REPLIES);
 
-      const expectEverythingState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.EVERYTHING);
-      expect(expectEverythingState).toBe(NOTIFICATION_STATE.ONLY_MENTIONS);
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState(true, NOTIFICATION_STATE.EVERYTHING);
+
+      expect(expectedState).toBe(NOTIFICATION_STATE.MENTIONS_AND_REPLIES);
     });
 
     it('returns states if invalid states are given', () => {
-      const expectUndefinedState = conversation_mapper.getMutedState();
-      expect(expectUndefinedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState();
 
-      const expectedUndefinedState = conversation_mapper.getMutedState('true');
-      expect(expectedUndefinedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState('true');
 
-      const expectInvalidState = conversation_mapper.getMutedState(0b10);
-      expect(expectInvalidState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
+      expectedState = conversation_mapper.getMutedState(0b10);
+
+      expect(expectedState).toBe(NOTIFICATION_STATE.EVERYTHING);
     });
   });
 });

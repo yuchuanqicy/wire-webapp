@@ -58,7 +58,7 @@ z.calling.CallingRepository = class CallingRepository {
    * @param {EventRepository} eventRepository -  Repository that handles events
    * @param {MediaRepository} mediaRepository -  Repository for media interactions
    * @param {z.time.ServerTimeRepository} serverTimeRepository - Handles time shift between server and client
-   * @param {UserRepository} userRepository -  Repository for all user and connection interactions
+   * @param {UserRepository} userRepository -  Repository for all user interactions
    */
   constructor(
     callingService,
@@ -525,7 +525,7 @@ z.calling.CallingRepository = class CallingRepository {
    * @returns {Promise} Resolves when self join was handled
    */
   _remoteSelfJoin(callEntity, callMessageEntity) {
-    const {conversationEntity} = callEntity;
+    const conversationEntity = callEntity.conversationEntity;
 
     if (callEntity.selfClientJoined()) {
       const logMessage = {
@@ -653,7 +653,7 @@ z.calling.CallingRepository = class CallingRepository {
     const {conversationId, type} = callMessageEntity;
 
     return this.conversationRepository.get_conversation_by_id(conversationId).then(conversationEntity => {
-      if (conversationEntity.is_one2one()) {
+      if (conversationEntity.is1to1()) {
         const groupMessageTypes = [
           z.calling.enum.CALL_MESSAGE_TYPE.GROUP_CHECK,
           z.calling.enum.CALL_MESSAGE_TYPE.GROUP_LEAVE,
@@ -745,7 +745,7 @@ z.calling.CallingRepository = class CallingRepository {
    * @returns {Promise} Resolves with the call
    */
   _confirmCallMessage(callEntity, incomingCallMessageEntity) {
-    const {response} = incomingCallMessageEntity;
+    const response = incomingCallMessageEntity.response;
 
     const skipConfirmation = response || !callEntity.selfClientJoined();
     return skipConfirmation
@@ -770,20 +770,12 @@ z.calling.CallingRepository = class CallingRepository {
    */
   _limitMessageRecipients(callMessageEntity) {
     const {remoteClientId, remoteUser, remoteUserId, response, type} = callMessageEntity;
-    let recipientsPromise;
+    const recipientsPromise = remoteUserId
+      ? this.userRepository.get_user_by_id(remoteUserId)
+      : Promise.resolve(remoteUser);
 
-    const isTypeReject = type === z.calling.enum.CALL_MESSAGE_TYPE.REJECT;
-    if (isTypeReject) {
-      recipientsPromise = Promise.resolve({selfUserEntity: this.userRepository.self()});
-    } else if (remoteUser) {
-      recipientsPromise = Promise.resolve({remoteUserEntity: remoteUser, selfUserEntity: this.userRepository.self()});
-    } else {
-      recipientsPromise = this.userRepository
-        .get_user_by_id(remoteUserId)
-        .then(remoteUserEntity => ({remoteUserEntity, selfUserEntity: this.userRepository.self()}));
-    }
-
-    return recipientsPromise.then(({remoteUserEntity, selfUserEntity}) => {
+    return recipientsPromise.then(remoteUserEntity => {
+      const selfUserEntity = this.userRepository.self();
       let precondition;
       let recipients;
 
@@ -1424,7 +1416,7 @@ z.calling.CallingRepository = class CallingRepository {
    * @returns {Promise} Resolves with the new call entity
    */
   _createOutgoingCall(callMessageEntity) {
-    const {properties} = callMessageEntity;
+    const properties = callMessageEntity.properties;
 
     const direction = z.calling.enum.CALL_STATE.OUTGOING;
     return this._createCall(callMessageEntity, this.userRepository.self(), direction).then(callEntity => {
@@ -1606,7 +1598,7 @@ z.calling.CallingRepository = class CallingRepository {
       if (callingConfig) {
         this._clearConfigTimeout();
 
-        const {DEFAULT_CONFIG_TTL} = CallingRepository.CONFIG;
+        const DEFAULT_CONFIG_TTL = CallingRepository.CONFIG.DEFAULT_CONFIG_TTL;
         const ttl = callingConfig.ttl * 0.9 || DEFAULT_CONFIG_TTL;
         const timeout = Math.min(ttl, DEFAULT_CONFIG_TTL) * z.util.TimeUtil.UNITS_IN_MILLIS.SECOND;
         const expirationDate = new Date(Date.now() + timeout);
