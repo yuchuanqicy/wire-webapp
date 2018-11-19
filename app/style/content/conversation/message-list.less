@@ -126,7 +126,9 @@
 }
 
 .message-isreplying {
-  opacity: 0.6;
+  .message-body {
+    opacity: 0.6;
+  }
 }
 
 // MESSAGE - HEADER
@@ -247,8 +249,8 @@
 .message-timestamp {
   height: 48px;
   padding-top: 8px; // TODO margin top is not working because of collapsing margins
-  
-  margin-bottom: 16px;border-bottom: 1px solid @seperator-color;
+  margin-bottom: 16px;
+  border-bottom: 1px solid @seperator-color;
   line-height: 40px;
   user-select: none;
 
