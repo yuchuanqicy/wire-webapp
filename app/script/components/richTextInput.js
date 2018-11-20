@@ -38,6 +38,8 @@ z.components.RichTextInput = class RichTextInput {
     this.onKeyUp = params.onKeyUp;
     this.onEnter = params.onEnter;
     this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
+    this.selectionStart = ko.observable(0);
+    this.selectionEnd = ko.observable(0);
 
     this.richText = ko.pureComputed(() => {
       const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
@@ -62,6 +64,11 @@ z.components.RichTextInput = class RichTextInput {
         })
         .join('')
         .replace(/<br><\/span>$/, '<br>&nbsp;</span>');
+    });
+
+    params.onInit({
+      selectionEnd: this.selectionEnd,
+      selectionStart: this.selectionStart,
     });
 
     //this.richText.subscribe(richText => this.inputElement.innerHTML = richText)
@@ -95,9 +102,9 @@ z.components.RichTextInput = class RichTextInput {
         range.setStartBefore(focusMention);
       }
     }
-    this.selectionStart = this.getStartFromRange(range.startContainer, range.startOffset);
+    this.selectionStart(this.getStartFromRange(range.startContainer, range.startOffset));
     const length = range.toString().length;
-    this.selectionEnd = this.selectionStart + length;
+    this.selectionEnd(this.selectionStart() + length);
 
     return true;
   }
@@ -123,8 +130,8 @@ z.components.RichTextInput = class RichTextInput {
     };
     const selection = document.getSelection();
     const range = document.createRange();
-    const start = findNodeAt(inputNodes, this.selectionStart);
-    const end = findNodeAt(inputNodes, this.selectionEnd);
+    const start = findNodeAt(inputNodes, this.selectionStart());
+    const end = findNodeAt(inputNodes, this.selectionEnd());
     range.setStart(start.node, start.offset);
     range.setEnd(end.node, end.offset);
     selection.removeAllRanges();
@@ -153,7 +160,7 @@ ko.components.register('rich-text-input', {
           keydown: onKeyDown,
           keyup: onKeyUp,
           input: onInput,
-          mouseup: getSelection
+          mouseup: updateSelection
         },
         click: onClick,
         enter: onEnter,

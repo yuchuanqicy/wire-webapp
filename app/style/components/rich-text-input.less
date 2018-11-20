@@ -27,5 +27,18 @@ rich-text-input {
     outline: none;
     overflow-x: hidden;
     overflow-y: auto;
+
+    &:empty::before {
+      .label-xs;
+      display: block;
+      padding-top: 4px;
+      padding-left: 8px;
+      color: fade(@graphite, 48%);
+      content: attr(data-placeholder);
+    }
+
+    &--accent:empty::before {
+      .accent-color;
+    }
   }
 }

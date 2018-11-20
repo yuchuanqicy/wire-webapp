@@ -284,6 +284,11 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.updateSelectionState();
   }
 
+  initRichText({selectionStart, selectionEnd}) {
+    this.selectionStart = selectionStart;
+    this.selectionEnd = selectionEnd;
+  }
+
   loadInitialStateForConversation(conversationEntity) {
     this.conversationHasFocus(true);
     this.pastedFile(null);
@@ -600,13 +605,13 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
   }
 
   handleMentionFlow() {
-    const {selectionStart, selectionEnd, value} = this.textarea;
-    const mentionCandidate = this.getMentionCandidate(selectionStart, selectionEnd, value);
+    const mentionCandidate = this.getMentionCandidate(this.selectionStart(), this.selectionEnd(), this.input());
     this.editedMention(mentionCandidate);
-    this.updateSelectionState();
+    // this.updateSelectionState();
   }
 
   updateSelectionState() {
+    /*
     if (!this.textarea) {
       return;
     }
@@ -627,6 +632,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     }
     this.selectionStart(newStart);
     this.selectionEnd(newEnd);
+    */
   }
 
   updateMentions(data, event) {

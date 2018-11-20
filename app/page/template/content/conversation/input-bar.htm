@@ -91,7 +91,8 @@
           inputObservable: input,
           onKeyDown: onInputKeyDown,
           onKeyUp: onInputKeyUp,
-          onEnter: onInputEnter
+          onEnter: onInputEnter,
+          onInit: initRichText,
           "></rich-text-input>
         <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '#conversation-input-bar-text', onSelectionValidated: addMention"></mention-suggestions>
 
