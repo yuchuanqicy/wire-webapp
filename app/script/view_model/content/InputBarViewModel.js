@@ -51,6 +51,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.onInputEnter = this.onInputEnter.bind(this);
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
     this.onInputKeyUp = this.onInputKeyUp.bind(this);
+    this.initRichText = this.initRichText.bind(this);
 
     this.messageHasher = messageHasher;
 
@@ -284,10 +285,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.updateSelectionState();
   }
 
-  initRichText({selectionStart, selectionEnd}) {
-    this.selectionStart = selectionStart;
-    this.selectionEnd = selectionEnd;
-  }
+  initRichText() {}
 
   loadInitialStateForConversation(conversationEntity) {
     this.conversationHasFocus(true);

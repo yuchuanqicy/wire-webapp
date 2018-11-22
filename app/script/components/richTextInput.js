@@ -37,9 +37,9 @@ z.components.RichTextInput = class RichTextInput {
     this.onKeyDown = params.onKeyDown;
     this.onKeyUp = params.onKeyUp;
     this.onEnter = params.onEnter;
-    this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
-    this.selectionStart = ko.observable(0);
-    this.selectionEnd = ko.observable(0);
+    //this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
+    this.selectionStart = params.selectionStart;
+    this.selectionEnd = params.selectionEnd;
 
     this.richText = ko.pureComputed(() => {
       const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
@@ -59,19 +59,23 @@ z.components.RichTextInput = class RichTextInput {
 
       return pieces
         .map((piece, index) => {
+          if (piece.length === 0) {
+            return '';
+          }
           const textPiece = z.util.SanitizationUtil.escapeString(piece).replace(/[\r\n]/g, '<br>');
-          return `<span${index % 2 ? mentionAttributes : ''}>${textPiece}</span>`;
+          const isMention = index % 2;
+          return isMention ? `<span${mentionAttributes}>${textPiece}</span>` : textPiece;
         })
         .join('')
         .replace(/<br><\/span>$/, '<br>&nbsp;</span>');
     });
 
-    params.onInit({
-      selectionEnd: this.selectionEnd,
-      selectionStart: this.selectionStart,
-    });
+    params.onInit();
 
-    //this.richText.subscribe(richText => this.inputElement.innerHTML = richText)
+    this.richText.subscribe(richText => {
+      this.inputElement.innerHTML = richText; // eslint-disable-line no-unsanitized/property
+      this.restoreSelection();
+    });
   }
 
   onSelectStart() {}
@@ -160,13 +164,13 @@ ko.components.register('rich-text-input', {
           keydown: onKeyDown,
           keyup: onKeyUp,
           input: onInput,
-          mouseup: updateSelection
+          mouseup: updateSelection,
         },
         click: onClick,
         enter: onEnter,
         attr: {
           'data-placeholder': placeholder
-        }
+        },
     "></div>
   `,
   viewModel: {

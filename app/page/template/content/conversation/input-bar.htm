@@ -93,8 +93,10 @@
           onKeyUp: onInputKeyUp,
           onEnter: onInputEnter,
           onInit: initRichText,
+          selectionStart: selectionStart,
+          selectionEnd: selectionEnd,
           "></rich-text-input>
-        <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '#conversation-input-bar-text', onSelectionValidated: addMention"></mention-suggestions>
+        <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '.rich-text-editable', onSelectionValidated: addMention"></mention-suggestions>
 
         <div class="controls-right">
           <!-- ko ifnot: isEditing() -->
