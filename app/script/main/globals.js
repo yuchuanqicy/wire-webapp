@@ -312,6 +312,7 @@ import infoToggleGlobal from '../components/infoToggle.js';
 import iconsGlobal from '../components/icons.js';
 import logosGlobal from '../components/logos.js';
 import loadingBarGlobal from '../components/loadingBar.js';
+import richTextInput from '../components/richTextInput';
 import assetHeaderGlobal from '../components/asset/assetHeader.js';
 import videoAssetGlobal from '../components/asset/videoAsset.js';
 import audioAssetGlobal from '../components/asset/audioAsset.js';

@@ -17,12 +17,7 @@
  *
  */
 
-'use strict';
-
-window.z = window.z || {};
-window.z.components = z.components || {};
-
-z.components.RichTextInput = class RichTextInput {
+class RichTextInput {
   static get CONFIG() {
     return {
       MENTION_CLASS: 'input-mention',
@@ -151,7 +146,7 @@ z.components.RichTextInput = class RichTextInput {
       .slice(0, countNodes)
       .reduce((textLength, node) => textLength + node.textContent.length, startLength);
   }
-};
+}
 
 ko.components.register('rich-text-input', {
   template: `
@@ -175,7 +170,7 @@ ko.components.register('rich-text-input', {
   `,
   viewModel: {
     createViewModel(params, componentInfo) {
-      return new z.components.RichTextInput(params, componentInfo);
+      return new RichTextInput(params, componentInfo);
     },
   },
 });
