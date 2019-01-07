@@ -17,8 +17,6 @@
  *
  */
 
-'use=szigorú';
-
 z.string.hu.wire = 'Wire';
 z.string.hu.wireMacos = 'Wire MacOS-hez';
 z.string.hu.wireWindows = 'Wire Windowshoz';
@@ -133,6 +131,8 @@ z.string.hu.modalAccountNewDevicesSecondary = 'Eszközök kezelése';
 z.string.hu.modalAccountNewDevicesHeadline = 'Fiókod legutóbbi használata:';
 z.string.hu.modalAccountNewDevicesFrom = 'Eszköz:';
 z.string.hu.modalAccountNewDevicesMessage = 'Ha ezt nem te voltál, akkor töröld az eszközt, és állítsd alaphelyzetbe jelszavad.';
+
+z.string.hu.modalAccountReadReceiptsChangedSecondary = 'Eszközök kezelése';
 
 z.string.hu.modalAccountRemoveDeviceAction = 'Eszköz eltávolítása';
 z.string.hu.modalAccountRemoveDeviceHeadline = '"{{device}}" eltávolítása';
@@ -488,6 +488,7 @@ z.string.hu.participantDevicesOutdatedClientMessage = '{{user}} a Wire régi ver
 z.string.hu.participantDevicesSelfAllDevices = 'Összes saját eszköz mutatása';
 z.string.hu.participantDevicesSelfFingerprint = 'Eszköz ujjlenyomata';
 
+
 z.string.hu.userProfileButtonConnect = 'Csatlakozás';
 z.string.hu.userProfileButtonIgnore = 'Figyelmen kívül hagyás';
 z.string.hu.userProfileButtonUnblock = 'Tiltás feloldása';
@@ -521,12 +522,13 @@ z.string.hu.preferencesAccountLogOut = 'Kijelentkezés';
 z.string.hu.preferencesAccountManageTeam = 'Csapat kezelése';
 z.string.hu.preferencesAccountMarketingConsentCheckbox = 'Feliratkozás hírlevélre';
 z.string.hu.preferencesAccountMarketingConsentDetail = 'Hírek és termékinformációk fogadása e-mailben a Wire-től.';
+z.string.hu.preferencesAccountPrivacy = 'Adatvédelem';
 z.string.hu.preferencesAccountResetPassword = 'Jelszó visszaállítása';
 z.string.hu.preferencesAccountTeam = 'innen: {{name}}';
-z.string.hu.preferencesAccountUsernamePlaceholder = 'Teljes neved';
-z.string.hu.preferencesAccountUsernameHint = 'Legalább 2 karakter, és kizárólag a—z, 0—9 és _ karakterek.';
 z.string.hu.preferencesAccountUsernameAvailable = 'Elérhető';
 z.string.hu.preferencesAccountUsernameErrorTaken = 'Már foglalt';
+z.string.hu.preferencesAccountUsernameHint = 'Legalább 2 karakter, és kizárólag a—z, 0—9 és _ karakterek.';
+z.string.hu.preferencesAccountUsernamePlaceholder = 'Teljes neved';
 
 z.string.hu.preferencesAVCamera = 'Kamera';
 z.string.hu.preferencesAVMicrophone = 'Mikrofon';
@@ -558,12 +560,11 @@ z.string.hu.preferencesOptionsAudioNoneDetail = 'Pssszt!';
 z.string.hu.preferencesOptionsAudioSome = 'Néhány';
 z.string.hu.preferencesOptionsAudioSomeDetail = 'Kopogások és hívások';
 z.string.hu.preferencesOptionsContacts = 'Névjegyek';
-z.string.hu.preferencesOptionsContactsGmail = 'Importálás Gmail-ből';
 z.string.hu.preferencesOptionsContactsMacos = 'Importálás Névjegyek-ből';
 z.string.hu.preferencesOptionsContactsDetail = 'A névjegyeid importálásával könnyebben kapcsolatba léphetsz másokkal. Minden információt anonimizálunk, és semmit nem osszuk meg senki mással.';
 z.string.hu.preferencesOptionsPopular = 'Közkívánatra';
 z.string.hu.preferencesOptionsEmojiReplaceCheckbox = 'Cserélje ki a begépelt hangulatjeleket emojikra';
-z.string.hu.preferencesOptionsEmojiReplaceDetail = ':-) → {{icon}}';
+z.string.hu.preferencesOptionsEmojiReplaceDetail = ':-) → [icon]';
 z.string.hu.preferencesOptionsPreviewsSendCheckbox = 'Előnézet készítése az elküldött hivatkozásokról';
 z.string.hu.preferencesOptionsPreviewsSendDetail = 'A más partnerektől kapott hivatkozások előnézete továbbra is látható lesz.';
 z.string.hu.preferencesOptionsNotifications = 'Értesítések';
@@ -626,7 +627,6 @@ z.string.hu.searchOthers = 'Csatlakozás';
 z.string.hu.searchInvite = 'Hívj meg másokat is a Wire-re';
 z.string.hu.searchInviteDetail = 'Névjegyeid megosztása megkönnyíti, hogy kapcsolatba lépj másokkal. Az összes információt anonimizáljuk és nem osztjuk meg senki mással.';
 z.string.hu.searchInviteButtonContacts = 'Névjegyekből';
-z.string.hu.searchInviteButtonGmail = 'Gmail-ből';
 z.string.hu.searchInviteHeadline = 'Hozd a barátaidat is';
 z.string.hu.searchInviteShare = 'Névjegyek megosztása';
 
@@ -644,9 +644,6 @@ z.string.hu.temporaryGuestJoinDescription = 'Ha bezárod vagy újratöltöd ezt 
 
 z.string.hu.temporaryGuestLeaveMessage = ' már nem részesei ennek a beszélgetésnek.';
 z.string.hu.temporaryGuestLeaveDescription = 'Ha bezárod vagy újratöltöd ezt az oldalt, akkor elveszted a hozzáférést a beszélgetés előzményeihez.';
-
-z.string.hu.uploadGoogleHeadline = 'Keress partnereket\na Wire-ön.';
-z.string.hu.uploadGoogleMessage = 'A névjegyeid importálásával könnyebben kapcsolatba léphetsz másokkal. Minden információt anonimizálunk, és semmit nem osszuk meg senki mással.';
 
 z.string.hu.urlSupportRoot = '/';
 z.string.hu.urlSupportArticles = '/hc/en-us/articles/';
@@ -670,10 +667,10 @@ z.string.hu.warningNotFoundMicrophone = 'Nem kezdeményezhetsz hívást, mert ni
 z.string.hu.warningPermissionDeniedCamera = 'Nem kezdeményezhetsz hívást, mert böngésződ nem férhet hozzá a kamerádhoz.';
 z.string.hu.warningPermissionDeniedMicrophone = 'Nem kezdeményezhetsz hívást, mert böngésződ nem férhet hozzá a mikrofonodhoz.';
 z.string.hu.warningPermissionDeniedScreen = 'A képernyőmegosztást engedélyezned kell a böngészőben.';
-z.string.hu.warningPermissionRequestCamera = '{{icon}} Kamera hozzáférés engedélyezése';
-z.string.hu.warningPermissionRequestMicrophone = '{{icon}} Mikrofon hozzáférés engedélyezése';
-z.string.hu.warningPermissionRequestNotification = '{{icon}} Értesítések engedélyezése';
-z.string.hu.warningPermissionRequestScreen = '{{icon}} Képernyőmegosztás engedélyezése';
+z.string.hu.warningPermissionRequestCamera = '[icon] Kamera hozzáférés engedélyezése';
+z.string.hu.warningPermissionRequestMicrophone = '[icon] Mikrofon hozzáférés engedélyezése';
+z.string.hu.warningPermissionRequestNotification = '[icon] Értesítések engedélyezése';
+z.string.hu.warningPermissionRequestScreen = '[icon] Képernyőmegosztás engedélyezése';
 
 z.string.hu.userAvailabilityAvailable = 'Elérhető';
 z.string.hu.userAvailabilityAway = 'Nincs a gépnél';
@@ -726,7 +723,6 @@ z.string.hu.tooltipConversationsStart = 'Beszélgetés megkezdése ({{shortcut}}
 z.string.hu.tooltipConversationDetailsAddPeople = 'Résztvevők hozzáadása a beszélgetéshez ({{shortcut}})';
 z.string.hu.tooltipConversationDetailsRename = 'Beszélgetés nevének megváltoztatása';
 
-z.string.hu.tooltipPreferencesContactsGmail = 'Kapcsolataid megosztásához jelentkezz be Gmail fiókodba';
 z.string.hu.tooltipPreferencesContactsMacos = 'Oszd meg névjegyeidet a macOS Névjegyek alkalmazásából';
 z.string.hu.tooltipPreferencesPassword = 'Nyiss meg egy másik weboldalt jelszavad visszaállításához';
 z.string.hu.tooltipPreferencesPicture = 'Profilkép módosítása…';

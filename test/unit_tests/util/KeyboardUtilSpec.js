@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/KeyboardUtil
-
-'use strict';
-
 describe('z.util.KeyboardUtil.KEY', () => {
   describe('isArrowKey', () => {
     it('returns whether an arrow key has been pressed', () => {

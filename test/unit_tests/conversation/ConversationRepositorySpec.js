@@ -17,9 +17,7 @@
  *
  */
 
-// grunt test_run:conversation/ConversationRepository
-
-'use strict';
+import Conversation from 'app/script/entity/Conversation';
 
 describe('ConversationRepository', () => {
   const test_factory = new TestFactory();
@@ -33,9 +31,8 @@ describe('ConversationRepository', () => {
     return ko.utils.arrayFirst(conversations(), _conversation => _conversation.id === conversation.id);
   };
 
-  const _generate_asset_message = (state, uploaded_on_this_client = false) => {
+  const _generate_asset_message = state => {
     const file_et = new z.entity.File();
-    file_et.uploaded_on_this_client(uploaded_on_this_client);
     file_et.status(state);
     const message_et = new z.entity.ContentMessage(z.util.createRandomUuid());
     message_et.assets.push(file_et);
@@ -46,7 +43,7 @@ describe('ConversationRepository', () => {
     conversation_type = z.conversation.ConversationType.GROUP,
     connection_status = z.connection.ConnectionStatus.ACCEPTED
   ) => {
-    const conversation = new z.entity.Conversation(z.util.createRandomUuid());
+    const conversation = new Conversation(z.util.createRandomUuid());
     conversation.type(conversation_type);
 
     const connectionEntity = new z.connection.ConnectionEntity();
@@ -57,7 +54,7 @@ describe('ConversationRepository', () => {
     return conversation;
   };
 
-  beforeAll(() => z.util.protobuf.loadProtos('ext/proto/@wireapp/protocol-messaging/messages.proto'));
+  beforeAll(() => z.util.protobuf.loadProtos('ext/js/@wireapp/protocol-messaging/proto/messages.proto'));
 
   beforeEach(() => {
     server = sinon.fakeServer.create();
@@ -295,12 +292,12 @@ describe('ConversationRepository', () => {
       const group_cleared = _generate_conversation(z.conversation.ConversationType.GROUP);
       group_cleared.name('Cleared');
       group_cleared.last_event_timestamp(Date.now() - 1000);
-      group_cleared.setTimestamp(Date.now(), z.entity.Conversation.TIMESTAMP_TYPE.CLEARED);
+      group_cleared.setTimestamp(Date.now(), Conversation.TIMESTAMP_TYPE.CLEARED);
 
       const group_removed = _generate_conversation(z.conversation.ConversationType.GROUP);
       group_removed.name('Removed');
       group_removed.last_event_timestamp(Date.now() - 1000);
-      group_removed.setTimestamp(Date.now(), z.entity.Conversation.TIMESTAMP_TYPE.CLEARED);
+      group_removed.setTimestamp(Date.now(), Conversation.TIMESTAMP_TYPE.CLEARED);
       group_removed.status(z.conversation.ConversationStatus.PAST_MEMBER);
 
       return Promise.all([
@@ -349,18 +346,18 @@ describe('ConversationRepository', () => {
   describe('get_number_of_pending_uploads', () => {
     it('should return number of pending uploads if there are pending uploads', () => {
       conversation_et = _generate_conversation(z.conversation.ConversationType.GROUP);
-      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING, true));
-
-      expect(conversation_et.get_number_of_pending_uploads()).toBe(1);
-
-      conversation_et = _generate_conversation(z.conversation.ConversationType.GROUP);
-      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING, true));
       conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING));
 
       expect(conversation_et.get_number_of_pending_uploads()).toBe(1);
 
       conversation_et = _generate_conversation(z.conversation.ConversationType.GROUP);
-      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING, true));
+      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING));
+      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOAD_PENDING));
+
+      expect(conversation_et.get_number_of_pending_uploads()).toBe(1);
+
+      conversation_et = _generate_conversation(z.conversation.ConversationType.GROUP);
+      conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADING));
       conversation_et.add_message(_generate_asset_message(z.assets.AssetTransferState.UPLOADED));
 
       expect(conversation_et.get_number_of_pending_uploads()).toBe(1);
@@ -377,7 +374,7 @@ describe('ConversationRepository', () => {
     it('gets messages which are not broken by design', () => {
       spyOn(TestFactory.user_repository, 'get_user_by_id').and.returnValue(Promise.resolve(new z.entity.User()));
 
-      conversation_et = new z.entity.Conversation(z.util.createRandomUuid());
+      conversation_et = new Conversation(z.util.createRandomUuid());
       // prettier-ignore
       /* eslint-disable comma-spacing, key-spacing, sort-keys, quotes */
       const bad_message = {"conversation":`${conversation_et.id}`,"id":"aeac8355-739b-4dfc-a119-891a52c6a8dc","from":"532af01e-1e24-4366-aacf-33b67d4ee376","data":{"content":"Hello World :)","nonce":"aeac8355-739b-4dfc-a119-891a52c6a8dc"},"type":"conversation.message-add"};
@@ -1106,6 +1103,38 @@ describe('ConversationRepository', () => {
           z.event.EventRepository.SOURCE.INJECTED
         );
       });
+    });
+  });
+
+  describe('shouldSendReadReceipt', () => {
+    it('uses the account preference for 1:1 conversations', () => {
+      // Set a receipt mode on account-level
+      const preferenceMode = 1;
+      TestFactory.propertyRepository.receiptMode(preferenceMode);
+
+      // Set the opposite receipt mode on conversation-level
+      const conversationEntity = _generate_conversation(z.conversation.ConversationType.ONE2ONE);
+      conversationEntity.receiptMode(!preferenceMode);
+
+      // Verify that the account-level preference wins
+      const shouldSend = TestFactory.conversation_repository.expectReadReceipt(conversationEntity);
+
+      expect(shouldSend).toBe(!!preferenceMode);
+    });
+
+    it('uses the conversation setting for group conversations', () => {
+      // Set a receipt mode on account-level
+      const preferenceMode = 1;
+      TestFactory.propertyRepository.receiptMode(preferenceMode);
+
+      // Set the opposite receipt mode on conversation-level
+      const conversationEntity = _generate_conversation(z.conversation.ConversationType.GROUP);
+      conversationEntity.receiptMode(!preferenceMode);
+
+      // Verify that the conversation-level preference wins
+      const shouldSend = TestFactory.conversation_repository.expectReadReceipt(conversationEntity);
+
+      expect(shouldSend).toBe(!!conversationEntity.receiptMode());
     });
   });
 });

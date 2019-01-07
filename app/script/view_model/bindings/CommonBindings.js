@@ -17,7 +17,16 @@
  *
  */
 
-'use strict';
+import ko from 'knockout';
+import $ from 'jquery';
+import moment from 'moment';
+import SimpleBar from 'simplebar';
+/* eslint-disable no-unused-vars */
+import antiscroll2 from '@wireapp/antiscroll-2/dist/antiscroll-2';
+/* eslint-enable no-unused-vars */
+
+import overlayedObserver from '../../ui/overlayedObserver';
+import viewportObserver from '../../ui/viewportObserver';
 
 /**
  * Use it on the drop area.
@@ -328,17 +337,17 @@ ko.subscribable.fn.trimmed = function() {
  * Will only fire once when the value has changed.
  * @param {*} handler - Handler
  * @param {ko.observable} owner - Subscription owner
- * @param {string} event_name - Event name
+ * @param {string} eventName - Event name
  * @returns {undefined} No return value
  */
-ko.subscribable.fn.subscribe_once = function(handler, owner, event_name) {
+ko.subscribable.fn.subscribe_once = function(handler, owner, eventName) {
   const subscription = this.subscribe(
-    new_value => {
+    newValue => {
       subscription.dispose();
-      handler(new_value);
+      handler(newValue);
     },
     owner,
-    event_name
+    eventName
   );
 };
 
@@ -348,7 +357,6 @@ ko.subscribable.fn.subscribe_once = function(handler, owner, event_name) {
  * @param {function} handler - Handler
  * @returns {ko.subscription} knockout subscription
  */
-
 ko.subscribable.fn.subscribeChanged = function(handler) {
   let savedValue = this.peek();
   return this.subscribe(latestValue => {
@@ -404,7 +412,7 @@ ko.bindingHandlers.antiscroll = {
 ko.bindingHandlers.simplebar = {
   init(element, valueAccessor) {
     const {trigger = valueAccessor(), onInit} = valueAccessor();
-    const simpleBar = new window.SimpleBar(element, {autoHide: false});
+    const simpleBar = new SimpleBar(element, {autoHide: false});
     if (ko.isObservable(trigger)) {
       const triggerSubscription = trigger.subscribe(() => simpleBar.recalculate());
       ko.utils.domNodeDisposal.addDisposeCallback(element, () => triggerSubscription.dispose());
@@ -551,17 +559,15 @@ ko.bindingHandlers.removed_from_view = {
  */
 ko.bindingHandlers.in_viewport = {
   init(element, valueAccessor) {
-    const onElementVisible = valueAccessor();
-    if (!onElementVisible) {
+    const {onVisible = valueAccessor(), container} = valueAccessor();
+    if (!onVisible) {
       return;
     }
-    z.ui.ViewportObserver.addElement(element, () => {
-      return z.ui.OverlayedObserver.onElementVisible(element, onElementVisible);
-    });
+    viewportObserver.addElement(element, () => overlayedObserver.onElementVisible(element, onVisible), true, container);
 
     ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
-      z.ui.OverlayedObserver.removeElement(element);
-      z.ui.ViewportObserver.removeElement(element);
+      overlayedObserver.removeElement(element);
+      viewportObserver.removeElement(element);
     });
   },
 };

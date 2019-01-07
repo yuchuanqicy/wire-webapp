@@ -17,45 +17,42 @@
  *
  */
 
-'use strict';
+import BasePanelViewModel from './BasePanelViewModel';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.panel = z.viewModel.panel || {};
-
-z.viewModel.panel.NotificationsViewModel = class NotificationsViewModel extends z.viewModel.panel.BasePanelViewModel {
+export default class NotificationsViewModel extends BasePanelViewModel {
   constructor(params) {
     super(params);
-    this.clickOnNotificationSetting = this.clickOnNotificationSetting.bind(this);
 
-    const conversation = params.repositories.conversation;
-    this.conversationRepository = conversation;
+    this.notificationChanged = this.notificationChanged.bind(this);
 
-    this.logger = new z.util.Logger('z.viewModel.panel.NotificationsViewModel', z.config.LOGGER.OPTIONS);
+    this.conversationRepository = params.repositories.conversation;
 
     this.settings = Object.values(z.conversation.NotificationSetting.STATE).map(status => ({
       text: z.conversation.NotificationSetting.getText(status),
       value: status,
     }));
 
-    this.isRendered = ko.observable(false).extend({notify: 'always'});
+    this.currentNotificationSetting = ko.observable();
 
-    this.currentNotificationSetting = ko.pureComputed(() => {
+    ko.pureComputed(() => {
       return this.activeConversation() && this.activeConversation().notificationState();
+    }).subscribe(setting => {
+      this.currentNotificationSetting(setting);
     });
+
+    this.isRendered = ko.observable(false).extend({notify: 'always'});
 
     this.shouldUpdateScrollbar = ko
       .pureComputed(() => this.isRendered())
       .extend({notify: 'always', rateLimit: {method: 'notifyWhenChangesStop', timeout: 0}});
   }
 
+  notificationChanged(viewModel, event) {
+    const notificationState = parseInt(event.target.value, 10);
+    this.conversationRepository.setNotificationState(this.activeConversation(), notificationState);
+  }
+
   getElementId() {
     return 'notification-settings';
   }
-
-  clickOnNotificationSetting({value}) {
-    if (this.activeConversation()) {
-      this.conversationRepository.setNotificationState(this.activeConversation(), value);
-    }
-  }
-};
+}

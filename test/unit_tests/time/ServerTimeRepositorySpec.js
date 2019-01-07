@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:time/ServerTimeRepository
-
-'use strict';
-
 describe('z.time.ServerTimeRepository', () => {
   let serverTimeRepository;
   const testFactory = new window.TestFactory();

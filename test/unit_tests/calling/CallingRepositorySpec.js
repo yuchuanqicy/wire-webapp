@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:calling/CallingRepository
-
 describe('z.calling.CallingRepository', () => {
   const testFactory = new TestFactory();
   let callingRepository;

@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:view_model/FaviconViewModel
-
 describe('z.viewModel.FaviconViewModel', () => {
   it('subscribes to uread count events', () => {
     const dispatcher = {subscribe: () => {}};

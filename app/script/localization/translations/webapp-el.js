@@ -120,6 +120,8 @@ z.string.el.modalAccountNewDevicesHeadline = 'Ο λογαριασμός σας �
 z.string.el.modalAccountNewDevicesFrom = 'Από:';
 z.string.el.modalAccountNewDevicesMessage = 'Εάν δεν το κάνατε αυτό, αφαιρέστε την συσκευή κι επαναφέρετε τον κωδικό σας.';
 
+z.string.el.modalAccountReadReceiptsChangedSecondary = 'Διαχείριση συσκευών';
+
 z.string.el.modalAccountRemoveDeviceAction = 'Αφαίρεση συσκευής';
 z.string.el.modalAccountRemoveDeviceHeadline = 'Αφαίρεση "{{device}}"';
 z.string.el.modalAccountRemoveDeviceMessage = 'Απαιτείται ο κωδικός πρόσβασης σας για να αφαιρέσετε την συσκευή.';
@@ -402,6 +404,7 @@ z.string.el.participantDevicesOutdatedClientMessage = '{{user}} χρησιμοπ
 z.string.el.participantDevicesSelfAllDevices = 'Εμφάνιση όλων των συσκευών μου';
 z.string.el.participantDevicesSelfFingerprint = 'Αποτυπώματα συσκευής';
 
+
 z.string.el.userProfileButtonConnect = 'Σύνδεση';
 z.string.el.userProfileButtonIgnore = 'Αγνόηση';
 z.string.el.userProfileButtonUnblock = 'Άρση αποκλεισμού';
@@ -426,12 +429,13 @@ z.string.el.preferencesAccountCreateTeam = 'Δημιουργήστε μια ομ
 z.string.el.preferencesAccountDelete = 'Διαγραφή λογαριασμού';
 z.string.el.preferencesAccountLogOut = 'Αποσύνδεση';
 z.string.el.preferencesAccountManageTeam = 'Διαχείριση ομάδων';
+z.string.el.preferencesAccountPrivacy = 'Προστασία Προσωπικών Δεδομένων';
 z.string.el.preferencesAccountResetPassword = 'Επαναφορά κωδικού πρόσβασης';
 z.string.el.preferencesAccountTeam = 'στο {{name}}';
-z.string.el.preferencesAccountUsernamePlaceholder = 'Ονοματεπώνυμο';
-z.string.el.preferencesAccountUsernameHint = 'Τουλάχιστον 2 χαρακτήρες. a—z, 0—9 και _ μόνο.';
 z.string.el.preferencesAccountUsernameAvailable = 'Διαθέσιμο';
 z.string.el.preferencesAccountUsernameErrorTaken = 'Χρησιμοποιείται ήδη';
+z.string.el.preferencesAccountUsernameHint = 'Τουλάχιστον 2 χαρακτήρες. a—z, 0—9 και _ μόνο.';
+z.string.el.preferencesAccountUsernamePlaceholder = 'Ονοματεπώνυμο';
 
 z.string.el.preferencesAVCamera = 'Κάμερα';
 z.string.el.preferencesAVMicrophone = 'Μικρόφωνο';
@@ -461,7 +465,6 @@ z.string.el.preferencesOptionsAudioNoneDetail = 'Σσσσς!';
 z.string.el.preferencesOptionsAudioSome = 'Μερικώς';
 z.string.el.preferencesOptionsAudioSomeDetail = 'Κουδουνίσματα και κλήσεις';
 z.string.el.preferencesOptionsContacts = 'Επαφές';
-z.string.el.preferencesOptionsContactsGmail = 'Εισαγωγή από το Gmail';
 z.string.el.preferencesOptionsContactsMacos = 'Εισαγωγή από τις Επαφές';
 z.string.el.preferencesOptionsContactsDetail = 'Χρησιμοποιούμε τις επαφές σας για να συνδέεστε με άλλους. Κρατάμε όλες σας τις πληροφορίες ανώνυμες και δεν τις μοιραζόμαστε με κανέναν άλλον.';
 z.string.el.preferencesOptionsPopular = 'Απο δημοφιλεις προτασεις';
@@ -496,7 +499,6 @@ z.string.el.searchOthers = 'Σύνδεση';
 z.string.el.searchInvite = 'Πρόσκληση ατόμων για συμμετοχή στο Wire';
 z.string.el.searchInviteDetail = 'Κάντε κοινή χρήση των επαφών σας για να μπορέσετε να συνδεθείτε με άλλους χρήστες.Κρατάμε ανώνυμες όλες σας τις πληροφορίες και δεν τις μοιραζόμαστε με κανέναν άλλον.';
 z.string.el.searchInviteButtonContacts = 'Από τις Επαφές';
-z.string.el.searchInviteButtonGmail = 'Από το Gmail';
 z.string.el.searchInviteHeadline = 'Προτείνετε το στους φίλους σας';
 z.string.el.searchInviteShare = 'Κοινή χρήση Επαφών';
 
@@ -504,9 +506,6 @@ z.string.el.searchListEveryoneParticipates = 'Όλοι όσοι συνδεθήκ
 z.string.el.searchListNoMatches = 'Δεν υπάρχουν σχετικά αποτελέσματα.\nΔοκιμάστε να εισάγετε ένα διαφορετικό όνομα.';
 
 z.string.el.temporaryGuestCta = 'Δημιουργία λογαριασμού';
-
-z.string.el.uploadGoogleHeadline = 'Εύρεση ατόμων για συνομιλία.';
-z.string.el.uploadGoogleMessage = 'Χρησιμοποιούμε τις επαφές σας για να συνδέεστε με άλλους. Κρατάμε όλες σας τις πληροφορίες ανώνυμες και δεν τις μοιραζόμαστε με κανέναν άλλον.';
 
 z.string.el.warningCallUnsupportedIncoming = '{{user}} καλεί. Το πρόγραμμα περιήγησής σας δεν υποστηρίζει κλήσεις.';
 z.string.el.warningCallUnsupportedOutgoing = 'Δεν μπορείτε να καλέσετε, επειδή το πρόγραμμα περιήγησής σας δεν υποστηρίζει κλήσεις.';
@@ -523,10 +522,10 @@ z.string.el.warningNotFoundMicrophone = 'Δεν μπορείτε να καλέσ
 z.string.el.warningPermissionDeniedCamera = 'Δεν μπορείτε να καλέσετε, επειδή το πρόγραμμα περιήγησής σας δεν έχει πρόσβαση σε κάμερα.';
 z.string.el.warningPermissionDeniedMicrophone = 'Δεν μπορείτε να καλέσετε, επειδή το πρόγραμμα περιήγησής σας δεν έχει πρόσβαση στο μικρόφωνο.';
 z.string.el.warningPermissionDeniedScreen = 'Το πρόγραμμα περιήγησής σας χρειάζεται άδεια για να μοιραστείτε την οθόνη σας.';
-z.string.el.warningPermissionRequestCamera = '{{icon}} Να επιτρέπεται η πρόσβαση στην κάμερα';
-z.string.el.warningPermissionRequestMicrophone = '{{icon}} Να επιτρέπεται η πρόσβαση στο μικρόφωνο';
-z.string.el.warningPermissionRequestNotification = '{{icon}} Να επιτρέπονται οι ειδοποιήσεις';
-z.string.el.warningPermissionRequestScreen = '{{icon}} Να επιτρέπεται η πρόσβαση στην οθόνη';
+z.string.el.warningPermissionRequestCamera = '[icon] Να επιτρέπεται η πρόσβαση στην κάμερα';
+z.string.el.warningPermissionRequestMicrophone = '[icon] Να επιτρέπεται η πρόσβαση στο μικρόφωνο';
+z.string.el.warningPermissionRequestNotification = '[icon] Να επιτρέπονται οι ειδοποιήσεις';
+z.string.el.warningPermissionRequestScreen = '[icon] Να επιτρέπεται η πρόσβαση στην οθόνη';
 
 z.string.el.userAvailabilityAvailable = 'Διαθέσιμο';
 z.string.el.userAvailabilityNone = 'Καθόλου';
@@ -572,7 +571,6 @@ z.string.el.tooltipConversationsStart = 'Ξεκινήστε συνομιλία (
 
 z.string.el.tooltipConversationDetailsRename = 'Αλλαγή ονόματος της συνομιλίας';
 
-z.string.el.tooltipPreferencesContactsGmail = 'Συνδεθείτε στον λογαριασμό Gmail σας για να κοινοποιήσετε τις επαφές';
 z.string.el.tooltipPreferencesContactsMacos = 'Κοινοποίηση όλων των επαφών σας από macOS της εφαρμογής Επαφές';
 z.string.el.tooltipPreferencesPassword = 'Ανοίξτε άλλη ιστοσελίδα για να επαναφέρετε τον κωδικό πρόσβασης σας';
 z.string.el.tooltipPreferencesPicture = 'Επιλέξτε εικόνα...';

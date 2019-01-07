@@ -17,6 +17,4 @@
  *
  */
 
-// grunt test_run:event/EventService
-
 window.testEventServiceClass('event_service_no_compound', 'z.event.EventServiceNoCompound');

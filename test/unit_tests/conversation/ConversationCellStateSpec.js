@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:conversation/ConversationCellState
-
-'use strict';
-
 describe('z.conversation.ConversationCellState', () => {
   const conversationCellState = z.conversation.ConversationCellState;
   const NOTIFICATION_STATES = z.conversation.NotificationSetting.STATE;

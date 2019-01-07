@@ -17,16 +17,12 @@
  *
  */
 
-// grunt test_run:conversation/ClientMismatchHandler
-
-'use strict';
-
 describe('ClientMismatchHandler', () => {
   const testFactory = new TestFactory();
 
   let conversationEntity = undefined;
 
-  beforeAll(() => z.util.protobuf.loadProtos('ext/proto/@wireapp/protocol-messaging/messages.proto'));
+  beforeAll(() => z.util.protobuf.loadProtos('ext/js/@wireapp/protocol-messaging/proto/messages.proto'));
 
   beforeEach(() => {
     return testFactory.exposeConversationActors().then(conversationRepository => {

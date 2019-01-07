@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:connection/ConnectionService
-
-'use strict';
-
 describe('User Service', () => {
   let server = null;
   const urls = {

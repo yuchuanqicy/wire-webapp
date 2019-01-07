@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:media/MediaEmbeds
-
 describe('MediaEmbeds', () => {
   // Will test all common link variations
   const test_link_variants = (site, re) => {

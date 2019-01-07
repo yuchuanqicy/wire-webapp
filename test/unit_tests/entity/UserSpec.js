@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:entity/User
-
-'use strict';
-
 describe('z.entity.User', () => {
   describe('First Name', () => {
     it('can generate first name', () => {

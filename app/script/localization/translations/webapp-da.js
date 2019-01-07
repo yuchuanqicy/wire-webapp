@@ -125,6 +125,8 @@ z.string.da.modalAccountNewDevicesHeadline = 'Din konto blev brugt på:';
 z.string.da.modalAccountNewDevicesFrom = 'Fra:';
 z.string.da.modalAccountNewDevicesMessage = 'Hvis du ikke gjorde dette, slet enheden og nulstil din adgangskode.';
 
+z.string.da.modalAccountReadReceiptsChangedSecondary = 'Administrér enheder';
+
 z.string.da.modalAccountRemoveDeviceAction = 'Fjern enhed';
 z.string.da.modalAccountRemoveDeviceHeadline = 'Fjern "{{device}}"';
 z.string.da.modalAccountRemoveDeviceMessage = 'Din adgangskode er krævet for at fjerne denne enhed.';
@@ -472,6 +474,7 @@ z.string.da.participantDevicesOutdatedClientMessage = '{{user}} bruger en gammel
 z.string.da.participantDevicesSelfAllDevices = 'Vis alle mine enheder';
 z.string.da.participantDevicesSelfFingerprint = 'Enheds fingeraftryk';
 
+
 z.string.da.userProfileButtonConnect = 'Forbind';
 z.string.da.userProfileButtonIgnore = 'Ignorér';
 z.string.da.userProfileButtonUnblock = 'Fjern Blokering';
@@ -500,12 +503,13 @@ z.string.da.preferencesAccountLeaveGuestRoom = 'Forlad gæsterummet';
 z.string.da.preferencesAccountLeaveGuestRoomDescription = 'Du vil ikke længere have mulighed for at få adgang til beskederne i denne samtale.';
 z.string.da.preferencesAccountLogOut = 'Log ud';
 z.string.da.preferencesAccountManageTeam = 'Administrer arbejdsgrupper';
+z.string.da.preferencesAccountPrivacy = 'Privatliv';
 z.string.da.preferencesAccountResetPassword = 'Nulstil adgangskode';
 z.string.da.preferencesAccountTeam = 'i {{name}}';
-z.string.da.preferencesAccountUsernamePlaceholder = 'Dit fulde navn';
-z.string.da.preferencesAccountUsernameHint = 'Mindst to tegn. Kun a-z, 0-9 og _.';
 z.string.da.preferencesAccountUsernameAvailable = 'Ledig';
 z.string.da.preferencesAccountUsernameErrorTaken = 'Allerede i brug';
+z.string.da.preferencesAccountUsernameHint = 'Mindst to tegn. Kun a-z, 0-9 og _.';
+z.string.da.preferencesAccountUsernamePlaceholder = 'Dit fulde navn';
 
 z.string.da.preferencesAVCamera = 'Kamera';
 z.string.da.preferencesAVMicrophone = 'Mikrofon';
@@ -537,7 +541,6 @@ z.string.da.preferencesOptionsAudioNoneDetail = 'Sshhh!';
 z.string.da.preferencesOptionsAudioSome = 'Nogle';
 z.string.da.preferencesOptionsAudioSomeDetail = 'Ping og opkald';
 z.string.da.preferencesOptionsContacts = 'Kontakter';
-z.string.da.preferencesOptionsContactsGmail = 'Importér fra Gmail';
 z.string.da.preferencesOptionsContactsMacos = 'Omportér fra Kontakter';
 z.string.da.preferencesOptionsContactsDetail = 'Vi bruger dine kontaktdata til at forbinde dig med andre. Vi anonymisere alle oplysninger og deler ikke det med alle andre.';
 z.string.da.preferencesOptionsPopular = 'Ved populær efterspørgsel';
@@ -602,7 +605,6 @@ z.string.da.searchOthers = 'Forbind';
 z.string.da.searchInvite = 'Inviter personer til Wire';
 z.string.da.searchInviteDetail = 'At dele dine kontakter hjælper med at forbinde til andre. Vi anonymiserer al information og deler det ikke med nogen andre.';
 z.string.da.searchInviteButtonContacts = 'Fra Kontakter';
-z.string.da.searchInviteButtonGmail = 'Fra Gmail';
 z.string.da.searchInviteHeadline = 'Få dine venner med';
 z.string.da.searchInviteShare = 'Del Kontakter';
 
@@ -621,9 +623,6 @@ z.string.da.temporaryGuestJoinDescription = 'Hvis du lukker eller opdaterer denn
 z.string.da.temporaryGuestLeaveMessage = ' er ikke længere med i denne samtale.';
 z.string.da.temporaryGuestLeaveDescription = 'Hvis du lukker eller opdaterer denne side, vil du miste adgang til samtale historikken.';
 
-z.string.da.uploadGoogleHeadline = 'Finde personer at snakke med.';
-z.string.da.uploadGoogleMessage = 'Vi bruger dine kontaktdata til at forbinde dig med andre. Vi anonymisere alle oplysninger og deler ikke det med alle andre.';
-
 z.string.da.warningCallUnsupportedIncoming = '{{user}} ringer. Din browser understøtter ikke opkald.';
 z.string.da.warningCallUnsupportedOutgoing = 'Du kan ikke ringe, fordi din browser ikke understøtter opkald.';
 z.string.da.warningCallIssues = 'Denne version af Wire kan ikke deltage i opkaldet. Brug venligst';
@@ -639,10 +638,10 @@ z.string.da.warningNotFoundMicrophone = 'Du kan ikke ringe, fordi din computer h
 z.string.da.warningPermissionDeniedCamera = 'Du kan ikke ringe, fordi din browser ikke har adgang til kameraet.';
 z.string.da.warningPermissionDeniedMicrophone = 'Du kan ikke ringe, fordi din browser ikke har adgang til mikrofonen.';
 z.string.da.warningPermissionDeniedScreen = 'Din browser skal have tilladelse til at dele din skærm.';
-z.string.da.warningPermissionRequestCamera = '{{icon}} Tillad adgang til kamera';
-z.string.da.warningPermissionRequestMicrophone = '{{icon}} Tillad adgang til mikrofon';
-z.string.da.warningPermissionRequestNotification = '{{icon}} Tillad meddelelser';
-z.string.da.warningPermissionRequestScreen = '{{icon}} Tillad adgang til skærm';
+z.string.da.warningPermissionRequestCamera = '[icon] Tillad adgang til kamera';
+z.string.da.warningPermissionRequestMicrophone = '[icon] Tillad adgang til mikrofon';
+z.string.da.warningPermissionRequestNotification = '[icon] Tillad meddelelser';
+z.string.da.warningPermissionRequestScreen = '[icon] Tillad adgang til skærm';
 
 z.string.da.userAvailabilityAvailable = 'Ledig';
 z.string.da.userAvailabilityAway = 'Ikke til stede';
@@ -695,7 +694,6 @@ z.string.da.tooltipConversationsStart = 'Start samtale ({{shortcut}})';
 z.string.da.tooltipConversationDetailsAddPeople = 'Tilføj deltagere til samtalen ({{shortcut}})';
 z.string.da.tooltipConversationDetailsRename = 'Ændre samtalens navn';
 
-z.string.da.tooltipPreferencesContactsGmail = 'Log ind på din Gmail konto for at dele kontakter';
 z.string.da.tooltipPreferencesContactsMacos = 'Del alle dine kontakter fra macOS Kontakter app';
 z.string.da.tooltipPreferencesPassword = 'Åbn en anden hjemmeside for at nulstille din adgangskode';
 z.string.da.tooltipPreferencesPicture = 'Ændre dit billede…';

@@ -123,6 +123,8 @@ z.string.pl.modalAccountNewDevicesHeadline = 'Twoje konto było ostatnio użyte:
 z.string.pl.modalAccountNewDevicesFrom = 'Z:';
 z.string.pl.modalAccountNewDevicesMessage = 'Jeżeli nie rozpoznajesz tego, usuń urządzenie z listy i zmień swoje hasło.';
 
+z.string.pl.modalAccountReadReceiptsChangedSecondary = 'Zarządzaj urządzeniami';
+
 z.string.pl.modalAccountRemoveDeviceAction = 'Usuń urządzenie';
 z.string.pl.modalAccountRemoveDeviceHeadline = 'Usuń {{device}}';
 z.string.pl.modalAccountRemoveDeviceMessage = 'Aby usunąć to urządzenie wymagane jest hasło.';
@@ -403,6 +405,7 @@ z.string.pl.participantDevicesOutdatedClientMessage = '{{user}} używa starszej 
 z.string.pl.participantDevicesSelfAllDevices = 'Pokaż wszystkie moje urządzenia';
 z.string.pl.participantDevicesSelfFingerprint = 'Odcisk palca urządzenia';
 
+
 z.string.pl.userProfileButtonConnect = 'Połącz';
 z.string.pl.userProfileButtonIgnore = 'Ignoruj';
 z.string.pl.userProfileButtonUnblock = 'Odblokuj';
@@ -428,12 +431,13 @@ z.string.pl.preferencesAccountCreateTeam = 'Utwórz nowy zespół';
 z.string.pl.preferencesAccountDelete = 'Usuń konto';
 z.string.pl.preferencesAccountLogOut = 'Wyloguj się';
 z.string.pl.preferencesAccountManageTeam = 'Zarządzaj zespołem';
+z.string.pl.preferencesAccountPrivacy = 'Prywatność';
 z.string.pl.preferencesAccountResetPassword = 'Zresetuj hasło';
 z.string.pl.preferencesAccountTeam = 'w {{name}}';
-z.string.pl.preferencesAccountUsernamePlaceholder = 'Twoje pełne imię i nazwisko';
-z.string.pl.preferencesAccountUsernameHint = 'Co najmniej 2 znaki. Tylko a-z, 0-9, _.';
 z.string.pl.preferencesAccountUsernameAvailable = '&Dostępny(a)';
 z.string.pl.preferencesAccountUsernameErrorTaken = 'Jest już w użyciu';
+z.string.pl.preferencesAccountUsernameHint = 'Co najmniej 2 znaki. Tylko a-z, 0-9, _.';
+z.string.pl.preferencesAccountUsernamePlaceholder = 'Twoje pełne imię i nazwisko';
 
 z.string.pl.preferencesAVCamera = 'Aparat';
 z.string.pl.preferencesAVMicrophone = 'Mikrofon';
@@ -463,7 +467,6 @@ z.string.pl.preferencesOptionsAudioNoneDetail = 'Csiiii!';
 z.string.pl.preferencesOptionsAudioSome = 'Niektóre';
 z.string.pl.preferencesOptionsAudioSomeDetail = 'Pingi i połączenia';
 z.string.pl.preferencesOptionsContacts = 'Kontakty';
-z.string.pl.preferencesOptionsContactsGmail = 'Import z Gmail';
 z.string.pl.preferencesOptionsContactsMacos = 'Import z Kontaktów';
 z.string.pl.preferencesOptionsContactsDetail = 'Wykorzystujemy Twoje dane kontaktowe do łączenia Cię z innymi. Wszystkie informacje są anonimowe i nie dzielimy ich z nikim innym.';
 z.string.pl.preferencesOptionsPopular = 'Różne';
@@ -498,7 +501,6 @@ z.string.pl.searchOthers = 'Połącz';
 z.string.pl.searchInvite = 'Zaproś innych do Wire';
 z.string.pl.searchInviteDetail = 'Udostępnianie kontaktów pomaga połączyć się z innymi. Wszystkie informacje są anonimowe i nie udostępniamy ich nikomu.';
 z.string.pl.searchInviteButtonContacts = 'Z kontaktów';
-z.string.pl.searchInviteButtonGmail = 'Z Gmaila';
 z.string.pl.searchInviteHeadline = 'Zaproś znajomych';
 z.string.pl.searchInviteShare = 'Udostępnij kontakty';
 
@@ -506,9 +508,6 @@ z.string.pl.searchListEveryoneParticipates = 'Wszyscy, z którymi masz połącze
 z.string.pl.searchListNoMatches = 'Brak wyników. Spróbuj wprowadzić inną nazwę.';
 
 z.string.pl.temporaryGuestCta = 'Utwórz konto';
-
-z.string.pl.uploadGoogleHeadline = 'Znajdź osoby do rozmowy.';
-z.string.pl.uploadGoogleMessage = 'Wykorzystujemy Twoje dane kontaktowe do łączenia Cię z innymi. Wszystkie informacje są anonimowe i nie dzielimy ich z nikim innym.';
 
 z.string.pl.warningCallUnsupportedIncoming = 'Dzwoni {{user}}. Twoja przeglądarka nie obsługuje rozmów.';
 z.string.pl.warningCallUnsupportedOutgoing = 'Nie możesz zadzwonić, ponieważ Twoja przeglądarka nie obsługuje rozmów.';
@@ -525,10 +524,10 @@ z.string.pl.warningNotFoundMicrophone = 'Nie możesz zadzwonić ponieważ Twój 
 z.string.pl.warningPermissionDeniedCamera = 'Nie możesz zadzwonić ponieważ przeglądarka nie ma dostępu do kamery.';
 z.string.pl.warningPermissionDeniedMicrophone = 'Nie możesz zadzwonić ponieważ przeglądarka nie ma dostępu do mikrofonu.';
 z.string.pl.warningPermissionDeniedScreen = 'Twoja przeglądarka potrzebuje pozwolenia aby pokazać pulpit.';
-z.string.pl.warningPermissionRequestCamera = '{{icon}} Zezwól na dostęp do aparatu';
-z.string.pl.warningPermissionRequestMicrophone = '{{icon}} Zezwól na dostęp do mikrofonu';
-z.string.pl.warningPermissionRequestNotification = '{{icon}} Zezwól na powiadomienia';
-z.string.pl.warningPermissionRequestScreen = '{{icon}} zezwól na dostęp do ekranu';
+z.string.pl.warningPermissionRequestCamera = '[icon] Zezwól na dostęp do aparatu';
+z.string.pl.warningPermissionRequestMicrophone = '[icon] Zezwól na dostęp do mikrofonu';
+z.string.pl.warningPermissionRequestNotification = '[icon] Zezwól na powiadomienia';
+z.string.pl.warningPermissionRequestScreen = '[icon] zezwól na dostęp do ekranu';
 
 z.string.pl.userAvailabilityAvailable = '&Dostępny(a)';
 z.string.pl.userAvailabilityNone = 'Żaden';
@@ -574,7 +573,6 @@ z.string.pl.tooltipConversationsStart = 'Zacznij rozmowę ({{shortcut}})';
 
 z.string.pl.tooltipConversationDetailsRename = 'Zmień nazwę konwersacji';
 
-z.string.pl.tooltipPreferencesContactsGmail = 'Zaloguj się do swojego konta Gmail i udostępniaj kontakty';
 z.string.pl.tooltipPreferencesContactsMacos = 'Udostępnij wszystkie kontakty z aplikacji Kontakty macOS';
 z.string.pl.tooltipPreferencesPassword = 'Otwórz stronę resetowania hasła';
 z.string.pl.tooltipPreferencesPicture = 'Zmień swój obraz…';

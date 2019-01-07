@@ -118,6 +118,8 @@ z.string.sk.modalAccountNewDevicesHeadline = 'Váš účet bol použitý:';
 z.string.sk.modalAccountNewDevicesFrom = 'Od:';
 z.string.sk.modalAccountNewDevicesMessage = 'Ak ste to neboli Vy, odpojte zariadenie a zmeňte si heslo.';
 
+z.string.sk.modalAccountReadReceiptsChangedSecondary = 'Správa zariadení';
+
 z.string.sk.modalAccountRemoveDeviceAction = 'Odstrániť zariadenie';
 z.string.sk.modalAccountRemoveDeviceHeadline = 'Odstrániť "{{device}}"';
 z.string.sk.modalAccountRemoveDeviceMessage = 'Na odstránenie zariadenia je potrebné Vaše heslo.';
@@ -373,6 +375,7 @@ z.string.sk.participantDevicesOutdatedClientMessage = '{{user}} používa starš
 z.string.sk.participantDevicesSelfAllDevices = 'Zobraziť všetky moje zariadenia';
 z.string.sk.participantDevicesSelfFingerprint = 'Identifikátor zaradenia';
 
+
 z.string.sk.userProfileButtonConnect = 'Pripojiť';
 z.string.sk.userProfileButtonIgnore = 'Ignorovať';
 z.string.sk.userProfileButtonUnblock = 'Odblokovať';
@@ -398,12 +401,13 @@ z.string.sk.preferencesAccountCreateTeam = 'Vytvoriť tím';
 z.string.sk.preferencesAccountDelete = 'Vymazať účet';
 z.string.sk.preferencesAccountLogOut = 'Odhlásenie';
 z.string.sk.preferencesAccountManageTeam = 'Správa tímu';
+z.string.sk.preferencesAccountPrivacy = 'Súkromie';
 z.string.sk.preferencesAccountResetPassword = 'Reset hesla';
 z.string.sk.preferencesAccountTeam = 'v {{name}}';
-z.string.sk.preferencesAccountUsernamePlaceholder = 'Vaše celé meno';
-z.string.sk.preferencesAccountUsernameHint = 'Aspoň 2 znaky. A výhradne a-z, 0-9.';
 z.string.sk.preferencesAccountUsernameAvailable = 'Dostupné';
 z.string.sk.preferencesAccountUsernameErrorTaken = 'Už obsadené';
+z.string.sk.preferencesAccountUsernameHint = 'Aspoň 2 znaky. A výhradne a-z, 0-9.';
+z.string.sk.preferencesAccountUsernamePlaceholder = 'Vaše celé meno';
 
 z.string.sk.preferencesAVCamera = 'Kamera';
 z.string.sk.preferencesAVMicrophone = 'Mikrofón';
@@ -433,7 +437,6 @@ z.string.sk.preferencesOptionsAudioNoneDetail = 'Pssst!';
 z.string.sk.preferencesOptionsAudioSome = 'Niektoré';
 z.string.sk.preferencesOptionsAudioSomeDetail = 'Pingy a hovory';
 z.string.sk.preferencesOptionsContacts = 'Kontakty';
-z.string.sk.preferencesOptionsContactsGmail = 'Import z Gmailu';
 z.string.sk.preferencesOptionsContactsMacos = 'Import z Kontaktov';
 z.string.sk.preferencesOptionsContactsDetail = 'Vaše údaje o kontaktoch používame na pripojenie k iným užívateľom. Všetky informácie anonymizujeme a nezdieľame ich s nikým iným.';
 z.string.sk.preferencesOptionsPopular = 'Populárnej požiadavky';
@@ -467,16 +470,12 @@ z.string.sk.searchOthers = 'Pripojiť';
 z.string.sk.searchInvite = 'Pozvať ľudí do Wire';
 z.string.sk.searchInviteDetail = 'Zdieľanie kontaktov Vám pomôže spojiť sa s ostatnými. Anonymizujeme všetky informácie a nezdieľame ich s nikým iným.';
 z.string.sk.searchInviteButtonContacts = 'Z kontaktov';
-z.string.sk.searchInviteButtonGmail = 'Z Gmailu';
 z.string.sk.searchInviteHeadline = 'Pozvať priateľov';
 z.string.sk.searchInviteShare = 'Zdieľať kontakty';
 
 z.string.sk.searchListEveryoneParticipates = 'Všetci pripojení sú už v tomto rozhovore.';
 z.string.sk.searchListNoMatches = 'Žiadne výsledky. Skúste zadať iné meno.';
 
-
-z.string.sk.uploadGoogleHeadline = 'Nájsť ľudí\npre rozhovor.';
-z.string.sk.uploadGoogleMessage = 'Vaše údaje o kontaktoch používame na pripojenie k iným užívateľom. Všetky informácie anonymizujeme a nezdieľame ich s nikým iným.';
 
 z.string.sk.warningCallUnsupportedIncoming = 'Volá {{user}}. Váš prehliadač nepodporuje hovory.';
 z.string.sk.warningCallUnsupportedOutgoing = 'Nemôžete volať, pretože Váš prehliadač nepodporuje hovory.';
@@ -493,9 +492,9 @@ z.string.sk.warningNotFoundMicrophone = 'Nemôžete volať, pretože Váš poč�
 z.string.sk.warningPermissionDeniedCamera = 'Nemôžete volať, pretože Váš prehliadač nemá prístup ku kamere.';
 z.string.sk.warningPermissionDeniedMicrophone = 'Nemôžete volať, pretože Váš prehliadač nemá prístup k mikrofónu.';
 z.string.sk.warningPermissionDeniedScreen = 'Váš prehliadač potrebuje povolenie pre zdieľanie obrazovky.';
-z.string.sk.warningPermissionRequestCamera = '{{icon}} Povoliť prístup ku kamere';
-z.string.sk.warningPermissionRequestMicrophone = '{{icon}} Povoliť prístup k mikrofónu';
-z.string.sk.warningPermissionRequestNotification = '{{icon}} Povoliť oznámenia';
+z.string.sk.warningPermissionRequestCamera = '[icon] Povoliť prístup ku kamere';
+z.string.sk.warningPermissionRequestMicrophone = '[icon] Povoliť prístup k mikrofónu';
+z.string.sk.warningPermissionRequestNotification = '[icon] Povoliť oznámenia';
 z.string.sk.warningPermissionRequestScreen = '{{icon}} Povoliť prístup k obrazovke';
 
 z.string.sk.userAvailabilityAvailable = 'Dostupné';
@@ -542,7 +541,6 @@ z.string.sk.tooltipConversationsStart = 'Začať rozhovor ({{shortcut}})';
 
 z.string.sk.tooltipConversationDetailsRename = 'Zmeniť názov rozhovoru';
 
-z.string.sk.tooltipPreferencesContactsGmail = 'Pre zdieľanie kontaktov sa prihláste do svojho Gmail účtu';
 z.string.sk.tooltipPreferencesContactsMacos = 'Zdieľať všetky svoje kontakty z aplikácie kontaktov systému macOS';
 z.string.sk.tooltipPreferencesPassword = 'Pre zmenu hesla otvorte ďalšiu webovú stránku';
 z.string.sk.tooltipPreferencesPicture = 'Zmeniť obrázok…';

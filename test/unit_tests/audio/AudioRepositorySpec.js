@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:audio/AudioRepository
-
-'use strict';
-
 describe('z.audio.AudioRepository', () => {
   const test_factory = new TestFactory();
 

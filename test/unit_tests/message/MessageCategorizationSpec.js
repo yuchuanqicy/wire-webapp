@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:message/MessageCategorization
-
 describe('z.message.MessageCategorization', () => {
   describe('categoryFromEvent', () => {
     it('malformed events should have category of type UNDEFINED', () => {

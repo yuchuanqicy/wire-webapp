@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:tracking/EventTrackingRepository
-
 describe('z.tracking.helpers', () => {
   describe('getConversationType', () => {
     it('returns correct type for one on one conversation', () => {

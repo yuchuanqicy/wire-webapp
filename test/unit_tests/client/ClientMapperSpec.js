@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:client/ClientMapper
-
-'use strict';
-
 describe('z.client.ClientMapper', () => {
   const mapper = new z.client.ClientMapper();
 

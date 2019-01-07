@@ -17,7 +17,7 @@
  *
  */
 
-// grunt test_run:backup/BackupRepository
+import JSZip from 'jszip';
 
 const noop = () => {};
 

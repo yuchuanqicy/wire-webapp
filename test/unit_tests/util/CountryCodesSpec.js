@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/CountryCodes
-
-'use strict';
-
 describe('z.util.CountryCodes', () => {
   describe('getCountryCode', () => {
     it('returns the county code for an existing ISO name', () => {

@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:search/SearchRepository
-
-'use strict';
-
 describe('z.search.SearchRepository', () => {
   const test_factory = new TestFactory();
 

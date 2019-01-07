@@ -19,10 +19,6 @@
 
 /* eslint no-undef: "off" */
 
-// grunt test_run:location/LocationService
-
-'use strict';
-
 describe('z.location.LocationService', () => {
   describe('getLocation', () => {
     it('resolves a latitude & longitude via Google Maps API into a location name', () => {

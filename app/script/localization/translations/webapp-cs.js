@@ -117,6 +117,8 @@ z.string.cs.modalAccountNewDevicesHeadline = 'Váš účet byl naposledy použit
 z.string.cs.modalAccountNewDevicesFrom = 'Od:';
 z.string.cs.modalAccountNewDevicesMessage = 'Pokud jste to nebyli vy sami, odeberte použité zařízení a změňte si heslo.';
 
+z.string.cs.modalAccountReadReceiptsChangedSecondary = 'Spravovat přístroje';
+
 z.string.cs.modalAccountRemoveDeviceAction = 'Odstranit přístroj';
 z.string.cs.modalAccountRemoveDeviceHeadline = 'Odstranit "{{device}}"';
 z.string.cs.modalAccountRemoveDeviceMessage = 'Pro odstranění přístroje je vyžadováno heslo.';
@@ -373,6 +375,7 @@ z.string.cs.participantDevicesOutdatedClientMessage = '{{user}} používá star�
 z.string.cs.participantDevicesSelfAllDevices = 'Zobrazit všechny mé přístroje';
 z.string.cs.participantDevicesSelfFingerprint = 'Identifikátor přístoje';
 
+
 z.string.cs.userProfileButtonConnect = 'Připojit';
 z.string.cs.userProfileButtonIgnore = 'Ignorovat';
 z.string.cs.userProfileButtonUnblock = 'Odblokovat';
@@ -397,12 +400,13 @@ z.string.cs.preferencesAccountCreateTeam = 'Vytvořit tým';
 z.string.cs.preferencesAccountDelete = 'Smazat účet';
 z.string.cs.preferencesAccountLogOut = 'Odhlásit se';
 z.string.cs.preferencesAccountManageTeam = 'Spravovat tým';
+z.string.cs.preferencesAccountPrivacy = 'Soukromí';
 z.string.cs.preferencesAccountResetPassword = 'Resetovat heslo';
 z.string.cs.preferencesAccountTeam = 'v {{name}}';
-z.string.cs.preferencesAccountUsernamePlaceholder = 'Celé jméno';
-z.string.cs.preferencesAccountUsernameHint = 'Alespoň 2 znaky. Pouze a—z, 0—9 a _';
 z.string.cs.preferencesAccountUsernameAvailable = 'Dostupný';
 z.string.cs.preferencesAccountUsernameErrorTaken = 'Již uděleno';
+z.string.cs.preferencesAccountUsernameHint = 'Alespoň 2 znaky. Pouze a—z, 0—9 a _';
+z.string.cs.preferencesAccountUsernamePlaceholder = 'Celé jméno';
 
 z.string.cs.preferencesAVCamera = 'Kamera';
 z.string.cs.preferencesAVMicrophone = 'Mikrofon';
@@ -432,7 +436,6 @@ z.string.cs.preferencesOptionsAudioNoneDetail = 'Pssst!';
 z.string.cs.preferencesOptionsAudioSome = 'Některé';
 z.string.cs.preferencesOptionsAudioSomeDetail = 'Chaty a hovory';
 z.string.cs.preferencesOptionsContacts = 'Kontakty';
-z.string.cs.preferencesOptionsContactsGmail = 'Importovat ze služby Gmail';
 z.string.cs.preferencesOptionsContactsMacos = 'Import z kontaktů';
 z.string.cs.preferencesOptionsContactsDetail = 'Vaše údaje o kontaktech používáme k propojení s ostatními uživateli. Všechny informace anonymizujeme a nesdílíme je s nikým dalším.';
 z.string.cs.preferencesOptionsPopular = 'Podle popularity poptávky';
@@ -466,16 +469,12 @@ z.string.cs.searchOthers = 'Připojit';
 z.string.cs.searchInvite = 'Pozvat lidi do aplikace Wire';
 z.string.cs.searchInviteDetail = 'Sdílením svých kontaktů si zjednodušíte propojení s ostatními. Všechny informace anonymizujeme a nikdy je neposkytujeme nikomu dalšímu.';
 z.string.cs.searchInviteButtonContacts = 'Z kontaktů';
-z.string.cs.searchInviteButtonGmail = 'Z Gmailu';
 z.string.cs.searchInviteHeadline = 'Přiveďte své přátele';
 z.string.cs.searchInviteShare = 'Sdílet kontakty';
 
 z.string.cs.searchListEveryoneParticipates = 'Všichni, které znáte\njsou již připojeni\nk této konverzaci.';
 z.string.cs.searchListNoMatches = 'Žádné odpovídající výsledky.\nZkuste jiné jméno.';
 
-
-z.string.cs.uploadGoogleHeadline = 'Najít kontakty\npro konverzaci.';
-z.string.cs.uploadGoogleMessage = 'Vaše údaje o kontaktech používáme k propojení s ostatními uživateli. Všechny informace anonymizujeme a nesdílíme je s nikým dalším.';
 
 z.string.cs.warningCallUnsupportedIncoming = 'Volá {{user}}. Tento prohlížeč nepodporuje volání.';
 z.string.cs.warningCallUnsupportedOutgoing = 'Nemůžete volat, protože prohlížeč nepodporuje volání.';
@@ -492,10 +491,10 @@ z.string.cs.warningNotFoundMicrophone = 'Nelze volat, protože tento počítač 
 z.string.cs.warningPermissionDeniedCamera = 'Nelze volat, protože prohlížeč nemá přístup ke kameře.';
 z.string.cs.warningPermissionDeniedMicrophone = 'Nelze volat, protože prohlížeč nemá přístup k mikrofonu.';
 z.string.cs.warningPermissionDeniedScreen = 'Prohlížeč potřebuje oprávnění ke sdílení obrazovku.';
-z.string.cs.warningPermissionRequestCamera = '{{icon}} Povolit přístup ke kameře';
-z.string.cs.warningPermissionRequestMicrophone = '{{icon}} Povolit přístup k mikrofonu';
-z.string.cs.warningPermissionRequestNotification = '{{icon}} Povolit upozornění';
-z.string.cs.warningPermissionRequestScreen = '{{icon}} Povolit přístup k obrazovce';
+z.string.cs.warningPermissionRequestCamera = '[icon] Povolit přístup ke kameře';
+z.string.cs.warningPermissionRequestMicrophone = '[icon] Povolit přístup k mikrofonu';
+z.string.cs.warningPermissionRequestNotification = '[icon] Povolit upozornění';
+z.string.cs.warningPermissionRequestScreen = '[icon] Povolit přístup k obrazovce';
 
 z.string.cs.userAvailabilityAvailable = 'Dostupný';
 z.string.cs.userAvailabilityNone = 'Žádné';
@@ -541,7 +540,6 @@ z.string.cs.tooltipConversationsStart = 'Spustit konverzaci ({{shortcut}})';
 
 z.string.cs.tooltipConversationDetailsRename = 'Změnit název konverzace';
 
-z.string.cs.tooltipPreferencesContactsGmail = 'Přihlaste se ke svému Gmail účtu pro sdílení kontaktů';
 z.string.cs.tooltipPreferencesContactsMacos = 'Sdílejte všechny své kontakty z aplikace kontaktů systému macOS';
 z.string.cs.tooltipPreferencesPassword = 'Pro změnu hesla otevřete další webovou stránku';
 z.string.cs.tooltipPreferencesPicture = 'Změnit obrázek…';

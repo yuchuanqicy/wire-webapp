@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:client/Client
-
-'use strict';
-
 describe('z.client.ClientEntity', () => {
   describe('dismantleUserClientId', () => {
     it('can get the user ID and client ID from a session ID', () => {

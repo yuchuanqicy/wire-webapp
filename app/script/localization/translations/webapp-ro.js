@@ -126,6 +126,8 @@ z.string.ro.modalAccountNewDevicesHeadline = 'Contul tău a fost folosit în dat
 z.string.ro.modalAccountNewDevicesFrom = 'De la:';
 z.string.ro.modalAccountNewDevicesMessage = 'Dacă nu ai făcut asta, elimină dispozitivul și resetează parola.';
 
+z.string.ro.modalAccountReadReceiptsChangedSecondary = 'Gestionare dispozitive';
+
 z.string.ro.modalAccountRemoveDeviceAction = 'Scoate dispozitivul';
 z.string.ro.modalAccountRemoveDeviceHeadline = 'Scoate „{{device}}”';
 z.string.ro.modalAccountRemoveDeviceMessage = 'Este necesară parola pentru a elimina acest dispozitiv.';
@@ -399,6 +401,7 @@ z.string.ro.participantDevicesOutdatedClientMessage = '{{user}} folosește o ver
 z.string.ro.participantDevicesSelfAllDevices = 'Arată toate dispozitivele mele';
 z.string.ro.participantDevicesSelfFingerprint = 'Amprentă dispozitiv';
 
+
 z.string.ro.userProfileButtonConnect = 'Conectare';
 z.string.ro.userProfileButtonIgnore = 'Ignoră';
 z.string.ro.userProfileButtonUnblock = 'Deblochează';
@@ -425,12 +428,13 @@ z.string.ro.preferencesAccountCreateTeam = 'Creează o echipă';
 z.string.ro.preferencesAccountDelete = 'Șterge contul';
 z.string.ro.preferencesAccountLogOut = 'Deconectare';
 z.string.ro.preferencesAccountManageTeam = 'Gestionează o echipă';
+z.string.ro.preferencesAccountPrivacy = 'Confidențialitate';
 z.string.ro.preferencesAccountResetPassword = 'Resetează parola';
 z.string.ro.preferencesAccountTeam = 'în {{name}}';
-z.string.ro.preferencesAccountUsernamePlaceholder = 'Numele tău complet';
-z.string.ro.preferencesAccountUsernameHint = 'Cel puțin două caractere. Doar a—z, 0—9 și _ sunt permise.';
 z.string.ro.preferencesAccountUsernameAvailable = 'Disponibil';
 z.string.ro.preferencesAccountUsernameErrorTaken = 'Deja folosit';
+z.string.ro.preferencesAccountUsernameHint = 'Cel puțin două caractere. Doar a—z, 0—9 și _ sunt permise.';
+z.string.ro.preferencesAccountUsernamePlaceholder = 'Numele tău complet';
 
 z.string.ro.preferencesAVCamera = 'Cameră';
 z.string.ro.preferencesAVMicrophone = 'Microfon';
@@ -460,7 +464,6 @@ z.string.ro.preferencesOptionsAudioNoneDetail = 'Psst!';
 z.string.ro.preferencesOptionsAudioSome = 'Unele';
 z.string.ro.preferencesOptionsAudioSomeDetail = 'Bipuri și apeluri';
 z.string.ro.preferencesOptionsContacts = 'Contacte';
-z.string.ro.preferencesOptionsContactsGmail = 'Importă din Gmail';
 z.string.ro.preferencesOptionsContactsMacos = 'Importă din contacte';
 z.string.ro.preferencesOptionsContactsDetail = 'Vom folosi datele tale de contact pentru a te conecta cu alții. Vom anonimiza toate informațiile și nu le vom împărtăși cu altcineva.';
 z.string.ro.preferencesOptionsPopular = 'În urma cererilor populare';
@@ -496,7 +499,6 @@ z.string.ro.searchOthers = 'Conectare';
 z.string.ro.searchInvite = 'Invită persoane pe Wire';
 z.string.ro.searchInviteDetail = 'Împărtășirea contactelor ne ajută să te conectăm cu alții. Noi anonimizăm toate informațiile și nu le împărtășim cu terți.';
 z.string.ro.searchInviteButtonContacts = 'Din Contacte';
-z.string.ro.searchInviteButtonGmail = 'Din Gmail';
 z.string.ro.searchInviteHeadline = 'Invită prietenii';
 z.string.ro.searchInviteShare = 'Împărtășește contacte';
 
@@ -505,9 +507,6 @@ z.string.ro.searchServiceConfirmButton = 'Adaugă serviciu';
 z.string.ro.searchListEveryoneParticipates = 'Toată lumea cu care\nești conectat este deja\nîn această conversație.';
 z.string.ro.searchListNoMatches = 'Nu s-a găsit nimic.\nÎncearcă să scrii un alt nume.';
 
-
-z.string.ro.uploadGoogleHeadline = 'Caută persoane\ncu care să vorbești.';
-z.string.ro.uploadGoogleMessage = 'Vom folosi datele tale de contact pentru a te conecta cu alții. Vom anonimiza toate informațiile și nu le vom împărtăși cu altcineva.';
 
 z.string.ro.warningCallUnsupportedIncoming = '{{user}} te sună. Browserul tău nu suportă apelurile.';
 z.string.ro.warningCallUnsupportedOutgoing = 'Nu poți suna pentru că browserul tău nu suportă apelurile.';
@@ -524,10 +523,10 @@ z.string.ro.warningNotFoundMicrophone = 'Nu poți suna pentru că acest dispozit
 z.string.ro.warningPermissionDeniedCamera = 'Nu poți suna pentru că browserul tău nu are acces la cameră.';
 z.string.ro.warningPermissionDeniedMicrophone = 'Nu poți suna pentru că browserul tău nu are acces la microfon.';
 z.string.ro.warningPermissionDeniedScreen = 'Browserul tău are nevoie de permisiuni pentru a partaja ecranul.';
-z.string.ro.warningPermissionRequestCamera = '{{icon}} permite accesul la cameră';
-z.string.ro.warningPermissionRequestMicrophone = '{{icon}} permit accesul la microfon';
-z.string.ro.warningPermissionRequestNotification = '{{icon}} permite notificările';
-z.string.ro.warningPermissionRequestScreen = '{{icon}} permite accesul la ecran';
+z.string.ro.warningPermissionRequestCamera = '[icon] permite accesul la cameră';
+z.string.ro.warningPermissionRequestMicrophone = '[icon] permit accesul la microfon';
+z.string.ro.warningPermissionRequestNotification = '[icon] permite notificările';
+z.string.ro.warningPermissionRequestScreen = '[icon] permite accesul la ecran';
 
 z.string.ro.userAvailabilityAvailable = 'Disponibil';
 z.string.ro.userAvailabilityAway = 'Departe';
@@ -578,7 +577,6 @@ z.string.ro.tooltipConversationsStart = 'Începe conversația ({{shortcut}})';
 
 z.string.ro.tooltipConversationDetailsRename = 'Schimbă numele conversației';
 
-z.string.ro.tooltipPreferencesContactsGmail = 'Autentifică-te în conturile Gmail pentru a partaja contacte';
 z.string.ro.tooltipPreferencesContactsMacos = 'Partajează toate contactele de pe aplicația Contacts din macOS';
 z.string.ro.tooltipPreferencesPassword = 'Deschide un alt site web pentru a reseta parola';
 z.string.ro.tooltipPreferencesPicture = 'Schimbă poza de profil…';

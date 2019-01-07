@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:extension/GiphyRepositorySpecs
-
-'use strict';
-
 describe('Giphy Repository', () => {
   let server = null;
   const urls = {

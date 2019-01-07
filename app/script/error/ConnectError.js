@@ -17,8 +17,6 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.error = z.error || {};
 
@@ -29,8 +27,6 @@ z.error.ConnectError = class ConnectError extends z.error.BaseError {
 
   static get MESSAGE() {
     return {
-      GOOGLE_CLIENT: 'Google Auth Client for JavaScript not loaded',
-      GOOGLE_DOWNLOAD: 'Failed to download contacts from Google',
       NO_CONTACTS: 'No contacts found for matching',
       NOT_SUPPORTED: 'Source not supported',
       UPLOAD: 'Address book upload failed',
@@ -39,8 +35,6 @@ z.error.ConnectError = class ConnectError extends z.error.BaseError {
 
   static get TYPE() {
     return {
-      GOOGLE_CLIENT: 'GOOGLE_CLIENT',
-      GOOGLE_DOWNLOAD: 'GOOGLE_DOWNLOAD',
       NO_CONTACTS: 'NO_CONTACTS',
       NOT_SUPPORTED: 'NOT_SUPPORTED',
       UPLOAD: 'UPLOAD',

@@ -53,6 +53,7 @@ import * as config from '../config';
 import EXTERNAL_ROUTE from '../externalRoute';
 import ROOT_ACTIONS from '../module/action/';
 import BackendError from '../module/action/BackendError';
+import LabeledError from '../module/action/LabeledError';
 import ValidationError from '../module/action/ValidationError';
 import {RootState, ThunkDispatch} from '../module/reducer';
 import * as AuthSelector from '../module/selector/AuthSelector';
@@ -225,7 +226,7 @@ class Login extends React.Component<CombinedProps, State> {
           login.email = email;
         } else if (this.isValidUsername(email)) {
           login.handle = email.replace('@', '');
-        } else if (this.isValidPhoneNumber(email)) {
+        } else if (config.FEATURE.ENABLE_PHONE_LOGIN && this.isValidPhoneNumber(email)) {
           login.phone = email;
         }
 
@@ -235,30 +236,44 @@ class Login extends React.Component<CombinedProps, State> {
           : this.props.doLogin(login);
       })
       .then(this.navigateChooseHandleOrWebapp)
-      .catch(error => {
-        switch (error.label) {
-          case BackendError.LABEL.NEW_CLIENT: {
-            this.props.resetAuthError();
-            /**
-             * Show history screen if:
-             *   1. database contains at least one event
-             *   2. there is at least one previously registered client
-             *   3. new local client is temporary
-             */
-            return this.props.doGetAllClients().then(clients => {
-              const shouldShowHistoryInfo = this.props.hasHistory || clients.length > 1 || !this.state.persist;
-              return shouldShowHistoryInfo
-                ? this.props.history.push(ROUTE.HISTORY_INFO)
-                : this.navigateChooseHandleOrWebapp();
-            });
+      .catch((error: Error | BackendError) => {
+        if ((error as BackendError).label) {
+          const backendError = error as BackendError;
+          switch (backendError.label) {
+            case BackendError.LABEL.NEW_CLIENT: {
+              this.props.resetAuthError();
+              /**
+               * Show history screen if:
+               *   1. database contains at least one event
+               *   2. there is at least one previously registered client
+               *   3. new local client is temporary
+               */
+              return this.props.doGetAllClients().then(clients => {
+                const shouldShowHistoryInfo = this.props.hasHistory || clients.length > 1 || !this.state.persist;
+                return shouldShowHistoryInfo
+                  ? this.props.history.push(ROUTE.HISTORY_INFO)
+                  : this.navigateChooseHandleOrWebapp();
+              });
+            }
+            case BackendError.LABEL.TOO_MANY_CLIENTS: {
+              this.props.resetAuthError();
+              return this.props.history.push(ROUTE.CLIENTS);
+            }
+            case BackendError.LABEL.INVALID_CREDENTIALS:
+            case LabeledError.GENERAL_ERRORS.LOW_DISK_SPACE: {
+              return;
+            }
+            default: {
+              const isValidationError = Object.values(ValidationError.ERROR).some(errorType =>
+                backendError.label.endsWith(errorType)
+              );
+              if (!isValidationError) {
+                throw backendError;
+              }
+            }
           }
-          case BackendError.LABEL.TOO_MANY_CLIENTS: {
-            this.props.resetAuthError();
-            return this.props.history.push(ROUTE.CLIENTS);
-          }
-          default: {
-            throw error;
-          }
+        } else {
+          throw error;
         }
       });
   };
@@ -298,16 +313,18 @@ class Login extends React.Component<CombinedProps, State> {
     const isSSOCapable = !isDesktopApp() || (isDesktopApp() && window.wSSOCapable === true);
     return (
       <Page>
-        <IsMobile>
-          <div style={{margin: 16}}>{backArrow}</div>
-        </IsMobile>
+        {config.FEATURE.ENABLE_ACCOUNT_REGISTRATION && (
+          <IsMobile>
+            <div style={{margin: 16}}>{backArrow}</div>
+          </IsMobile>
+        )}
         <Container centerText verticalCenter style={{width: '100%'}}>
           {!isValidLink && <Redirect to={ROUTE.CONVERSATION_JOIN_INVALID} />}
           <AppAlreadyOpen />
           <Columns>
             <IsMobile not>
               <Column style={{display: 'flex'}}>
-                <div style={{margin: 'auto'}}>{backArrow}</div>
+                {config.FEATURE.ENABLE_ACCOUNT_REGISTRATION && <div style={{margin: 'auto'}}>{backArrow}</div>}
               </Column>
             </IsMobile>
             <Column style={{flexBasis: 384, flexGrow: 0, padding: 0}}>
@@ -400,7 +417,7 @@ class Login extends React.Component<CombinedProps, State> {
                     )}
                   </Form>
                 </div>
-                {isSSOCapable ? (
+                {config.FEATURE.ENABLE_SSO && isSSOCapable ? (
                   <div style={{marginTop: '36px'}}>
                     <Link center onClick={this.forgotPassword} data-uie-name="go-forgot-password">
                       {_(loginStrings.forgotPassword)}
@@ -411,14 +428,16 @@ class Login extends React.Component<CombinedProps, State> {
                           {_(loginStrings.ssoLogin)}
                         </Link>
                       </Column>
-                      <Column>
-                        <Link
-                          href={EXTERNAL_ROUTE.PHONE_LOGIN + window.location.search}
-                          data-uie-name="go-sign-in-phone"
-                        >
-                          {_(loginStrings.phoneLogin)}
-                        </Link>
-                      </Column>
+                      {config.FEATURE.ENABLE_PHONE_LOGIN && (
+                        <Column>
+                          <Link
+                            href={URLUtil.pathWithParams(EXTERNAL_ROUTE.PHONE_LOGIN)}
+                            data-uie-name="go-sign-in-phone"
+                          >
+                            {_(loginStrings.phoneLogin)}
+                          </Link>
+                        </Column>
+                      )}
                     </Columns>
                   </div>
                 ) : (
@@ -428,11 +447,16 @@ class Login extends React.Component<CombinedProps, State> {
                         {_(loginStrings.forgotPassword)}
                       </Link>
                     </Column>
-                    <Column>
-                      <Link href={EXTERNAL_ROUTE.PHONE_LOGIN + window.location.search} data-uie-name="go-sign-in-phone">
-                        {_(loginStrings.phoneLogin)}
-                      </Link>
-                    </Column>
+                    {config.FEATURE.ENABLE_PHONE_LOGIN && (
+                      <Column>
+                        <Link
+                          href={URLUtil.pathWithParams(EXTERNAL_ROUTE.PHONE_LOGIN)}
+                          data-uie-name="go-sign-in-phone"
+                        >
+                          {_(loginStrings.phoneLogin)}
+                        </Link>
+                      </Column>
+                    )}
                   </Columns>
                 )}
               </ContainerXS>

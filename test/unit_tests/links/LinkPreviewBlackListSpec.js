@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:links/LinkPreviewBlackList
-
 describe('is_blacklisted', () => {
   it('blacklists youtu.be links', () => {
     const url = 'https://youtu.be/t4gjl-uwUHc';

@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:calling/videoGridRepository
-
 describe('z.calling.VideoGridRepository', () => {
   let groupVideoGrid;
   const initialGrid = [0, 0, 0, 0];

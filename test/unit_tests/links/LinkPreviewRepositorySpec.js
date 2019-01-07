@@ -17,15 +17,13 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:links/LinkPreviewRepository
+import PropertiesRepository from 'app/script/properties/PropertiesRepository';
 
 describe('z.links.LinkPreviewRepository', () => {
   let link_preview_repository = null;
 
   beforeEach(() => {
-    const properties_repository = new z.properties.PropertiesRepository();
+    const properties_repository = new PropertiesRepository();
     link_preview_repository = new z.links.LinkPreviewRepository(undefined, properties_repository);
   });
 

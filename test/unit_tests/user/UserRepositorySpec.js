@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:user/UserRepository
-
-'use strict';
-
 describe('z.user.UserRepository', () => {
   let server = null;
   const test_factory = new TestFactory();

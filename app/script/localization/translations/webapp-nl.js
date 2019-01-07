@@ -120,6 +120,8 @@ z.string.nl.modalAccountNewDevicesHeadline = 'Je account werd gebruikt op:';
 z.string.nl.modalAccountNewDevicesFrom = 'Van:';
 z.string.nl.modalAccountNewDevicesMessage = 'Als je dit niet zelf was, verwijder dan het apparaat en stel je wachtwoord opnieuw in.';
 
+z.string.nl.modalAccountReadReceiptsChangedSecondary = 'Beheer apparaten';
+
 z.string.nl.modalAccountRemoveDeviceAction = 'Verwijder apparaat';
 z.string.nl.modalAccountRemoveDeviceHeadline = 'Verwijder "{{device}}"';
 z.string.nl.modalAccountRemoveDeviceMessage = 'Je wachtwoord is nodig om dit apparaat te verwijderen.';
@@ -391,6 +393,7 @@ z.string.nl.participantDevicesOutdatedClientMessage = '{{user}} gebruikt een oud
 z.string.nl.participantDevicesSelfAllDevices = 'Toon al mijn apparaten';
 z.string.nl.participantDevicesSelfFingerprint = 'Digitale vingerafdruk';
 
+
 z.string.nl.userProfileButtonConnect = 'Verbind';
 z.string.nl.userProfileButtonIgnore = 'Negeer';
 z.string.nl.userProfileButtonUnblock = 'Deblokkeer';
@@ -417,12 +420,13 @@ z.string.nl.preferencesAccountCreateTeam = 'Maak een team';
 z.string.nl.preferencesAccountDelete = 'Verwijder account';
 z.string.nl.preferencesAccountLogOut = 'Uitloggen';
 z.string.nl.preferencesAccountManageTeam = 'Beheer team';
+z.string.nl.preferencesAccountPrivacy = 'Privacy';
 z.string.nl.preferencesAccountResetPassword = 'Reset wachtwoord';
 z.string.nl.preferencesAccountTeam = 'in {{name}}';
-z.string.nl.preferencesAccountUsernamePlaceholder = 'Je volledige naam';
-z.string.nl.preferencesAccountUsernameHint = 'Ten minste 2 tekens. a—z, 0—9, en _ alleen.';
 z.string.nl.preferencesAccountUsernameAvailable = 'Beschikbaar';
 z.string.nl.preferencesAccountUsernameErrorTaken = 'Al in gebruik';
+z.string.nl.preferencesAccountUsernameHint = 'Ten minste 2 tekens. a—z, 0—9, en _ alleen.';
+z.string.nl.preferencesAccountUsernamePlaceholder = 'Je volledige naam';
 
 z.string.nl.preferencesAVCamera = 'Camera';
 z.string.nl.preferencesAVMicrophone = 'Microfoon';
@@ -452,12 +456,11 @@ z.string.nl.preferencesOptionsAudioNoneDetail = 'Sshhh!';
 z.string.nl.preferencesOptionsAudioSome = 'Sommige';
 z.string.nl.preferencesOptionsAudioSomeDetail = 'Pings en oproepen';
 z.string.nl.preferencesOptionsContacts = 'Contacten';
-z.string.nl.preferencesOptionsContactsGmail = 'Importeren uit Gmail';
 z.string.nl.preferencesOptionsContactsMacos = 'Importeren uit contacten';
 z.string.nl.preferencesOptionsContactsDetail = 'Dit helpt je om met anderen te verbinden. We anonimiseren alle informatie en delen deze niet met iemand anders.';
 z.string.nl.preferencesOptionsPopular = 'Op veler verzoek';
 z.string.nl.preferencesOptionsEmojiReplaceCheckbox = 'Getypte emoticons vervangen door emojis';
-z.string.nl.preferencesOptionsEmojiReplaceDetail = ':-) → {{icon}}';
+z.string.nl.preferencesOptionsEmojiReplaceDetail = ':-) → [icon]';
 z.string.nl.preferencesOptionsPreviewsSendCheckbox = 'Maak linkvoorbeelden voor links die jij verstuurt';
 z.string.nl.preferencesOptionsPreviewsSendDetail = 'Linkvoorbeelden kunnen nog steeds getoond worden voor links van andere mensen.';
 z.string.nl.preferencesOptionsNotifications = 'Meldingen';
@@ -488,7 +491,6 @@ z.string.nl.searchOthers = 'Verbind';
 z.string.nl.searchInvite = 'Nodig andere mensen uit voor Wire';
 z.string.nl.searchInviteDetail = 'Het delen van je contacten helpt je om met anderen te verbinden. We anonimiseren alle informatie en delen deze niet met iemand anders.';
 z.string.nl.searchInviteButtonContacts = 'Van contacten';
-z.string.nl.searchInviteButtonGmail = 'Van Gmail';
 z.string.nl.searchInviteHeadline = 'Nodig je vrienden uit';
 z.string.nl.searchInviteShare = 'Contacten delen';
 
@@ -498,9 +500,6 @@ z.string.nl.searchListEveryoneParticipates = 'Iedereen met wie je contact hebt z
 z.string.nl.searchListNoMatches = 'Geen overeenkomende resultaten.\nProbeer een andere gebruikersnaam.';
 
 z.string.nl.temporaryGuestCta = 'Een account aanmaken';
-
-z.string.nl.uploadGoogleHeadline = 'Zoek mensen \nom mee te praten.';
-z.string.nl.uploadGoogleMessage = 'Dit helpt je om met anderen te verbinden. We anonimiseren alle informatie en delen deze niet met iemand anders.';
 
 z.string.nl.warningCallUnsupportedIncoming = '{{user}} belt, maar je browser ondersteund geen gesprekken.';
 z.string.nl.warningCallUnsupportedOutgoing = 'Je kan niet bellen omdat jou browser dit niet ondersteund.';
@@ -517,10 +516,10 @@ z.string.nl.warningNotFoundMicrophone = 'Je kan niet bellen omdat je computer ge
 z.string.nl.warningPermissionDeniedCamera = 'Je kan niet bellen omdat je browser geen toegang heeft tot de camera.';
 z.string.nl.warningPermissionDeniedMicrophone = 'Je kan niet bellen omdat je browser geen toegang heeft tot de microfoon.';
 z.string.nl.warningPermissionDeniedScreen = 'Je browser heeft permissie nodig om je scherm te delen.';
-z.string.nl.warningPermissionRequestCamera = '{{icon}} Toegang tot camera toestaan';
-z.string.nl.warningPermissionRequestMicrophone = '{{icon}} Toegang tot de microfoon toestaan';
-z.string.nl.warningPermissionRequestNotification = '{{icon}} Meldingen toestaan';
-z.string.nl.warningPermissionRequestScreen = '{{icon}} Toegang tot scherm toestaan';
+z.string.nl.warningPermissionRequestCamera = '[icon] Toegang tot camera toestaan';
+z.string.nl.warningPermissionRequestMicrophone = '[icon] Toegang tot de microfoon toestaan';
+z.string.nl.warningPermissionRequestNotification = '[icon] Meldingen toestaan';
+z.string.nl.warningPermissionRequestScreen = '[icon] Toegang tot scherm toestaan';
 
 z.string.nl.userAvailabilityAvailable = 'Beschikbaar';
 z.string.nl.userAvailabilityAway = 'Afwezig';
@@ -571,7 +570,6 @@ z.string.nl.tooltipConversationsStart = 'Start gesprek ({{shortcut}})';
 
 z.string.nl.tooltipConversationDetailsRename = 'Verander gesprek naam';
 
-z.string.nl.tooltipPreferencesContactsGmail = 'Log in op je Gmail account om je contacten te delen';
 z.string.nl.tooltipPreferencesContactsMacos = 'Deel al je contacten van de macOS Contact app';
 z.string.nl.tooltipPreferencesPassword = 'Open andere website om je wachtwoord te resetten';
 z.string.nl.tooltipPreferencesPicture = 'Verander je foto…';

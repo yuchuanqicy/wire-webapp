@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:calling/handler/MediaStreamHandler
-
 window.wire = window.wire || {};
 window.wire.auth = wire.auth || {};
 window.wire.auth.audio = wire.auth.audio || {};

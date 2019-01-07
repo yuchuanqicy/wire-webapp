@@ -133,6 +133,8 @@ z.string.es.modalAccountNewDevicesHeadline = 'Tu cuenta fue usada en:';
 z.string.es.modalAccountNewDevicesFrom = 'Desde:';
 z.string.es.modalAccountNewDevicesMessage = 'Si usted no hizo esto, retire el dispositivo y restablecer la contraseña.';
 
+z.string.es.modalAccountReadReceiptsChangedSecondary = 'Administrar dispositivos';
+
 z.string.es.modalAccountRemoveDeviceAction = 'Eliminar dispositivo';
 z.string.es.modalAccountRemoveDeviceHeadline = 'Eliminar "{{device}}"';
 z.string.es.modalAccountRemoveDeviceMessage = 'Se requiere tu contraseña para eliminar el dispositivo.';
@@ -355,6 +357,7 @@ z.string.es.conversationContextMenuDelete = 'Eliminar para mí';
 z.string.es.conversationContextMenuDeleteEveryone = 'Eliminar para Todos…';
 z.string.es.conversationContextMenuDownload = 'Descargar';
 z.string.es.conversationContextMenuLike = 'Me gusta';
+z.string.es.conversationContextMenuReply = 'Responder';
 z.string.es.conversationContextMenuUnlike = 'No me gusta';
 z.string.es.conversationDeleteTimestamp = 'Eliminados el {{date}}';
 z.string.es.conversationEditTimestamp = 'Editado {{date}}';
@@ -419,6 +422,8 @@ z.string.es.conversationsSecondaryLineEphemeralMention = 'Te mencionó';
 z.string.es.conversationsSecondaryLineEphemeralMentionGroup = 'Alguien te mencionó';
 z.string.es.conversationsSecondaryLineEphemeralMessage = 'Te envió un mensaje';
 z.string.es.conversationsSecondaryLineEphemeralMessageGroup = 'Alguien envió un mensaje';
+z.string.es.conversationsSecondaryLineEphemeralReply = 'Te respondió';
+z.string.es.conversationsSecondaryLineEphemeralReplyGroup = 'Alguien te respondió';
 z.string.es.conversationsSecondaryLineIncomingCall = '{{user}} está llamando';
 z.string.es.conversationsSecondaryLinePeopleLeft = '{{number}} personas se fueron';
 z.string.es.conversationsSecondaryLinePersonLeft = '{{user}} se fue';
@@ -437,6 +442,8 @@ z.string.es.conversationsSecondaryLineSummaryMissedCall = '{{number}} llamada pe
 z.string.es.conversationsSecondaryLineSummaryMissedCalls = '{{number}} llamadas perdidas';
 z.string.es.conversationsSecondaryLineSummaryPing = '{{number}} ping';
 z.string.es.conversationsSecondaryLineSummaryPings = '{{number}} pings'
+z.string.es.conversationsSecondaryLineSummaryReply = '{{number}} respuesta';
+z.string.es.conversationsSecondaryLineSummaryReplies = '{{number}} respuestas';
 z.string.es.conversationsSecondaryLineYouLeft = 'Te fuiste';
 z.string.es.conversationsSecondaryLineYouWereRemoved = 'Te han eliminado';
 
@@ -512,7 +519,7 @@ z.string.es.groupParticipantActionSendRequest = 'Conectar';
 z.string.es.groupParticipantActionUnblock = 'Desbloquear…';
 
 z.string.es.guestOptionsCopyLink = 'Copiar el enlace';
-z.string.es.guestOptionsCopyLinkDone = 'Se copió el enlace.';
+z.string.es.guestOptionsCopyLinkDone = 'Enlace Copiado!';
 z.string.es.guestOptionsCreateLink = 'Crear un enlace';
 z.string.es.guestOptionsInfoHeader = 'Invitar a otros con un enlace';
 z.string.es.guestOptionsInfoText = 'Cualquiera que posea el enlace puede unirse a la conversación, incluso si no usa Wire.';
@@ -522,9 +529,10 @@ z.string.es.guestOptionsTitle = 'Invitados y servicios';
 z.string.es.notificationSettingsTitle = 'Notificaciones';
 z.string.es.notificationSettingsDisclaimer = 'Se te notificará acerca de todo (incluidas llamadas de audio y video) o sólo cuando se te menciona.';
 z.string.es.notificationSettingsEverything = 'Todo';
+z.string.es.notificationSettingsMentionsAndReplies = 'Menciones y respuestas';
 z.string.es.notificationSettingsNothing = 'Nada';
 
-z.string.es.timedMessagesTitle = 'Mensaje temporizado';
+z.string.es.timedMessagesTitle = 'Mensajes temporizados';
 z.string.es.timedMessageDisclaimer = 'Los mensajes cronometrados se activarán para todos los participantes en esta conversación.';
 
 z.string.es.participantDevicesDetailHeadline = 'Verifica que esta coincida con la huella digital que se muestra en el {{html1}}dispositivo de {{user}}’s{{html2}}.';
@@ -541,6 +549,7 @@ z.string.es.participantDevicesOutdatedClientMessage = '{{user}} está utilizando
 
 z.string.es.participantDevicesSelfAllDevices = 'Mostrar todos mis dispositivos';
 z.string.es.participantDevicesSelfFingerprint = 'Huella digital de tu dispositivo';
+
 
 z.string.es.userProfileButtonConnect = 'Conectar';
 z.string.es.userProfileButtonIgnore = 'Ignorar';
@@ -575,12 +584,13 @@ z.string.es.preferencesAccountLogOut = 'Cerrar sesión';
 z.string.es.preferencesAccountManageTeam = 'Administrar equipo';
 z.string.es.preferencesAccountMarketingConsentCheckbox = 'Recibir boletín de noticias';
 z.string.es.preferencesAccountMarketingConsentDetail = 'Reciba noticias y actualizaciones de productos de Wire por correo electrónico.';
+z.string.es.preferencesAccountPrivacy = 'Privacidad';
 z.string.es.preferencesAccountResetPassword = 'Restablecer contraseña';
 z.string.es.preferencesAccountTeam = 'en {{name}}';
-z.string.es.preferencesAccountUsernamePlaceholder = 'Tu nombre completo';
-z.string.es.preferencesAccountUsernameHint = 'Al menos 2 caracteres. Sólo a–z, 0–9 y _.';
 z.string.es.preferencesAccountUsernameAvailable = 'Disponible';
 z.string.es.preferencesAccountUsernameErrorTaken = 'No disponible';
+z.string.es.preferencesAccountUsernameHint = 'Al menos 2 caracteres. Sólo a–z, 0–9 y _.';
+z.string.es.preferencesAccountUsernamePlaceholder = 'Tu nombre completo';
 
 z.string.es.preferencesAVCamera = 'Cámara';
 z.string.es.preferencesAVMicrophone = 'Micrófono';
@@ -614,7 +624,6 @@ z.string.es.preferencesOptionsAudioNoneDetail = 'Sshhh!';
 z.string.es.preferencesOptionsAudioSome = 'Algunos';
 z.string.es.preferencesOptionsAudioSomeDetail = 'Pings y llamadas';
 z.string.es.preferencesOptionsContacts = 'Contactos';
-z.string.es.preferencesOptionsContactsGmail = 'Importar desde Gmail';
 z.string.es.preferencesOptionsContactsMacos = 'Importar desde Contactos';
 z.string.es.preferencesOptionsContactsDetail = 'Compartir tus contactos te ayuda a conectarte con otros. Toda la información es anónima y no será compartida con nadie más.';
 z.string.es.preferencesOptionsPopular = 'Por demanda popular';
@@ -685,7 +694,6 @@ z.string.es.searchOthers = 'Conectar';
 z.string.es.searchInvite = 'Invitar amigos a Wire';
 z.string.es.searchInviteDetail = 'Compartir tus contactos te ayuda a conectar con otros. Anonimizamos toda la información y no la compartimos con nadie.';
 z.string.es.searchInviteButtonContacts = 'Desde los contactos';
-z.string.es.searchInviteButtonGmail = 'Desde Gmail';
 z.string.es.searchInviteHeadline = 'Tráete a tus amigos';
 z.string.es.searchInviteShare = 'Compartir contactos';
 
@@ -704,9 +712,6 @@ z.string.es.temporaryGuestJoinDescription = 'Si cierras o actualizas esta págin
 z.string.es.temporaryGuestLeaveMessage = ' ya no eres parte de esta conversación.';
 z.string.es.temporaryGuestLeaveDescription = 'Si cierras o actualizas esta página, perderás acceso al historial de conversación.';
 
-z.string.es.uploadGoogleHeadline = 'Buscar con quien hablar.';
-z.string.es.uploadGoogleMessage = 'Compartir tus contactos te ayuda a conectarte con otros. Toda la información es anónima y no será compartida con nadie más.';
-
 z.string.es.warningCallUnsupportedIncoming = '{{user}} está llamando. Tu navegador no está configurada para llamadas.';
 z.string.es.warningCallUnsupportedOutgoing = 'No puedes llamar porque tu navegador no está configurada para llamadas.';
 z.string.es.warningCallIssues = 'Esta versión de Wire no puede participar en la llamada. Por favor, usa';
@@ -722,10 +727,10 @@ z.string.es.warningNotFoundMicrophone = 'No puedes llamar porque tu máquina no 
 z.string.es.warningPermissionDeniedCamera = 'No puedes llamar porque tu máquina no tiene accesso a la cámera.';
 z.string.es.warningPermissionDeniedMicrophone = 'No puedes llamar porque tu máquina no tiene acceso al micrófono.';
 z.string.es.warningPermissionDeniedScreen = 'Tu navegador necesita permiso para compartir la pantalla.';
-z.string.es.warningPermissionRequestCamera = '{{icon}} Permitir acceso a la cámara';
-z.string.es.warningPermissionRequestMicrophone = '{{icon}} Permitir acceso al micrófono';
-z.string.es.warningPermissionRequestNotification = '{{icon}} Permitir notificaciones';
-z.string.es.warningPermissionRequestScreen = '{{icon}} Permitir acceso a la pantalla';
+z.string.es.warningPermissionRequestCamera = '[icon] Permitir acceso a la cámara';
+z.string.es.warningPermissionRequestMicrophone = '[icon] Permitir acceso al micrófono';
+z.string.es.warningPermissionRequestNotification = '[icon] Permitir notificaciones';
+z.string.es.warningPermissionRequestScreen = '[icon] Permitir acceso a la pantalla';
 
 z.string.es.userAvailabilityAvailable = 'Disponible';
 z.string.es.userAvailabilityAway = 'Ausente';
@@ -744,12 +749,14 @@ z.string.es.notificationMemberJoinMany = '{{user}} agregó a {{number}} personas
 z.string.es.notificationMemberJoinSelf = '{user} se unió a la conversación';
 z.string.es.notificationMemberJoinOne = '{{user1}} agregó a {{user2}} a la conversación';
 z.string.es.notificationMemberLeaveRemovedYou = '{{user}} te eliminó de la conversación';
-z.string.es.notificationMention = 'Mención nueva:';
+z.string.es.notificationMention = 'Mención: {{text}}';
 z.string.es.notificationObfuscated = 'Te envió un mensaje';
 z.string.es.notificationObfuscatedMention = 'Te mencionó';
+z.string.es.notificationObfuscatedReply = 'Te respondió';
 z.string.es.notificationObfuscatedTitle = 'Alguien';
 z.string.es.notificationPing = 'Hizo ping';
 z.string.es.notificationReaction = '{{reaction}} su mensaje';
+z.string.es.notificationReply = 'Respuesta: {{text}}';
 z.string.es.notificationSharedAudio = 'Compartió un mensaje de audio';
 z.string.es.notificationSharedFile = 'Compartió un archivo';
 z.string.es.notificationSharedLocation = 'Compartió una ubicación';
@@ -784,7 +791,6 @@ z.string.es.tooltipConversationsStart = 'Empezar una conversación ({{shortcut}}
 z.string.es.tooltipConversationDetailsAddPeople = 'Añadir participantes a la conversación ({{shortcut}})';
 z.string.es.tooltipConversationDetailsRename = 'Cambiar nombre de la conversación';
 
-z.string.es.tooltipPreferencesContactsGmail = 'Iniciar sesión en tu cuenta de Gmail para compartir los contactos';
 z.string.es.tooltipPreferencesContactsMacos = 'Compartir todos tus contactos desde la aplicación de Contactos de macOS';
 z.string.es.tooltipPreferencesPassword = 'Abrir otra página web para restablecer su contraseña';
 z.string.es.tooltipPreferencesPicture = 'Cambiar tu foto…';
@@ -814,4 +820,11 @@ z.string.es.ephemeralUnitsWeeks = 'semanas';
 z.string.es.ephemeralUnitsYear = 'año';
 z.string.es.ephemeralUnitsYears = 'años';
 z.string.es.ephemeralRemaining = 'restantes';
+
+z.string.es.replyAudioMessage = 'Mensaje de audio';
+z.string.es.replyQuoteError = 'No puedes ver este mensaje.';
+z.string.es.replyQuoteShowMore = 'Ver más';
+z.string.es.replyQuoteShowLess = 'Mostrar menos';
+z.string.es.replyQuoteTimeStampDate = 'Mensaje original de {{date}}';
+z.string.es.replyQuoteTimeStampTime = 'Mensaje original de {{time}}'
 

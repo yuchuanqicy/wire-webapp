@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/EmojiUtil
-
-'use strict';
-
 describe('z.util.emoji', () => {
   describe('includes_only_emojies', () => {
     it('returns false for empty string', () => {

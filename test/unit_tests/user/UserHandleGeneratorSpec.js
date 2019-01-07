@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:user/UserHandleGenerator
-
-'use strict';
-
 describe('UserHandleGenerator', () => {
   describe('generate_handle_variations', () => {
     it('generates handle variations', () => {

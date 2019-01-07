@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/NumberUtil
-
-'use strict';
-
 describe('z.util.NumberUtil', () => {
   describe('inRange', () => {
     it('returns true for values inside the specified range', () => {

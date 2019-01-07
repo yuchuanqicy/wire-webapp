@@ -17,14 +17,13 @@
  *
  */
 
-'use strict';
+import platform from 'platform';
 
 window.z = window.z || {};
 window.z.util = z.util || {};
 
 z.util.Environment = (() => {
   const APP_ENV = {
-    INTERNAL: 'wire-webapp-staging.wire.com',
     LOCALHOST: 'localhost',
     PRODUCTION: 'wire.com',
     VIRTUAL_HOST: 'wire.ms', // The domain "wire.ms" is our virtual host for testing contact uploads
@@ -62,26 +61,25 @@ z.util.Environment = (() => {
   };
 
   const _getVersion = () => {
-    const browserVersion = window.platform.version || '';
+    const browserVersion = platform.version || '';
     const [majorVersion] = browserVersion.split('.');
     return window.parseInt(majorVersion, 10);
   };
 
-  const _isChrome = () => window.platform.name === BROWSER_NAME.CHROME || _isElectron();
-  const _isDesktop = () => _isElectron() && window.platform.ua.includes(BROWSER_NAME.WIRE);
-  const _isEdge = () => window.platform.name === BROWSER_NAME.EDGE;
-  const _isElectron = () => window.platform.name === BROWSER_NAME.ELECTRON;
-  const _isFirefox = () => window.platform.name === BROWSER_NAME.FIREFOX;
-  const _isOpera = () => window.platform.name === BROWSER_NAME.OPERA;
+  const _isChrome = () => platform.name === BROWSER_NAME.CHROME || _isElectron();
+  const _isDesktop = () => _isElectron() && platform.ua.includes(BROWSER_NAME.WIRE);
+  const _isEdge = () => platform.name === BROWSER_NAME.EDGE;
+  const _isElectron = () => platform.name === BROWSER_NAME.ELECTRON;
+  const _isFirefox = () => platform.name === BROWSER_NAME.FIREFOX;
+  const _isOpera = () => platform.name === BROWSER_NAME.OPERA;
 
-  const _isMac = () => window.platform.ua.includes(PLATFORM_NAME.MACINTOSH);
-  const _isWindows = () => window.platform.os.family && window.platform.os.family.includes(PLATFORM_NAME.WINDOWS);
+  const _isMac = () => platform.ua.includes(PLATFORM_NAME.MACINTOSH);
+  const _isWindows = () => platform.os.family && platform.os.family.includes(PLATFORM_NAME.WINDOWS);
 
-  const isInternal = () => window.location.hostname === APP_ENV.INTERNAL;
   const isLocalhost = () => [APP_ENV.LOCALHOST, APP_ENV.VIRTUAL_HOST].includes(window.location.hostname);
   const isProduction = () => {
     const isProductionHost = window.wire.env.ENVIRONMENT === z.service.BackendEnvironment.PRODUCTION;
-    return isProductionHost && !isInternal();
+    return isProductionHost;
   };
 
   const _supportsAudioOutputSelection = () => _isChrome();
@@ -134,7 +132,7 @@ z.util.Environment = (() => {
       chrome: _isChrome(),
       edge: _isEdge(),
       firefox: _isFirefox(),
-      name: window.platform.name,
+      name: platform.name,
       opera: _isOpera(),
       supports: {
         audioOutputSelection: _supportsAudioOutputSelection(),
@@ -153,7 +151,6 @@ z.util.Environment = (() => {
     electron: _isElectron(),
     electronVersion: _getElectronVersion,
     frontend: {
-      isInternal,
       isLocalhost,
       isProduction,
     },
@@ -171,7 +168,7 @@ z.util.Environment = (() => {
         return _getAppVersion();
       }
 
-      const electronVersion = _getElectronVersion(window.platform.ua);
+      const electronVersion = _getElectronVersion(platform.ua);
       const showElectronVersion = electronVersion && showWrapperVersion;
       return showElectronVersion ? electronVersion : _getFormattedAppVersion();
     },

@@ -17,9 +17,7 @@
  *
  */
 
-// grunt test_run:util/ValidationUtil
-
-'use strict';
+import UUID from 'uuidjs';
 
 describe('z.util.ValidationUtil', () => {
   describe('"asset.legacy"', () => {

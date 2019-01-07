@@ -17,8 +17,6 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.components = z.components || {};
 
@@ -121,10 +119,10 @@ z.components.VideoAssetComponent = class VideoAssetComponent {
 ko.components.register('video-asset', {
   template: `
     <!-- ko ifnot: message.isObfuscated() -->
-      <div class="video-asset-container" 
-        data-bind="hide_controls: 2000, 
-                   attr: {'data-uie-value': asset.file_name}, 
-                   css: {'video-asset-container--small': displaySmall()}" 
+      <div class="video-asset-container"
+        data-bind="hide_controls: 2000,
+                   attr: {'data-uie-value': asset.file_name},
+                   css: {'video-asset-container--small': displaySmall()}"
         data-uie-name="video-asset">
         <video playsinline
                data-bind="attr: {src: video_src},
@@ -138,7 +136,7 @@ ko.components.register('video-asset', {
           <div class="video-playback-error label-xs" data-bind="l10n_text: z.string.conversationPlaybackError"></div>
         <!-- /ko -->
         <!-- ko ifnot: video_playback_error -->
-          <!-- ko if: !asset.uploaded_on_this_client() && asset.status() === z.assets.AssetTransferState.UPLOADING -->
+          <!-- ko if: asset.status() === z.assets.AssetTransferState.UPLOAD_PENDING -->
             <div class="asset-placeholder">
               <div class="three-dots">
                 <span></span><span></span><span></span>
@@ -146,7 +144,7 @@ ko.components.register('video-asset', {
             </div>
           <!-- /ko -->
 
-          <!-- ko ifnot: !asset.uploaded_on_this_client() && asset.status() === z.assets.AssetTransferState.UPLOADING -->
+          <!-- ko if: asset.status() !== z.assets.AssetTransferState.UPLOAD_PENDING -->
             <div class="video-controls-center">
               <!-- ko if: displaySmall() -->
                 <media-button params="src: video_element,
@@ -154,14 +152,14 @@ ko.components.register('video-asset', {
                                       asset: asset,
                                       play: onPlayButtonClicked">
                 </media-button>
-              <!-- /ko -->           
+              <!-- /ko -->
               <!-- ko ifnot: displaySmall() -->
                 <media-button params="src: video_element,
                                       large: true,
                                       asset: asset,
                                       play: onPlayButtonClicked,
                                       pause: on_pause_button_clicked,
-                                      cancel: () => asset.cancel($parents[1])">
+                                      cancel: () => asset.cancel(message)">
                 </media-button>
               <!-- /ko -->
             </div>

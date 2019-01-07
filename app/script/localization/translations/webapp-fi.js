@@ -117,6 +117,8 @@ z.string.fi.modalAccountNewDevicesHeadline = 'Tiliäsi käytettiin:';
 z.string.fi.modalAccountNewDevicesFrom = 'Laite:';
 z.string.fi.modalAccountNewDevicesMessage = 'Jos et tehnyt tätä, poista laite ja vaihda salasanasi.';
 
+z.string.fi.modalAccountReadReceiptsChangedSecondary = 'Hallitse laitteita';
+
 z.string.fi.modalAccountRemoveDeviceAction = 'Poista laite';
 z.string.fi.modalAccountRemoveDeviceHeadline = 'Poista "{{device}}"';
 z.string.fi.modalAccountRemoveDeviceMessage = 'Sinun täytyy kirjoittaa salasanasi poistaaksesi laitteen.';
@@ -374,6 +376,7 @@ z.string.fi.participantDevicesOutdatedClientMessage = '{{user}} käyttää vanha
 z.string.fi.participantDevicesSelfAllDevices = 'Näytä kaikki laitteeni';
 z.string.fi.participantDevicesSelfFingerprint = 'Laitteen sormenjälki';
 
+
 z.string.fi.userProfileButtonConnect = 'Yhdistä';
 z.string.fi.userProfileButtonIgnore = 'Hylkää';
 z.string.fi.userProfileButtonUnblock = 'Poista esto';
@@ -399,12 +402,13 @@ z.string.fi.preferencesAccountCreateTeam = 'Luo tiimi';
 z.string.fi.preferencesAccountDelete = 'Poista tili';
 z.string.fi.preferencesAccountLogOut = 'Kirjaudu ulos';
 z.string.fi.preferencesAccountManageTeam = 'Hallinnoi tiimiä';
+z.string.fi.preferencesAccountPrivacy = 'Tietosuoja';
 z.string.fi.preferencesAccountResetPassword = 'Vaihda salasana';
 z.string.fi.preferencesAccountTeam = 'tiimissä {{name}}';
-z.string.fi.preferencesAccountUsernamePlaceholder = 'Koko nimesi';
-z.string.fi.preferencesAccountUsernameHint = 'Vähintään 2 merkkiä, vain a - z, 0 - 9 ja _.';
 z.string.fi.preferencesAccountUsernameAvailable = 'Saatavilla';
 z.string.fi.preferencesAccountUsernameErrorTaken = 'On jo käytössä';
+z.string.fi.preferencesAccountUsernameHint = 'Vähintään 2 merkkiä, vain a - z, 0 - 9 ja _.';
+z.string.fi.preferencesAccountUsernamePlaceholder = 'Koko nimesi';
 
 z.string.fi.preferencesAVCamera = 'Kamera';
 z.string.fi.preferencesAVMicrophone = 'Mikrofoni';
@@ -434,7 +438,6 @@ z.string.fi.preferencesOptionsAudioNoneDetail = 'Sshhh!';
 z.string.fi.preferencesOptionsAudioSome = 'Jotain';
 z.string.fi.preferencesOptionsAudioSomeDetail = 'Pingit ja puhelut';
 z.string.fi.preferencesOptionsContacts = 'Yhteystiedot';
-z.string.fi.preferencesOptionsContactsGmail = 'Tuo Gmailista';
 z.string.fi.preferencesOptionsContactsMacos = 'Tuo Yhteystiedoista';
 z.string.fi.preferencesOptionsContactsDetail = 'Käytämme sinun kontaktitietoja yhdistääksemme sinut muiden kanssa. Anonymisoimme kaiken tiedon ja emme jaa sitä ulkopuolisille.';
 z.string.fi.preferencesOptionsPopular = 'Yleisön pyynnöstä';
@@ -468,16 +471,12 @@ z.string.fi.searchOthers = 'Yhdistä';
 z.string.fi.searchInvite = 'Kutsu henkilöitä Wireen';
 z.string.fi.searchInviteDetail = 'Yhteystietojesi jakaminen auttaa sinua löytämään uusia kontakteja. Anonymisoimme kaiken tiedon ja emme jaa sitä ulkopuolisille.';
 z.string.fi.searchInviteButtonContacts = 'Kontakteista';
-z.string.fi.searchInviteButtonGmail = 'Gmailista';
 z.string.fi.searchInviteHeadline = 'Kutsu kavereitasi';
 z.string.fi.searchInviteShare = 'Jaa yhteystietoja';
 
 z.string.fi.searchListEveryoneParticipates = 'Jokainen jonka kanssa olet yhdistetty on jo tässä keskustelussa.';
 z.string.fi.searchListNoMatches = 'Ei vastaavia tuloksia. Yritä toisella nimellä.';
 
-
-z.string.fi.uploadGoogleHeadline = 'Etsi ihmisiä joiden kanssa jutella.';
-z.string.fi.uploadGoogleMessage = 'Käytämme sinun kontaktitietoja yhdistääksemme sinut muiden kanssa. Anonymisoimme kaiken tiedon ja emme jaa sitä ulkopuolisille.';
 
 z.string.fi.warningCallUnsupportedIncoming = '{{user}} soittaa. Selaimesi ei tue puheluja.';
 z.string.fi.warningCallUnsupportedOutgoing = 'Et voi soittaa puhelua koska selaimesi ei tue puheluja.';
@@ -494,10 +493,10 @@ z.string.fi.warningNotFoundMicrophone = 'Et voi soittaa puhelua koska tietokonee
 z.string.fi.warningPermissionDeniedCamera = 'Et voi soittaa puhelua koska selaimellasi ei ole oikeutta käyttä kameraa.';
 z.string.fi.warningPermissionDeniedMicrophone = 'Et voi soittaa puhelua koska selaimellasi ei ole oikeuta käyttää mikrofonia.';
 z.string.fi.warningPermissionDeniedScreen = 'Selaimesi tarvitsee luvan jakaa näyttösi.';
-z.string.fi.warningPermissionRequestCamera = '{{icon}} Anna käyttöoikeus kameraan';
-z.string.fi.warningPermissionRequestMicrophone = '{{icon}} Anna käyttöoikeus mikrofoniin';
-z.string.fi.warningPermissionRequestNotification = '{{icon}} Salli ilmoitukset';
-z.string.fi.warningPermissionRequestScreen = '{{icon}} Salli näytön käyttö';
+z.string.fi.warningPermissionRequestCamera = '[icon] Anna käyttöoikeus kameraan';
+z.string.fi.warningPermissionRequestMicrophone = '[icon] Anna käyttöoikeus mikrofoniin';
+z.string.fi.warningPermissionRequestNotification = '[icon] Salli ilmoitukset';
+z.string.fi.warningPermissionRequestScreen = '[icon] Salli näytön käyttö';
 
 z.string.fi.userAvailabilityAvailable = 'Saatavilla';
 z.string.fi.userAvailabilityNone = 'Ei mitään';
@@ -543,7 +542,6 @@ z.string.fi.tooltipConversationsStart = 'Aloita keskustelu ({{shortcut}})';
 
 z.string.fi.tooltipConversationDetailsRename = 'Muuta keskustelun nimeä';
 
-z.string.fi.tooltipPreferencesContactsGmail = 'Kirjaudu gmail-tilillesi jakaaksesi kontakteja';
 z.string.fi.tooltipPreferencesContactsMacos = 'Jaa kaikki yhteystietosi macOs Yhteystieto sovelluksesta';
 z.string.fi.tooltipPreferencesPassword = 'Avaa toinen nettisivu vaihtaaksesi salasanasi';
 z.string.fi.tooltipPreferencesPicture = 'Vaihda kuvasi…';

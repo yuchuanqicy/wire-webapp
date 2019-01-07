@@ -115,6 +115,8 @@ z.string.sl.modalAccountNewDevicesHeadline = 'Vaš račun je bil uporabljen na:'
 z.string.sl.modalAccountNewDevicesFrom = 'Od:';
 z.string.sl.modalAccountNewDevicesMessage = 'Če tega niste storili, odstranite napravo in ponastavite vaše geslo.';
 
+z.string.sl.modalAccountReadReceiptsChangedSecondary = 'Upravljanje naprav';
+
 z.string.sl.modalAccountRemoveDeviceAction = 'Odstrani napravo';
 z.string.sl.modalAccountRemoveDeviceHeadline = 'Odstrani "{{device}}"';
 z.string.sl.modalAccountRemoveDeviceMessage = 'Za odstranitev naprave je potrebno vaše geslo.';
@@ -365,6 +367,7 @@ z.string.sl.participantDevicesOutdatedClientMessage = '{{user}} uporablja starej
 z.string.sl.participantDevicesSelfAllDevices = 'Prikaži vse moje naprave';
 z.string.sl.participantDevicesSelfFingerprint = 'Prstni odtis naprave';
 
+
 z.string.sl.userProfileButtonConnect = 'Poveži';
 z.string.sl.userProfileButtonIgnore = 'Ignoriraj';
 z.string.sl.userProfileButtonUnblock = 'Odblokiraj';
@@ -390,12 +393,13 @@ z.string.sl.preferencesAccountCreateTeam = 'Ustvari novo ekipo';
 z.string.sl.preferencesAccountDelete = 'Izbriši račun';
 z.string.sl.preferencesAccountLogOut = 'Odjava';
 z.string.sl.preferencesAccountManageTeam = 'Uredi nalogo';
+z.string.sl.preferencesAccountPrivacy = 'Zasebnost';
 z.string.sl.preferencesAccountResetPassword = 'Resetiraj geslo';
 z.string.sl.preferencesAccountTeam = 'v {{name}}';
-z.string.sl.preferencesAccountUsernamePlaceholder = 'Vaše polno ime';
-z.string.sl.preferencesAccountUsernameHint = 'Vsaj 2 znaka. Le a—z, 0—9 in _.';
 z.string.sl.preferencesAccountUsernameAvailable = 'Na voljo';
 z.string.sl.preferencesAccountUsernameErrorTaken = 'Že zasedeno';
+z.string.sl.preferencesAccountUsernameHint = 'Vsaj 2 znaka. Le a—z, 0—9 in _.';
+z.string.sl.preferencesAccountUsernamePlaceholder = 'Vaše polno ime';
 
 z.string.sl.preferencesAVCamera = 'Kamera';
 z.string.sl.preferencesAVMicrophone = 'Mikrofon';
@@ -425,7 +429,6 @@ z.string.sl.preferencesOptionsAudioNoneDetail = 'Pssst!';
 z.string.sl.preferencesOptionsAudioSome = 'Nekateri';
 z.string.sl.preferencesOptionsAudioSomeDetail = 'Pingi in klici';
 z.string.sl.preferencesOptionsContacts = 'Stiki';
-z.string.sl.preferencesOptionsContactsGmail = 'Uvozi iz Gmail';
 z.string.sl.preferencesOptionsContactsMacos = 'Uvozi iz imenika stikov';
 z.string.sl.preferencesOptionsContactsDetail = 'Uporabljamo vaše podatke stikov pri povezovanju z drugimi. Vse informacije anonimiziramo in ne delimo z drugimi.';
 z.string.sl.preferencesOptionsPopular = 'Po priljubljenosti';
@@ -459,16 +462,12 @@ z.string.sl.searchOthers = 'Poveži';
 z.string.sl.searchInvite = 'Povabi ostale osebe na Wire';
 z.string.sl.searchInviteDetail = 'Deljenje vaših stikov pomaga pri povezovanju z drugimi. Vse informacije anonimiziramo in ne delimo z drugimi.';
 z.string.sl.searchInviteButtonContacts = 'Iz imenika stikov';
-z.string.sl.searchInviteButtonGmail = 'Iz Gmail';
 z.string.sl.searchInviteHeadline = 'Pripeljite vaše prijatelje';
 z.string.sl.searchInviteShare = 'Deli Stike';
 
 z.string.sl.searchListEveryoneParticipates = 'Vsi \ns katerimi ste povezani,\nso že v tem pogovoru.';
 z.string.sl.searchListNoMatches = 'Brez ujemanja rezultatov. \nPoizkusite vnesti drugo ime.';
 
-
-z.string.sl.uploadGoogleHeadline = 'Poiščite osebe\nza pogovor.';
-z.string.sl.uploadGoogleMessage = 'Uporabljamo vaše podatke stikov pri povezovanju z drugimi. Vse informacije anonimiziramo in ne delimo z drugimi.';
 
 z.string.sl.warningCallUnsupportedIncoming = '{{user}} kliče. Vaš brskalnik ne podpira klicev.';
 z.string.sl.warningCallUnsupportedOutgoing = 'Ne morete klicati, ker vaš brskalnik ne podpira klicev.';
@@ -485,10 +484,10 @@ z.string.sl.warningNotFoundMicrophone = 'Ne morete klicati, ker vaš računalnik
 z.string.sl.warningPermissionDeniedCamera = 'Ne morete klicati, ker vaš brskalnik nima dostopa do kamere.';
 z.string.sl.warningPermissionDeniedMicrophone = 'Klicati ni mogoče, ker vaš brskalnik nima dostopa do mikrofona.';
 z.string.sl.warningPermissionDeniedScreen = 'Vaš brskalnik potrebuje dovoljenje za deljenje vašega zaslona.';
-z.string.sl.warningPermissionRequestCamera = '{{icon}} Dovoli dostop do kamere';
-z.string.sl.warningPermissionRequestMicrophone = '{{icon}} Dovoli dostop do mikrofona';
-z.string.sl.warningPermissionRequestNotification = '{{icon}} Dovoli obvestila';
-z.string.sl.warningPermissionRequestScreen = '{{icon}} Dovoli dostop do zaslona';
+z.string.sl.warningPermissionRequestCamera = '[icon] Dovoli dostop do kamere';
+z.string.sl.warningPermissionRequestMicrophone = '[icon] Dovoli dostop do mikrofona';
+z.string.sl.warningPermissionRequestNotification = '[icon] Dovoli obvestila';
+z.string.sl.warningPermissionRequestScreen = '[icon] Dovoli dostop do zaslona';
 
 z.string.sl.userAvailabilityAvailable = 'Na voljo';
 z.string.sl.userAvailabilityNone = 'Nič';
@@ -534,7 +533,6 @@ z.string.sl.tooltipConversationsStart = 'Začni pogovor ({{shortcut}})';
 
 z.string.sl.tooltipConversationDetailsRename = 'Spremeni ime pogovora';
 
-z.string.sl.tooltipPreferencesContactsGmail = 'Prijavite se v vaš Gmail račun za deljenje stikov';
 z.string.sl.tooltipPreferencesContactsMacos = 'Deli vse vaše stike iz macOS aplikacije Contacts';
 z.string.sl.tooltipPreferencesPassword = 'Odpri drugo spletno stran za ponastavitev gesla';
 z.string.sl.tooltipPreferencesPicture = 'Spremenite vašo sliko…';

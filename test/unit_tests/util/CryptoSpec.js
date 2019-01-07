@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/Crypto
-
-'use strict';
-
 describe('z.util.Crypto', () => {
   describe('Jenkins’s one-at-a-time hash', () => {
     /* eslint-disable sort-keys */

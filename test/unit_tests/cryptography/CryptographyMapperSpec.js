@@ -17,12 +17,10 @@
  *
  */
 
-// grunt test_run:cryptography/CryptographyMapper
+import CryptographyMapper from 'app/script/cryptography/CryptographyMapper';
 
-'use strict';
-
-describe('z.cryptography.CryptographyMapper', () => {
-  const mapper = new z.cryptography.CryptographyMapper();
+describe('CryptographyMapper', () => {
+  const mapper = new CryptographyMapper();
 
   let event = undefined;
 
@@ -38,7 +36,7 @@ describe('z.cryptography.CryptographyMapper', () => {
   });
 
   describe('"mapGenericMessage"', () => {
-    beforeAll(() => z.util.protobuf.loadProtos('ext/proto/@wireapp/protocol-messaging/messages.proto'));
+    beforeAll(() => z.util.protobuf.loadProtos('ext/js/@wireapp/protocol-messaging/proto/messages.proto'));
 
     it('resolves with a mapped original asset message', () => {
       const original = {

@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:location/LocationRepository
-
-'use strict';
-
 describe('z.location.LocationRepository', () => {
   describe('getMapsUrl', () => {
     it('should return the proper urls', () => {

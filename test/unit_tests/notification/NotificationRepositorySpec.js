@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:notification/NotificationRepository
-
 window.wire = window.wire || {};
 window.wire.app = window.wire.app || {};
 

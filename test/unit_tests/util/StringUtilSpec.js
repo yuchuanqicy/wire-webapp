@@ -17,9 +17,7 @@
  *
  */
 
-// grunt test_run:util/StringUtil
-
-'use strict';
+import _ from 'underscore';
 
 describe('z.util.StringUtil', () => {
   describe('compareTransliteration', () => {

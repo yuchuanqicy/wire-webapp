@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:auth/AuthRepository
-
-'use strict';
-
 describe('z.auth.AuthRepository', () => {
   const test_factory = new TestFactory();
 

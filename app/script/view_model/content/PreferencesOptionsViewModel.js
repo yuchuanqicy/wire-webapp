@@ -17,11 +17,11 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.viewModel = z.viewModel || {};
 window.z.viewModel.content = z.viewModel.content || {};
+
+import {THEMES as ThemeViewModelThemes} from '../ThemeViewModel';
 
 z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewModel {
   static get CONFIG() {
@@ -46,6 +46,12 @@ z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewMo
       this.propertiesRepository.savePreference(z.properties.PROPERTIES_TYPE.SOUND_ALERTS, audioPreference);
     });
 
+    this.optionDarkMode = ko.observable();
+    this.optionDarkMode.subscribe(darkModePreference => {
+      amplify.publish(z.event.WebApp.PROPERTIES.UPDATE.INTERFACE.USE_DARK_MODE_TOGGLE, darkModePreference);
+    });
+    amplify.subscribe(z.event.WebApp.PROPERTIES.UPDATE.INTERFACE.USE_DARK_MODE, this.optionDarkMode);
+
     this.optionReplaceInlineEmoji = ko.observable();
     this.optionReplaceInlineEmoji.subscribe(emojiPreference => {
       this.propertiesRepository.savePreference(z.properties.PROPERTIES_TYPE.EMOJI.REPLACE_INLINE, emojiPreference);
@@ -62,10 +68,6 @@ z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewMo
     });
 
     amplify.subscribe(z.event.WebApp.PROPERTIES.UPDATED, this.updateProperties.bind(this));
-  }
-
-  connectGoogleContacts() {
-    amplify.publish(z.event.WebApp.CONNECT.IMPORT_CONTACTS, z.connect.ConnectSource.GMAIL);
   }
 
   connectMacOSContacts() {
@@ -98,6 +100,7 @@ z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewMo
   updateProperties(properties) {
     this.optionAudio(properties.settings.sound.alerts);
     this.optionReplaceInlineEmoji(properties.settings.emoji.replace_inline);
+    this.optionDarkMode(properties.settings.interface.theme === ThemeViewModelThemes.DARK);
     this.optionSendPreviews(properties.settings.previews.send);
     this.optionNotifications(properties.settings.notifications);
   }

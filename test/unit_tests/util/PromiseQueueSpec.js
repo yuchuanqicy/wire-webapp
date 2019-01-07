@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/PromiseQueue
-
-'use strict';
-
 describe('PromiseQueue', () => {
   describe('push', () => {
     it('should process promises', () => {

@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:message/MessageHasher
-
-'use strict';
-
 describe('z.message.MessageHasher', () => {
   describe('hashEvent', () => {
     describe('unhandled event type', () => {

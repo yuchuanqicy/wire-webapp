@@ -17,10 +17,6 @@
  *
  */
 
-'use strict';
-
-// grunt test_run:calling/CallMessageBuilder
-
 describe('z.calling.CallMessageBuilder', () => {
   const callMessageBuilder = z.calling.CallMessageBuilder;
 

@@ -17,10 +17,10 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.viewModel = z.viewModel || {};
+
+import ThemeViewModel from '../view_model/ThemeViewModel';
 
 z.viewModel.MainViewModel = class MainViewModel {
   static get CONFIG() {
@@ -75,6 +75,7 @@ z.viewModel.MainViewModel = class MainViewModel {
 
     this.panel = new z.viewModel.PanelViewModel(this, repositories);
     this.content = new z.viewModel.ContentViewModel(this, repositories);
+    this.theme = new ThemeViewModel(this, repositories);
     this.list = new z.viewModel.ListViewModel(this, repositories);
 
     this.modals = new z.viewModel.ModalsViewModel();
@@ -150,12 +151,7 @@ z.viewModel.MainViewModel = class MainViewModel {
             overlay.addEventListener('click', this.closePanelOnClick);
           }
 
-          if (!isNarrowScreen) {
-            // In case we are not on a narrow screen, opening a panel will resize a bunch of elements
-            // we need to warn them by triggering a window resize event.
-            // When the screen is narrow, the panel just goes on top, no elements are resized
-            window.dispatchEvent(new Event('resize'));
-          }
+          window.dispatchEvent(new Event('resize'));
 
           resolve();
         }

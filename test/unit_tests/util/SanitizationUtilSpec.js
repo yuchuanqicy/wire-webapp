@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/SanitizationUtil
-
-'use strict';
-
 describe('z.util.SanitizationUtil', () => {
   describe('escapeRegex', () => {
     it('will return escaped regex strings', () => {

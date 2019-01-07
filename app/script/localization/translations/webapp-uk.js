@@ -135,6 +135,8 @@ z.string.uk.modalAccountNewDevicesHeadline = 'Ваш акаунт викорис
 z.string.uk.modalAccountNewDevicesFrom = 'Від:';
 z.string.uk.modalAccountNewDevicesMessage = 'Якщо ви не робили цього, видаліть пристрій і змініть пароль.';
 
+z.string.uk.modalAccountReadReceiptsChangedSecondary = 'Керування пристроями';
+
 z.string.uk.modalAccountRemoveDeviceAction = 'Видалити пристрій';
 z.string.uk.modalAccountRemoveDeviceHeadline = 'Видалити "{{device}}"';
 z.string.uk.modalAccountRemoveDeviceMessage = 'Для видалення пристрою необхідно ввести ваш пароль.';
@@ -357,7 +359,7 @@ z.string.uk.conversationContextMenuDelete = 'Видалити для мене…
 z.string.uk.conversationContextMenuDeleteEveryone = 'Видалити для всіх…';
 z.string.uk.conversationContextMenuDownload = 'Скачати';
 z.string.uk.conversationContextMenuLike = 'Подобається';
-z.string.uk.conversationContextMenuReply = 'Відповісти…';
+z.string.uk.conversationContextMenuReply = 'Відповісти';
 z.string.uk.conversationContextMenuUnlike = 'Не подобається';
 z.string.uk.conversationDeleteTimestamp = 'Видалене: {{date}}';
 z.string.uk.conversationEditTimestamp = 'Відредаговане: {{date}}';
@@ -550,6 +552,7 @@ z.string.uk.participantDevicesOutdatedClientMessage = '{{user}} використ
 z.string.uk.participantDevicesSelfAllDevices = 'Показати всі мої пристрої';
 z.string.uk.participantDevicesSelfFingerprint = 'Ідентифікатор пристрою';
 
+
 z.string.uk.userProfileButtonConnect = 'Додати до контактів';
 z.string.uk.userProfileButtonIgnore = 'Ігнорувати';
 z.string.uk.userProfileButtonUnblock = 'Розблокувати';
@@ -583,12 +586,13 @@ z.string.uk.preferencesAccountLogOut = 'Вийти';
 z.string.uk.preferencesAccountManageTeam = 'Керування командою';
 z.string.uk.preferencesAccountMarketingConsentCheckbox = 'Отримувати новини';
 z.string.uk.preferencesAccountMarketingConsentDetail = 'Отримувати новини та інформацію про оновлення Wire по електронній пошті.';
+z.string.uk.preferencesAccountPrivacy = 'Політики конфіденційності';
 z.string.uk.preferencesAccountResetPassword = 'Виконати скидання паролю';
 z.string.uk.preferencesAccountTeam = 'в {{name}}';
-z.string.uk.preferencesAccountUsernamePlaceholder = 'Ваше повне ім’я';
-z.string.uk.preferencesAccountUsernameHint = 'Мінімум 2 символи з множини a—z, 0—9, та _.';
 z.string.uk.preferencesAccountUsernameAvailable = 'Доступний';
 z.string.uk.preferencesAccountUsernameErrorTaken = 'Уже зарезервований';
+z.string.uk.preferencesAccountUsernameHint = 'Мінімум 2 символи з множини a—z, 0—9, та _.';
+z.string.uk.preferencesAccountUsernamePlaceholder = 'Ваше повне ім’я';
 
 z.string.uk.preferencesAVCamera = 'Камера';
 z.string.uk.preferencesAVMicrophone = 'Мікрофон';
@@ -622,12 +626,11 @@ z.string.uk.preferencesOptionsAudioNoneDetail = 'Тихенько!';
 z.string.uk.preferencesOptionsAudioSome = 'Деякі';
 z.string.uk.preferencesOptionsAudioSomeDetail = 'Пінги та дзвінки';
 z.string.uk.preferencesOptionsContacts = 'Контакти';
-z.string.uk.preferencesOptionsContactsGmail = 'Імпорт з Gmail';
 z.string.uk.preferencesOptionsContactsMacos = 'Імпорт з Контактів';
 z.string.uk.preferencesOptionsContactsDetail = 'Ми використовуємо дані про ваші контакти, щоб ви могли знайти людей, яких ви знаєте. Ми анонімізуємо всю інформацію та не передаємо її третім особам.';
 z.string.uk.preferencesOptionsPopular = 'У відповідь на численні прохання';
 z.string.uk.preferencesOptionsEmojiReplaceCheckbox = 'Замінювати текстові смайлики іконками';
-z.string.uk.preferencesOptionsEmojiReplaceDetail = ':-) → {{icon}}';
+z.string.uk.preferencesOptionsEmojiReplaceDetail = ':-) → [icon]';
 z.string.uk.preferencesOptionsPreviewsSendCheckbox = 'Генерувати попередній перегляд для надісланих лінків';
 z.string.uk.preferencesOptionsPreviewsSendDetail = 'Дана опція не впливає на попередній перегляд лінків від інших людей.';
 z.string.uk.preferencesOptionsNotifications = 'Сповіщення';
@@ -694,7 +697,6 @@ z.string.uk.searchOthers = 'Додати до контактів';
 z.string.uk.searchInvite = 'Запросіть людей в Wire';
 z.string.uk.searchInviteDetail = 'Поділившись контактами, ви зможете зв’язатись в Wire з людьми, з якими ви, можливо, знайомі. Вся інформація анонімна та не передається третім особам.';
 z.string.uk.searchInviteButtonContacts = 'З контактів';
-z.string.uk.searchInviteButtonGmail = 'З Gmail';
 z.string.uk.searchInviteHeadline = 'Приведіть друзів';
 z.string.uk.searchInviteShare = 'Поділитись контактами';
 
@@ -712,9 +714,6 @@ z.string.uk.temporaryGuestJoinDescription = 'Закривши чи оновив�
 
 z.string.uk.temporaryGuestLeaveMessage = ' більше не є учасниками цієї розмови.';
 z.string.uk.temporaryGuestLeaveDescription = 'Закривши чи оновивши цю сторінку, ви втратите доступ до історії розмови.';
-
-z.string.uk.uploadGoogleHeadline = 'Знайдіть людей,\nщоб порозмовляти.';
-z.string.uk.uploadGoogleMessage = 'Ми використовуємо дані про ваші контакти, щоб ви могли знайти людей, яких ви знаєте. Ми анонімізуємо всю інформацію та не передаємо її третім особам.';
 
 z.string.uk.urlSupportRoot = '/';
 z.string.uk.urlSupportArticles = '/hc/en-us/articles/';
@@ -802,7 +801,6 @@ z.string.uk.tooltipConversationsStart = 'Почати розмову ({{shortcut
 z.string.uk.tooltipConversationDetailsAddPeople = 'Додати учасників до розмови ({{shortcut}})';
 z.string.uk.tooltipConversationDetailsRename = 'Змінити ім’я розмови';
 
-z.string.uk.tooltipPreferencesContactsGmail = 'Увійдіть у свій обліковий запис Gmail, щоб поділитися контактами';
 z.string.uk.tooltipPreferencesContactsMacos = 'Поділіться вашими контактами з додатку Контакти для Mac OS';
 z.string.uk.tooltipPreferencesPassword = 'Відкрийте нову вкладку в браузері, щоб змінити ваш пароль';
 z.string.uk.tooltipPreferencesPicture = 'Змініть своє фото…';

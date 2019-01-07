@@ -17,7 +17,7 @@
  *
  */
 
-'use strict';
+import adapter from 'webrtc-adapter';
 
 window.z = window.z || {};
 window.z.calling = z.calling || {};
@@ -1604,8 +1604,10 @@ z.calling.CallingRepository = class CallingRepository {
         const expirationDate = new Date(Date.now() + timeout);
         callingConfig.expiration = expirationDate;
 
-        const logMessage = `Updated calling configuration expires on '${expirationDate.toISOString()}'`;
-        this.callLogger.info(logMessage, callingConfig);
+        const turnServersConfig = (callingConfig.ice_servers || []).map(server => server.urls.join('\n')).join('\n');
+        const logMessage = `Updated calling configuration expires on '${expirationDate.toISOString()}' with servers:
+${turnServersConfig}`;
+        this.callLogger.info(logMessage);
         this.callingConfig = callingConfig;
 
         this.callingConfigTimeout = window.setTimeout(() => {
@@ -1663,11 +1665,7 @@ z.calling.CallingRepository = class CallingRepository {
    * @returns {undefined} No return value
    */
   _enableDebugging() {
-    if (window.adapter) {
-      window.adapter.disableLog = false;
-    } else {
-      this.callLogger.warn('WebRTC Adapter not found while trying to enable logging');
-    }
+    adapter.disableLog = false;
   }
 
   /**

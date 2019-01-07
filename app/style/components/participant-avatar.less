@@ -217,7 +217,7 @@ participant-avatar {
       width: 60%;
 
       & > path {
-        fill: fade(@graphite-dark, 20%);
+        fill: var(--background-fade-24);
       }
     }
   }
@@ -248,15 +248,15 @@ participant-avatar {
 
   &.avatar-halo-active {
     .accent-border-color;
+    border-width: 2px;
+    border-style: solid;
 
     border-radius: 50%;
-    border-style: solid;
-    border-width: 2px;
   }
 }
 
 &.accent-color-temporary .avatar-initials {
-  color: @graphite-dark;
+  color: var(--background);
 }
 
 .avatar-temporary-guest-border {

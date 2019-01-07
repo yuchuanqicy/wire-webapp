@@ -17,8 +17,6 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.components = z.components || {};
 
@@ -95,20 +93,20 @@ ko.components.register('audio-asset', {
       <!-- ko if: header -->
         <asset-header params="message: message"></asset-header>
       <!-- /ko -->
-      <!-- ko if: !asset.uploaded_on_this_client() && asset.status() === z.assets.AssetTransferState.UPLOADING -->
+      <!-- ko if: asset.status() === z.assets.AssetTransferState.UPLOAD_PENDING -->
         <div class="asset-placeholder">
           <div class="three-dots">
             <span></span><span></span><span></span>
           </div>
         </div>
       <!-- /ko -->
-      <!-- ko ifnot: !asset.uploaded_on_this_client() && asset.status() === z.assets.AssetTransferState.UPLOADING -->
+      <!-- ko if: asset.status() !== z.assets.AssetTransferState.UPLOAD_PENDING -->
         <div class="audio-controls">
           <media-button params="src: audio_element,
                                 asset: asset,
                                 play: on_play_button_clicked,
                                 pause: on_pause_button_clicked,
-                                cancel: function() {asset.cancel($parents[1])}">
+                                cancel: function() {asset.cancel(message)}">
           </media-button>
           <!-- ko if: asset.status() !== z.assets.AssetTransferState.UPLOADING -->
             <span class="audio-controls-time label-xs"

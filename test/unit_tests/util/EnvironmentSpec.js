@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:util/Environment
-
-'use strict';
-
 describe('EnvironmentSpec', () => {
   describe('z.util.Environment.electronVersion', () => {
     it('detects wrapper version for internal', () => {

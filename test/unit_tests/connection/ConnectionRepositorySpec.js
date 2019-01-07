@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:connection/ConnectionRepository
-
-'use strict';
-
 describe('z.connection.ConnectionRepository', () => {
   let server = undefined;
   let connectionRepository = undefined;

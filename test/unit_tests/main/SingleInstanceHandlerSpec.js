@@ -17,8 +17,6 @@
  *
  */
 
-// grunt test_run:main/SingleInstanceHandler
-
 describe('z.main.SingleInstanceHandler', () => {
   describe('registerInstance', () => {
     it('registers the current instance', () => {

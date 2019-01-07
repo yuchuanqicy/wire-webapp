@@ -17,20 +17,20 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.properties = z.properties || {};
 
 z.properties.PROPERTIES_TYPE = {
   CONTACT_IMPORT: {
-    GOOGLE: 'contact_import.google',
     MACOS: 'contact_import.macos',
   },
   EMOJI: {
     REPLACE_INLINE: 'settings.emoji.replace_inline',
   },
   ENABLE_DEBUGGING: 'enable_debugging',
+  INTERFACE: {
+    THEME: 'settings.interface.theme',
+  },
   NOTIFICATIONS: 'settings.notifications',
   PREVIEWS: {
     SEND: 'settings.previews.send',

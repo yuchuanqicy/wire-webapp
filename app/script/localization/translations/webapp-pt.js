@@ -118,6 +118,8 @@ z.string.pt.modalAccountNewDevicesHeadline = 'A sua conta foi usada em:';
 z.string.pt.modalAccountNewDevicesFrom = 'De:';
 z.string.pt.modalAccountNewDevicesMessage = 'Se não fez isto, remova o dispositivo da conta e altere a sua palavra-passe.';
 
+z.string.pt.modalAccountReadReceiptsChangedSecondary = 'Gerir dispositivos';
+
 z.string.pt.modalAccountRemoveDeviceAction = 'Remover o dispositivo';
 z.string.pt.modalAccountRemoveDeviceHeadline = 'Remover "{{device}}"';
 z.string.pt.modalAccountRemoveDeviceMessage = 'A palavra-passe é necessária para remover o dispositivo.';
@@ -375,6 +377,7 @@ z.string.pt.participantDevicesOutdatedClientMessage = '{{user}} está a usar uma
 z.string.pt.participantDevicesSelfAllDevices = 'Mostrar todos os meus dispositivos';
 z.string.pt.participantDevicesSelfFingerprint = 'Impressão digital do dispositivo';
 
+
 z.string.pt.userProfileButtonConnect = 'Ligar';
 z.string.pt.userProfileButtonIgnore = 'Ignorar';
 z.string.pt.userProfileButtonUnblock = 'Desbloquear';
@@ -400,12 +403,13 @@ z.string.pt.preferencesAccountCreateTeam = 'Criar uma equipa';
 z.string.pt.preferencesAccountDelete = 'Eliminar conta';
 z.string.pt.preferencesAccountLogOut = 'Terminar sessão';
 z.string.pt.preferencesAccountManageTeam = 'Gerir equipa';
+z.string.pt.preferencesAccountPrivacy = 'Privacidade';
 z.string.pt.preferencesAccountResetPassword = 'Alterar a palavra-passe';
 z.string.pt.preferencesAccountTeam = 'em {{name}}';
-z.string.pt.preferencesAccountUsernamePlaceholder = 'O seu nome completo';
-z.string.pt.preferencesAccountUsernameHint = 'Pelo menos 2 caracteres. a-z, 0-9 e _ apenas.';
 z.string.pt.preferencesAccountUsernameAvailable = 'Disponível';
 z.string.pt.preferencesAccountUsernameErrorTaken = 'Já está ocupado';
+z.string.pt.preferencesAccountUsernameHint = 'Pelo menos 2 caracteres. a-z, 0-9 e _ apenas.';
+z.string.pt.preferencesAccountUsernamePlaceholder = 'O seu nome completo';
 
 z.string.pt.preferencesAVCamera = 'Câmera';
 z.string.pt.preferencesAVMicrophone = 'Microfone';
@@ -435,7 +439,6 @@ z.string.pt.preferencesOptionsAudioNoneDetail = 'Sshhh!';
 z.string.pt.preferencesOptionsAudioSome = 'Alguns';
 z.string.pt.preferencesOptionsAudioSomeDetail = 'Pings e chamadas';
 z.string.pt.preferencesOptionsContacts = 'Contactos';
-z.string.pt.preferencesOptionsContactsGmail = 'Importar do Gmail';
 z.string.pt.preferencesOptionsContactsMacos = 'Importar dos Contactos';
 z.string.pt.preferencesOptionsContactsDetail = 'Usamos seus dados de contacto para liga-lo aos outros. Nós anonimizamos toda a informação e não a partilhamos com outras entidades.';
 z.string.pt.preferencesOptionsPopular = 'A pedido popular';
@@ -469,16 +472,12 @@ z.string.pt.searchOthers = 'Ligar';
 z.string.pt.searchInvite = 'Convidar pessoas para aderir ao Wire';
 z.string.pt.searchInviteDetail = 'Partilhar os seus contacto ajuda a ligar-se aos outros. Anonimizamos toda a informação e não a partilhamos com ninguém.';
 z.string.pt.searchInviteButtonContacts = 'Dos contactos';
-z.string.pt.searchInviteButtonGmail = 'Do Gmail';
 z.string.pt.searchInviteHeadline = 'Traga os seus amigos';
 z.string.pt.searchInviteShare = 'Partilhar Contactos';
 
 z.string.pt.searchListEveryoneParticipates = 'Todas as pessoas a que está ligado já estão nesta conversa.';
 z.string.pt.searchListNoMatches = 'Sem resultados. Tente um nome diferente.';
 
-
-z.string.pt.uploadGoogleHeadline = 'Encontre pessoas para conversar.';
-z.string.pt.uploadGoogleMessage = 'Usamos seus dados de contacto para liga-lo aos outros. Nós anonimizamos toda a informação e não a partilhamos com outras entidades.';
 
 z.string.pt.warningCallUnsupportedIncoming = '{{user}} está a chamar. O seu navegador não suporta chamadas.';
 z.string.pt.warningCallUnsupportedOutgoing = 'Não pode telefonar porque o seu navegador não suporta chamadas.';
@@ -495,10 +494,10 @@ z.string.pt.warningNotFoundMicrophone = 'Não pode telefonar porque o seu comput
 z.string.pt.warningPermissionDeniedCamera = 'Não pode telefonar porque o seu navegador não tem acesso à câmara.';
 z.string.pt.warningPermissionDeniedMicrophone = 'Não pode telefonar porque o seu navegador não tem acesso ao microfone.';
 z.string.pt.warningPermissionDeniedScreen = 'O seu navegador precisa de permissão para partilhar o ecrã.';
-z.string.pt.warningPermissionRequestCamera = '{{icon}} Permitir o acesso a câmara';
-z.string.pt.warningPermissionRequestMicrophone = '{{icon}} Permitir o acesso ao microfone';
-z.string.pt.warningPermissionRequestNotification = '{{icon}} Permitir notificações';
-z.string.pt.warningPermissionRequestScreen = '{{icon}} Permitir o acesso ao ecrã';
+z.string.pt.warningPermissionRequestCamera = '[icon] Permitir o acesso a câmara';
+z.string.pt.warningPermissionRequestMicrophone = '[icon] Permitir o acesso ao microfone';
+z.string.pt.warningPermissionRequestNotification = '[icon] Permitir notificações';
+z.string.pt.warningPermissionRequestScreen = '[icon] Permitir o acesso ao ecrã';
 
 z.string.pt.userAvailabilityAvailable = 'Disponível';
 z.string.pt.userAvailabilityAway = 'Ausente';
@@ -549,7 +548,6 @@ z.string.pt.tooltipConversationsStart = 'Iniciar conversa ({{shortcut}})';
 
 z.string.pt.tooltipConversationDetailsRename = 'Alterar nome da conversa';
 
-z.string.pt.tooltipPreferencesContactsGmail = 'Iniciar sessão na sua conta do Gmail para partilhar contactos';
 z.string.pt.tooltipPreferencesContactsMacos = 'Partilhe os contatos da aplicação de contactos macOS';
 z.string.pt.tooltipPreferencesPassword = 'Abrir um outro site para alterar a sua palavra-passe';
 z.string.pt.tooltipPreferencesPicture = 'Mude sua fotografia…';

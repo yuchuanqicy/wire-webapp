@@ -17,9 +17,7 @@
  *
  */
 
-// grunt test_run:conversation/EventMapper
-
-'use strict';
+import EventMapper from 'app/script/conversation/EventMapper';
 
 describe('Event Mapper', () => {
   const test_factory = new TestFactory();
@@ -28,7 +26,7 @@ describe('Event Mapper', () => {
 
   beforeAll(() => {
     return z.util.protobuf
-      .loadProtos('ext/proto/@wireapp/protocol-messaging/messages.proto')
+      .loadProtos('ext/js/@wireapp/protocol-messaging/proto/messages.proto')
       .then(() => test_factory.exposeUserActors())
       .then(() => {
         wire.app = {
@@ -41,7 +39,7 @@ describe('Event Mapper', () => {
 
   beforeEach(() => {
     conversation_et = new z.entity.Conversation(z.util.createRandomUuid());
-    event_mapper = new z.conversation.EventMapper();
+    event_mapper = new EventMapper();
   });
 
   describe('mapJsonEvent', () => {

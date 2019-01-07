@@ -17,12 +17,9 @@
  *
  */
 
-'use strict';
-
 window.z = window.z || {};
 window.z.connect = z.connect || {};
 
 z.connect.ConnectSource = {
-  GMAIL: 'gmail',
   ICLOUD: 'icloud',
 };

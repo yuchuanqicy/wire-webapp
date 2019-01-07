@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:connection/ConnectionMapper
-
-'use strict';
-
 describe('z.connection.ConnectionMapper', () => {
   let connectionMapper = undefined;
 

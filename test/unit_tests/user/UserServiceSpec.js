@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:user/UserService
-
-'use strict';
-
 describe('User Service', () => {
   let server = null;
   const urls = {

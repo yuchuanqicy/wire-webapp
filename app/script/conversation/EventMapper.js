@@ -17,18 +17,15 @@
  *
  */
 
-'use strict';
-
-window.z = window.z || {};
-window.z.conversation = z.conversation || {};
+import ReceiptModeUpdateMessage from '../entity/message/ReceiptModeUpdateMessage';
 
 // Event Mapper to convert all server side JSON events into core entities.
-z.conversation.EventMapper = class EventMapper {
+export default class EventMapper {
   /**
    * Construct a new Event Mapper.
    */
   constructor() {
-    this.logger = new z.util.Logger('z.conversation.EventMapper', z.config.LOGGER.OPTIONS);
+    this.logger = new z.util.Logger('EventMapper', z.config.LOGGER.OPTIONS);
   }
 
   /**
@@ -86,6 +83,54 @@ z.conversation.EventMapper = class EventMapper {
   }
 
   /**
+   * Will update the content of the originalEntity with the new data given.
+   * Will try to do as little updates as possible to avoid to many observable emission.
+   *
+   * @param {z.entity.MessageEntity} originalEntity - the original message to update
+   * @param {Object} event - new json data to feed into the entity
+   * @returns {z.entity.MessageEntity} - the updated message entity
+   */
+  updateMessageEvent(originalEntity, event) {
+    const {id, data: eventData, edited_time: editedTime} = event;
+
+    if (id !== originalEntity.id) {
+      originalEntity.assets.removeAll();
+      originalEntity.assets.push(this._mapAssetText(eventData));
+
+      if (eventData.quote) {
+        const {message_id: messageId, user_id: userId, error} = eventData.quote;
+        originalEntity.quote(new z.message.QuoteEntity({error, messageId, userId}));
+      }
+    } else if (originalEntity.get_first_asset) {
+      const asset = originalEntity.get_first_asset();
+      if (eventData.previews) {
+        if (asset.previews().length !== eventData.previews.length) {
+          asset.previews(this._mapAssetLinkPreviews(eventData.previews));
+        }
+      }
+      if (eventData.status && asset.status) {
+        asset.status(eventData.status);
+      }
+    }
+
+    if (event.reactions !== undefined) {
+      originalEntity.reactions(event.reactions);
+      originalEntity.version = event.version;
+    }
+
+    originalEntity.id = id;
+    if (originalEntity.is_content() || originalEntity.is_ping()) {
+      originalEntity.status(event.status || z.message.StatusType.SENT);
+    }
+    originalEntity.replacing_message_id = eventData.replacing_message_id;
+    if (editedTime || eventData.edited_time) {
+      originalEntity.edited_timestamp(new Date(editedTime || eventData.edited_time).getTime());
+    }
+
+    return addReadReceiptData(originalEntity, event);
+  }
+
+  /**
    * Convert JSON event into a message entity.
    *
    * @param {Object} event - Event data
@@ -107,6 +152,11 @@ z.conversation.EventMapper = class EventMapper {
         break;
       }
 
+      case z.event.Backend.CONVERSATION.RECEIPT_MODE_UPDATE: {
+        messageEntity = this._mapEventReceiptModeUpdate(event);
+        break;
+      }
+
       case z.event.Backend.CONVERSATION.MESSAGE_TIMER_UPDATE: {
         messageEntity = this._mapEventMessageTimerUpdate(event);
         break;
@@ -118,7 +168,7 @@ z.conversation.EventMapper = class EventMapper {
       }
 
       case z.event.Client.CONVERSATION.ASSET_ADD: {
-        messageEntity = this._mapEventAssetAdd(event, createDummyImage);
+        messageEntity = addReadReceiptData(this._mapEventAssetAdd(event, createDummyImage), event);
         break;
       }
 
@@ -139,17 +189,17 @@ z.conversation.EventMapper = class EventMapper {
       }
 
       case z.event.Client.CONVERSATION.KNOCK: {
-        messageEntity = this._mapEventPing();
+        messageEntity = addReadReceiptData(this._mapEventPing(), event);
         break;
       }
 
       case z.event.Client.CONVERSATION.LOCATION: {
-        messageEntity = this._mapEventLocation(event);
+        messageEntity = addReadReceiptData(this._mapEventLocation(event), event);
         break;
       }
 
       case z.event.Client.CONVERSATION.MESSAGE_ADD: {
-        messageEntity = this._mapEventMessageAdd(event);
+        messageEntity = addReadReceiptData(this._mapEventMessageAdd(event), event);
         break;
       }
 
@@ -204,7 +254,7 @@ z.conversation.EventMapper = class EventMapper {
       messageEntity.status(event.status || z.message.StatusType.SENT);
     }
 
-    if (messageEntity.is_reactable()) {
+    if (messageEntity.isReactable()) {
       messageEntity.reactions(event.reactions || {});
     }
 
@@ -380,7 +430,7 @@ z.conversation.EventMapper = class EventMapper {
 
     messageEntity.assets.push(this._mapAssetText(eventData));
     messageEntity.replacing_message_id = eventData.replacing_message_id;
-    messageEntity.edited_timestamp = new Date(editedTime || eventData.edited_time).getTime();
+    messageEntity.edited_timestamp(new Date(editedTime || eventData.edited_time).getTime());
 
     if (eventData.quote) {
       const {message_id: messageId, user_id: userId, error} = eventData.quote;
@@ -419,6 +469,17 @@ z.conversation.EventMapper = class EventMapper {
     const messageEntity = new z.entity.RenameMessage();
     messageEntity.name = eventData.name;
     return messageEntity;
+  }
+
+  /**
+   * Maps JSON data of conversation.receipt-mode-update message into message entity.
+   *
+   * @private
+   * @param {Object} eventData - Message data
+   * @returns {ReceiptModeUpdateMessage} receipt mode update message entity
+   */
+  _mapEventReceiptModeUpdate({data: eventData}) {
+    return new ReceiptModeUpdateMessage(!!eventData.receipt_mode);
   }
 
   /**
@@ -564,7 +625,7 @@ z.conversation.EventMapper = class EventMapper {
       assetEntity.preview_resource(remoteDataPreview);
     }
 
-    assetEntity.status(status || z.assets.AssetTransferState.UPLOADING);
+    assetEntity.status(status || z.assets.AssetTransferState.UPLOAD_PENDING);
 
     return assetEntity;
   }
@@ -592,17 +653,21 @@ z.conversation.EventMapper = class EventMapper {
       assetEntity.height = height;
     }
 
-    const {key, otr_key, sha256, token} = eventData;
-
-    const remoteData = key
-      ? z.assets.AssetRemoteData.v3(key, otr_key, sha256, token, true)
-      : z.assets.AssetRemoteData.v2(conversationId, assetId, otr_key, sha256, true);
-    assetEntity.resource(remoteData);
-
     if (createDummyImage) {
       assetEntity.dummy_url = this._createDummyImage(assetEntity.width, assetEntity.height);
     }
 
+    const {key, otr_key, sha256, token} = eventData;
+
+    if (!otr_key || !sha256) {
+      return assetEntity;
+    }
+
+    const remoteData = key
+      ? z.assets.AssetRemoteData.v3(key, otr_key, sha256, token, true)
+      : z.assets.AssetRemoteData.v2(conversationId, assetId, otr_key, sha256, true);
+
+    assetEntity.resource(remoteData);
     return assetEntity;
   }
 
@@ -701,4 +766,11 @@ z.conversation.EventMapper = class EventMapper {
 
     return assetEntity;
   }
-};
+}
+
+function addReadReceiptData(entity, event) {
+  const {data: eventData, read_receipts} = event;
+  entity.expectsReadConfirmation = eventData.expects_read_confirmation;
+  entity.readReceipts(read_receipts || []);
+  return entity;
+}

@@ -17,10 +17,6 @@
  *
  */
 
-// grunt test_run:team/TeamRepository
-
-'use strict';
-
 describe('z.team.TeamRepository', () => {
   const test_factory = new TestFactory();
 
