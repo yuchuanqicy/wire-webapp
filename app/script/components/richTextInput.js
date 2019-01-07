@@ -114,7 +114,7 @@ class RichTextInput {
 
   restoreSelection() {
     const inputNodes = Array.from(this.inputElement.childNodes);
-    const len = node => node.textContent.length;
+    const len = node => (node ? node.textContent.length : 0);
     const findNodeAt = (nodes, pos) => {
       let index = 0;
       let lenSum = len(nodes[index]);
@@ -123,7 +123,7 @@ class RichTextInput {
         lenSum += len(nodes[index]);
       }
       return {
-        node: nodes[index],
+        node: nodes[index] || this.inputElement,
         offset: pos - (lenSum - len(nodes[index])),
       };
     };
