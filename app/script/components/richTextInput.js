@@ -26,7 +26,6 @@ class RichTextInput {
   constructor(params, {element}) {
     this.inputElement = element.querySelector('.rich-text-editable');
     this.placeholder = params.placeholder;
-    this.mentionsObservable = params.mentionsObservable;
     this.inputObservable = params.inputObservable;
     this.addTextObservable = params.addTextObservable;
     this.onKeyDown = params.onKeyDown;
@@ -35,10 +34,12 @@ class RichTextInput {
     //this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
     this.selectionStart = params.selectionStart;
     this.selectionEnd = params.selectionEnd;
+    this.mentionInput = params.mentionInput;
 
     this.richText = ko.pureComputed(() => {
       const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
-      const pieces = this.mentionsObservable()
+      const pieces = this.mentionInput
+        .currentList()
         .slice()
         .reverse()
         .reduce(
@@ -78,6 +79,7 @@ class RichTextInput {
   onInput() {
     this.updateSelection();
     this.inputObservable(this.inputElement.textContent);
+    this.mentionInput.handleMentionFlow(this.inputElement.textContent, this.selectionStart(), this.selectionEnd());
   }
   updateSelection() {
     const selection = document.getSelection();

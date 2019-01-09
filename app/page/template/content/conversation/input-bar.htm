@@ -87,7 +87,6 @@
         </div-->
         <rich-text-input params="
           placeholder: inputPlaceholder, 
-          mentionsObservable: currentMentions, 
           inputObservable: input,
           onKeyDown: onInputKeyDown,
           onKeyUp: onInputKeyUp,
@@ -95,8 +94,9 @@
           onInit: initRichText,
           selectionStart: selectionStart,
           selectionEnd: selectionEnd,
+          mentionInput: mentionInput;
           "></rich-text-input>
-        <mention-suggestions params="suggestions: mentionSuggestions, targetInputSelector: '.rich-text-editable', onSelectionValidated: addMention"></mention-suggestions>
+        <mention-suggestions params="suggestions: mentionInput.suggestions(), targetInputSelector: '.rich-text-editable', onSelectionValidated: addMention"></mention-suggestions>
 
         <div class="controls-right">
           <!-- ko ifnot: isEditing() -->
