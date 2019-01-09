@@ -26,14 +26,14 @@ export default class MentionInput {
     this.currentList = ko.observableArray();
 
     this.editedMention.subscribe(editedMention => {
-      if (editedMention || !this.conversationEntity()) {
-        this.mentionSuggestions([]);
+      if (editedMention || !conversationEntity()) {
+        this.suggestions([]);
       }
 
       const candidates = conversationEntity()
         .participating_user_ets()
         .filter(userEntity => !userEntity.isService);
-      this.mentionSuggestions(searchRepository.searchUserInSet(editedMention.term, candidates));
+      this.suggestions(searchRepository.searchUserInSet(editedMention.term, candidates));
     });
   }
 
