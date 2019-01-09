@@ -26,8 +26,8 @@ export default class MentionInput {
     this.currentList = ko.observableArray();
 
     this.editedMention.subscribe(editedMention => {
-      if (editedMention || !conversationEntity()) {
-        this.suggestions([]);
+      if (!editedMention || !conversationEntity()) {
+        return this.suggestions([]);
       }
 
       const candidates = conversationEntity()
