@@ -29,12 +29,14 @@ class RichTextInput {
     this.inputObservable = params.inputObservable;
     this.addTextObservable = params.addTextObservable;
     this.onKeyDown = params.onKeyDown;
-    this.onKeyUp = params.onKeyUp;
+    this.onInputKeyUp = params.onInputKeyUp;
     this.onEnter = params.onEnter;
     //this.inputObservable.subscribe(text => (this.inputElement.textContent = text));
     this.selectionStart = params.selectionStart;
     this.selectionEnd = params.selectionEnd;
     this.mentionInput = params.mentionInput;
+    this.emojiInput = params.emojiInput;
+    this.onKeyUp = this.onKeyUp.bind(this);
 
     this.richText = ko.pureComputed(() => {
       const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
@@ -76,11 +78,24 @@ class RichTextInput {
 
   onSelectStart() {}
   onClick() {}
-  onInput() {
+  onInput(data, event) {
+    const previousText = this.inputObservable();
+    const newText = this.inputElement.textContent;
     this.updateSelection();
-    this.inputObservable(this.inputElement.textContent);
+    this.inputObservable(newText);
+    this.mentionInput.updateMentions(event, previousText, newText);
     this.mentionInput.handleMentionFlow(this.inputElement.textContent, this.selectionStart(), this.selectionEnd());
   }
+
+  onKeyUp(data, keyboardEvent) {
+    if (!this.mentionInput.editedMention()) {
+      this.emojiInput.onInputKeyUp(data, keyboardEvent);
+    }
+    if (keyboardEvent.key !== z.util.KeyboardUtil.KEY.ESC) {
+      this.mentionInput.handleMentionFlow(this.inputElement.textContent, this.selectionStart(), this.selectionEnd());
+    }
+  }
+
   updateSelection() {
     const selection = document.getSelection();
     const anchorMention = this.getClosestMention(selection.anchorNode);
@@ -148,6 +163,17 @@ class RichTextInput {
       .slice(0, countNodes)
       .reduce((textLength, node) => textLength + node.textContent.length, startLength);
   }
+
+  setSelection(start, end) {
+    if (start !== undefined) {
+      this.selectionStart(start);
+    }
+    if (end !== undefined) {
+      this.selectionEnd(end);
+    }
+  }
+
+  insertText(text) {}
 }
 
 ko.components.register('rich-text-input', {

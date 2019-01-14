@@ -85,7 +85,7 @@ export default class MentionInput {
   }
 
   detectMentionEdgeDeletion(textarea, lengthDifference) {
-    const hadSelection = this.selectionStart() !== this.selectionEnd();
+    const hadSelection = false; //this.selectionStart() !== this.selectionEnd();
     if (hadSelection) {
       return null;
     }
@@ -98,15 +98,11 @@ export default class MentionInput {
     return this.findMentionAtPosition(checkPosition, this.currentList());
   }
 
-  updateMentions(event) {
+  updateMentions(event, previousValue, newValue) {
     const textarea = event.target;
-    const value = textarea.value;
-    const previousValue = this.input();
-
-    const lengthDifference = value.length - previousValue.length;
+    const lengthDifference = newValue.length - previousValue.length;
     const edgeMention = this.detectMentionEdgeDeletion(textarea, lengthDifference);
     if (edgeMention) {
-      textarea.value = this.input();
       textarea.selectionStart = edgeMention.startIndex;
       textarea.selectionEnd = edgeMention.endIndex;
     }

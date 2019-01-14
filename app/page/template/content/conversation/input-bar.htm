@@ -89,12 +89,13 @@
           placeholder: inputPlaceholder, 
           inputObservable: input,
           onKeyDown: onInputKeyDown,
-          onKeyUp: onInputKeyUp,
+          onInputKeyUp: onInputKeyUp,
           onEnter: onInputEnter,
           onInit: initRichText,
           selectionStart: selectionStart,
           selectionEnd: selectionEnd,
-          mentionInput: mentionInput;
+          mentionInput: mentionInput,
+          emojiInput: emojiInput,
           "></rich-text-input>
         <mention-suggestions params="suggestions: mentionInput.suggestions(), targetInputSelector: '.rich-text-editable', onSelectionValidated: addMention"></mention-suggestions>
 
