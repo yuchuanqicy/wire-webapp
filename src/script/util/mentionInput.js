@@ -86,27 +86,29 @@ export default class MentionInput {
     return mentions.find(({startIndex, endIndex}) => position > startIndex && position < endIndex);
   }
 
-  detectMentionEdgeDeletion(textarea, lengthDifference) {
-    const hadSelection = false; //this.selectionStart() !== this.selectionEnd();
+  detectMentionEdgeDeletion(lengthDifference, selectionStart, selectionEnd, previousSelectionStart) {
+    const hadSelection = selectionStart !== selectionEnd;
     if (hadSelection) {
       return null;
     }
     if (lengthDifference >= 0) {
       return null;
     }
-    const currentSelectionStart = textarea.selectionStart;
-    const forwardDeleted = currentSelectionStart === this.selectionStart();
-    const checkPosition = forwardDeleted ? currentSelectionStart + 1 : currentSelectionStart;
+    const forwardDeleted = previousSelectionStart === selectionStart;
+    const checkPosition = forwardDeleted ? previousSelectionStart + 1 : previousSelectionStart;
     return this.findMentionAtPosition(checkPosition, this.currentList());
   }
 
-  updateMentions(event, previousValue, newValue) {
-    const textarea = event.target;
+  updateMentions(previousValue, newValue, selectionStart, selectionEnd, previousSelectionStart, setSelection) {
     const lengthDifference = newValue.length - previousValue.length;
-    const edgeMention = this.detectMentionEdgeDeletion(textarea, lengthDifference);
+    const edgeMention = this.detectMentionEdgeDeletion(
+      lengthDifference,
+      selectionStart,
+      selectionEnd,
+      previousSelectionStart
+    );
     if (edgeMention) {
-      textarea.selectionStart = edgeMention.startIndex;
-      textarea.selectionEnd = edgeMention.endIndex;
+      setSelection(edgeMention.startIndex, edgeMention.endIndex);
     }
   }
 

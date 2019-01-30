@@ -81,9 +81,17 @@ class RichTextInput {
   onInput(data, event) {
     const previousText = this.inputObservable();
     const newText = this.inputElement.textContent;
+    const previousSelectionStart = this.selectionStart();
     this.updateSelection();
     this.inputObservable(newText);
-    this.mentionInput.updateMentions(event, previousText, newText);
+    this.mentionInput.updateMentions(
+      previousText,
+      newText,
+      this.selectionStart(),
+      this.selectionEnd(),
+      previousSelectionStart,
+      this.setSelection.bind(this)
+    );
     this.mentionInput.handleMentionFlow(this.inputElement.textContent, this.selectionStart(), this.selectionEnd());
   }
 
@@ -164,13 +172,9 @@ class RichTextInput {
       .reduce((textLength, node) => textLength + node.textContent.length, startLength);
   }
 
-  setSelection(start, end) {
-    if (start !== undefined) {
-      this.selectionStart(start);
-    }
-    if (end !== undefined) {
-      this.selectionEnd(end);
-    }
+  setSelection(start = this.selectionStart(), end = this.selectionEnd()) {
+    this.selectionStart(start);
+    this.selectionEnd(end);
   }
 
   insertText(text) {}
