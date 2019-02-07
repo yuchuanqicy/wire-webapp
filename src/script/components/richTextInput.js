@@ -35,8 +35,18 @@ class RichTextInput {
     this.selectionStart = params.selectionStart;
     this.selectionEnd = params.selectionEnd;
     this.mentionInput = params.mentionInput;
+    this.mentionInput.onAddMention = this.insertText.bind(this);
     this.emojiInput = params.emojiInput;
     this.onKeyUp = this.onKeyUp.bind(this);
+
+    this.inputObservable.subscribe(input => {
+      const difference = input.length - this.inputElement.textContent.length;
+      if (difference) {
+        const newSelectionPos = Math.max(this.selectionStart(), this.selectionEnd()) + difference;
+        this.selectionStart(newSelectionPos);
+        this.selectionEnd(newSelectionPos);
+      }
+    });
 
     this.richText = ko.pureComputed(() => {
       const mentionAttributes = ` class="${RichTextInput.CONFIG.MENTION_CLASS}" data-uie-name="item-input-mention"`;
@@ -45,11 +55,11 @@ class RichTextInput {
         .slice()
         .reverse()
         .reduce(
-          (currentPieces, mentionEntity) => {
+          (currentPieces, {startIndex, endIndex}) => {
             const currentPiece = currentPieces.shift();
-            currentPieces.unshift(currentPiece.substr(mentionEntity.endIndex));
-            currentPieces.unshift(currentPiece.substr(mentionEntity.startIndex, mentionEntity.length));
-            currentPieces.unshift(currentPiece.substr(0, mentionEntity.startIndex));
+            currentPieces.unshift(currentPiece.slice(endIndex));
+            currentPieces.unshift(currentPiece.slice(startIndex, endIndex));
+            currentPieces.unshift(currentPiece.slice(0, startIndex));
             return currentPieces;
           },
           [this.inputObservable()]
@@ -95,6 +105,24 @@ class RichTextInput {
     this.mentionInput.handleMentionFlow(this.inputElement.textContent, this.selectionStart(), this.selectionEnd());
   }
 
+  handleKeyDown(data, event) {
+    // Manually move the cursor when pressing "Page Up" or "Page Down" and do nothing else
+    // see https://bugs.chromium.org/p/chromium/issues/detail?id=890248
+    if (event.key === 'PageUp' || event.key === 'PageDown') {
+      const newPos = event.key === 'PageUp' ? 0 : this.inputElement.textContent.length;
+      this.setSelection(newPos, newPos);
+      this.updateSelection();
+      return false;
+    }
+
+    if (this.mentionInput.doesCaptureKey(event.key)) {
+      return false;
+    }
+    this.updateSelection();
+    this.onKeyDown(data, event);
+    return true;
+  }
+
   onKeyUp(data, keyboardEvent) {
     if (!this.mentionInput.editedMention()) {
       this.emojiInput.onInputKeyUp(data, keyboardEvent);
@@ -134,7 +162,7 @@ class RichTextInput {
   }
   getClosestMention(node) {
     const element = node.nodeType === 3 ? node.parentNode : node;
-    return element.closest(RichTextInput.CONFIG.MENTION_CLASS);
+    return element.closest(`.${RichTextInput.CONFIG.MENTION_CLASS}`);
   }
 
   restoreSelection() {
@@ -177,7 +205,14 @@ class RichTextInput {
     this.selectionEnd(end);
   }
 
-  insertText(text) {}
+  insertText(text, start = 0, end) {
+    if (!end || end < start) {
+      end = start;
+    }
+    const input = this.inputObservable();
+    const parts = [input.substring(0, start), text, input.substring(end)];
+    this.inputObservable(parts.join(''));
+  }
 }
 
 ko.components.register('rich-text-input', {
@@ -188,7 +223,7 @@ ko.components.register('rich-text-input', {
       dir="auto"
       data-bind="
         event:{
-          keydown: onKeyDown,
+          keydown: handleKeyDown,
           keyup: onKeyUp,
           input: onInput,
           mouseup: updateSelection,

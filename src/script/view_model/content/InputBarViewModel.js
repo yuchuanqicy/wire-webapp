@@ -44,7 +44,6 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.addedToView = this.addedToView.bind(this);
     this.addMention = this.addMention.bind(this);
     this.clickToPing = this.clickToPing.bind(this);
-    this.endMentionFlow = this.endMentionFlow.bind(this);
     this.onDropFiles = this.onDropFiles.bind(this);
     this.onPasteFiles = this.onPasteFiles.bind(this);
     this.onWindowClick = this.onWindowClick.bind(this);
@@ -122,7 +121,6 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
     this.pingDisabled = ko.observable(false);
 
-    this.editedMention = ko.observable(undefined);
     this.mentionInput.currentList = ko.observableArray();
 
     this.hasFocus = ko.pureComputed(() => this.isEditing() || this.conversationHasFocus()).extend({notify: 'always'});
@@ -287,7 +285,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.pastedFile(null);
     this.cancelMessageEditing();
     this.cancelMessageReply();
-    this.endMentionFlow();
+    this.mentionInput.endFlow();
 
     if (conversationEntity) {
       const previousSessionData = this._loadDraftState(conversationEntity);
@@ -354,7 +352,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
   _createMentionEntity(userEntity) {
     const mentionLength = userEntity.name().length + 1;
-    return new z.message.MentionEntity(this.editedMention().startIndex, mentionLength, userEntity.id);
+    return new z.message.MentionEntity(this.mentionInput.editedMention().startIndex, mentionLength, userEntity.id);
   }
 
   addMention(userEntity, inputElement) {
@@ -363,7 +361,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     // keep track of what is before and after the mention being edited
     const beforeMentionPartial = this.input().slice(0, mentionEntity.startIndex);
     const afterMentionPartial = this.input()
-      .slice(mentionEntity.startIndex + this.editedMention().term.length + 1)
+      .slice(mentionEntity.startIndex + this.mentionInput.editedMention().term.length + 1)
       .replace(/^ /, '');
 
     // insert the mention in between
@@ -371,16 +369,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
     this.mentionInput.currentList.push(mentionEntity);
     this.mentionInput.currentList.sort((mentionA, mentionB) => mentionA.startIndex - mentionB.startIndex);
-
-    const caretPosition = mentionEntity.endIndex + 1;
-    inputElement.selectionStart = caretPosition;
-    inputElement.selectionEnd = caretPosition;
-    this.endMentionFlow();
-  }
-
-  endMentionFlow() {
-    this.editedMention(undefined);
-    this.updateSelectionState();
+    this.mentionInput.endFlow();
   }
 
   addedToView() {
@@ -524,22 +513,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
   }
 
   onInputKeyDown(data, keyboardEvent) {
-    const textAreaValue = $(keyboardEvent.target).val();
-
-    // Manually move the cursor when pressing "Page Up", and do nothing else
-    // see https://bugs.chromium.org/p/chromium/issues/detail?id=890248
-    if (keyboardEvent.keyCode === 33) {
-      keyboardEvent.target.setSelectionRange(0, 0);
-      return false;
-    }
-
-    // Manually move the cursor when pressing "Page Down", and do nothing else
-    if (keyboardEvent.keyCode === 34 && textAreaValue) {
-      keyboardEvent.target.setSelectionRange(textAreaValue.length, textAreaValue.length);
-      return false;
-    }
-
-    const inputHandledByEmoji = !this.editedMention() && false; //&& this.emojiInput.onInputKeyDown(data, keyboardEvent);
+    const inputHandledByEmoji = false; //&& this.emojiInput.onInputKeyDown(data, keyboardEvent);
 
     if (!inputHandledByEmoji) {
       switch (keyboardEvent.key) {
@@ -553,7 +527,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
         case z.util.KeyboardUtil.KEY.ESC: {
           if (this.mentionInput.hasSuggestions()) {
-            this.endMentionFlow();
+            this.mentionInput.endFlow();
           } else if (this.pastedFile()) {
             this.pastedFile(null);
           } else if (this.isEditing()) {
@@ -691,7 +665,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
   }
 
   onInputKeyUp(data, keyboardEvent) {
-    if (!this.editedMention()) {
+    if (!this.mentionInput.editedMention()) {
       //this.emojiInput.onInputKeyUp(data, keyboardEvent);
     }
     if (keyboardEvent.key !== z.util.KeyboardUtil.KEY.ESC) {

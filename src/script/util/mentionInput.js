@@ -112,13 +112,22 @@ export default class MentionInput {
     }
   }
 
+  doesCaptureKey(key) {
+    const capturedKeys = [
+      z.util.KeyboardUtil.KEY.ARROW_UP,
+      z.util.KeyboardUtil.KEY.ARROW_DOWN,
+      z.util.KeyboardUtil.KEY.ENTER,
+      z.util.KeyboardUtil.KEY.TAB,
+    ];
+    return this.hasSuggestions() && capturedKeys.includes(key);
+  }
+
   handleMentionFlow(text, selectionStart, selectionEnd) {
     const mentionCandidate = this.getMentionCandidate(selectionStart, selectionEnd, text);
     this.editedMention(mentionCandidate);
   }
 
-  endMentionFlow() {
+  endFlow() {
     this.editedMention(undefined);
-    this.updateSelectionState();
   }
 }

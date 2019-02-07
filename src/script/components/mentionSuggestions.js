@@ -21,7 +21,6 @@ class MentionSuggestions {
   constructor(params) {
     this.onInput = this.onInput.bind(this);
     this.onSuggestionClick = this.onSuggestionClick.bind(this);
-    this.onInitSimpleBar = this.onInitSimpleBar.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
 
     this.isVisible = ko.observable(false);
@@ -60,10 +59,6 @@ class MentionSuggestions {
     if (wrapper) {
       wrapper.style.width = size;
     }
-  }
-
-  onInitSimpleBar(simpleBar) {
-    this.scrollElement = simpleBar.getScrollElement();
   }
 
   onInput(keyboardEvent) {
@@ -168,7 +163,7 @@ class MentionSuggestions {
 ko.components.register('mention-suggestions', {
   template: `
   <!-- ko if: isVisible() -->
-    <div class="conversation-input-bar-mention-suggestion" data-uie-name="list-mention-suggestions" data-bind="style: position(), simplebar: {trigger: shouldUpdateScrollbar, onInit: onInitSimpleBar}">
+    <div class="conversation-input-bar-mention-suggestion" data-uie-name="list-mention-suggestions" data-bind="style: position()">
       <div class="mention-suggestion-list" data-bind="foreach: {data: suggestions().slice().reverse(), as: 'suggestion'}">
         <div class="mention-suggestion-list__item" data-bind="
           click: $parent.onSuggestionClick,
