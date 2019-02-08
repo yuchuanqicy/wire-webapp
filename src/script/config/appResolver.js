@@ -1,6 +1,6 @@
 /*
  * Wire
- * Copyright (C) 2018 Wire Swiss GmbH
+ * Copyright (C) 2019 Wire Swiss GmbH
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,19 +17,9 @@
  *
  */
 
-// https://github.com/gruntjs/grunt-contrib-compress
+import resolver from 'utils/dependenciesResolver';
+import graph from './dependenciesGraph';
 
-module.exports = {
-  server: {
-    files: [
-      {
-        cwd: '<%= dir.dist_ %>',
-        expand: true,
-        src: ['../package.json', '../../.env.defaults', '**/*', '.**/*', '!<%= dir.dist.s3 %>'],
-      },
-    ],
-    options: {
-      archive: '<%= dir.dist.s3 %>/ebs.zip',
-    },
-  },
-};
+resolver.init(graph);
+
+export default resolver.resolve;
