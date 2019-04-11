@@ -1414,8 +1414,8 @@ class AuthViewModel {
       if (!isValidPassword) {
         const isPasswordVerification = mode === z.auth.AuthView.MODE.VERIFY_PASSWORD;
         const errorMessage = isPasswordVerification
-          ? t('authErrorPasswordWrong', {minLength: ValidationUtil.DEFAULT_PASSWORD_MIN_LENGTH})
-          : t('authErrorPasswordShort');
+          ? t('authErrorPasswordWrong')
+          : t('authErrorPasswordShort', {minLength: ValidationUtil.DEFAULT_PASSWORD_MIN_LENGTH});
         this._add_error(errorMessage, z.auth.AuthView.TYPE.PASSWORD);
       }
     }
