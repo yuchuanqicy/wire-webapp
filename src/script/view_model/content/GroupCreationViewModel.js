@@ -39,7 +39,7 @@ export class GroupCreationViewModel {
   }
 
   constructor(conversationRepository, searchRepository, teamRepository, userRepository) {
-    this.logger = getLogger('z.viewModel.content.GroupCreationViewModel');
+    this.logger = getLogger('GroupCreationViewModel');
 
     this.conversationRepository = conversationRepository;
     this.searchRepository = searchRepository;

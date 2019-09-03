@@ -18,6 +18,7 @@
  */
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {makeUserDevicesHistory, UserDevicesState} from 'Components/userDevices';
 
 export class ParticipantDevicesViewModel extends BasePanelViewModel {
@@ -28,6 +29,7 @@ export class ParticipantDevicesViewModel extends BasePanelViewModel {
     this.conversationRepository = conversation;
     this.cryptographyRepository = cryptography;
     this.userDevicesHistory = makeUserDevicesHistory();
+    this.PanelViewModel = PanelViewModel;
 
     this.showSelfFingerprint = () => this.userDevicesHistory.current() === UserDevicesState.SELF_FINGERPRINT;
     this.showDeviceDetails = () => this.userDevicesHistory.current() === UserDevicesState.DEVICE_DETAILS;

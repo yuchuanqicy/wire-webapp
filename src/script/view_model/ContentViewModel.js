@@ -22,14 +22,29 @@ import {t} from 'Util/LocalizerUtil';
 import {alias} from 'Util/util';
 
 import {Config} from '../auth/config';
-import {MessageListViewModel} from './content/MessageListViewModel';
-import {UserModalViewModel} from './content/UserModalViewModel';
-import {LegalHoldModalViewModel} from './content/LegalHoldModalViewModel';
-import {GroupCreationViewModel} from './content/GroupCreationViewModel';
-import {EmojiInputViewModel} from './content/EmojiInputViewModel';
 import {ModalsViewModel} from './ModalsViewModel';
 import {WebAppEvents} from '../event/WebApp';
-import {PreferencesAVViewModel} from './content/PreferencesAVViewModel.js';
+
+import {CollectionDetailsViewModel} from './content/CollectionDetailsViewModel';
+import {CollectionViewModel} from './content/CollectionViewModel';
+import {ConnectRequestsViewModel} from './content/ConnectRequestsViewModel';
+import {EmojiInputViewModel} from './content/EmojiInputViewModel';
+import {GiphyViewModel} from './content/GiphyViewModel';
+import {GroupCreationViewModel} from './content/GroupCreationViewModel';
+import {HistoryExportViewModel} from './content/HistoryExportViewModel';
+import {HistoryImportViewModel} from './content/HistoryImportViewModel';
+import {InputBarViewModel} from './content/InputBarViewModel';
+import {LegalHoldModalViewModel} from './content/LegalHoldModalViewModel';
+import {MessageListViewModel} from './content/MessageListViewModel';
+import {PanelViewModel} from './PanelViewModel';
+import {PreferencesAboutViewModel} from './content/PreferencesAboutViewModel';
+import {PreferencesAccountViewModel} from './content/PreferencesAccountViewModel';
+import {PreferencesAVViewModel} from './content/PreferencesAVViewModel';
+import {PreferencesDeviceDetailsViewModel} from './content/PreferencesDeviceDetailsViewModel';
+import {PreferencesDevicesViewModel} from './content/PreferencesDevicesViewModel';
+import {PreferencesOptionsViewModel} from './content/PreferencesOptionsViewModel';
+import {TitleBarViewModel} from './content/TitleBarViewModel';
+import {UserModalViewModel} from './content/UserModalViewModel';
 
 export class ContentViewModel {
   static get STATE() {
@@ -65,12 +80,12 @@ export class ContentViewModel {
     this.state = ko.observable(ContentViewModel.STATE.WATERMARK);
 
     // Nested view models
-    this.collectionDetails = new z.viewModel.content.CollectionDetailsViewModel();
-    this.collection = new z.viewModel.content.CollectionViewModel(mainViewModel, this, repositories);
-    this.connectRequests = new z.viewModel.content.ConnectRequestsViewModel(mainViewModel, this, repositories);
+    this.collectionDetails = new CollectionDetailsViewModel();
+    this.collection = new CollectionViewModel(mainViewModel, this, repositories);
+    this.connectRequests = new ConnectRequestsViewModel(mainViewModel, this, repositories);
     this.emojiInput = new EmojiInputViewModel(repositories.properties);
-    this.giphy = new z.viewModel.content.GiphyViewModel(mainViewModel, this, repositories);
-    this.inputBar = new z.viewModel.content.InputBarViewModel(mainViewModel, this, repositories);
+    this.giphy = new GiphyViewModel(mainViewModel, this, repositories);
+    this.inputBar = new InputBarViewModel(mainViewModel, this, repositories);
     this.groupCreation = new GroupCreationViewModel(
       repositories.conversation,
       repositories.search,
@@ -86,29 +101,20 @@ export class ContentViewModel {
       repositories.cryptography,
     );
     this.messageList = new MessageListViewModel(mainViewModel, this, repositories);
-    this.titleBar = new z.viewModel.content.TitleBarViewModel(
-      mainViewModel.calling,
-      mainViewModel.panel,
-      this,
-      repositories,
-    );
+    this.titleBar = new TitleBarViewModel(mainViewModel.calling, mainViewModel.panel, this, repositories);
 
-    this.preferencesAbout = new z.viewModel.content.PreferencesAboutViewModel(mainViewModel, this, repositories);
-    this.preferencesAccount = new z.viewModel.content.PreferencesAccountViewModel(mainViewModel, this, repositories);
+    this.preferencesAbout = new PreferencesAboutViewModel(mainViewModel, this, repositories);
+    this.preferencesAccount = new PreferencesAccountViewModel(mainViewModel, this, repositories);
     this.preferencesAV = new PreferencesAVViewModel(repositories.media, repositories.user, {
       mediaSourceChanged: repositories.calling.changeMediaSource.bind(repositories.calling),
       willChangeMediaSource: repositories.calling.stopMediaSource.bind(repositories.calling),
     });
-    this.preferencesDeviceDetails = new z.viewModel.content.PreferencesDeviceDetailsViewModel(
-      mainViewModel,
-      this,
-      repositories,
-    );
-    this.preferencesDevices = new z.viewModel.content.PreferencesDevicesViewModel(mainViewModel, this, repositories);
-    this.preferencesOptions = new z.viewModel.content.PreferencesOptionsViewModel(repositories);
+    this.preferencesDeviceDetails = new PreferencesDeviceDetailsViewModel(mainViewModel, this, repositories);
+    this.preferencesDevices = new PreferencesDevicesViewModel(mainViewModel, this, repositories);
+    this.preferencesOptions = new PreferencesOptionsViewModel(repositories);
 
-    this.historyExport = new z.viewModel.content.HistoryExportViewModel(mainViewModel, this, repositories);
-    this.historyImport = new z.viewModel.content.HistoryImportViewModel(mainViewModel, this, repositories);
+    this.historyExport = new HistoryExportViewModel(mainViewModel, this, repositories);
+    this.historyImport = new HistoryImportViewModel(mainViewModel, this, repositories);
 
     this.previousState = undefined;
     this.previousConversation = undefined;
@@ -217,7 +223,7 @@ export class ContentViewModel {
 
         if (isOpenedConversation) {
           if (openNotificationSettings) {
-            this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.NOTIFICATIONS);
+            this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.NOTIFICATIONS);
           }
           return;
         }
@@ -248,7 +254,7 @@ export class ContentViewModel {
             this._showContent(ContentViewModel.STATE.CONVERSATION);
             this.previousConversation = this.conversationRepository.active_conversation();
             if (openNotificationSettings) {
-              this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.NOTIFICATIONS);
+              this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.NOTIFICATIONS);
             }
           });
         });

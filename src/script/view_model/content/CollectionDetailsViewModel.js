@@ -28,12 +28,8 @@ import {WebAppEvents} from '../../event/WebApp';
 import {MessageCategory} from '../../message/MessageCategory';
 import {ContentViewModel} from '../ContentViewModel';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
 // Parent: ContentViewModel
-z.viewModel.content.CollectionDetailsViewModel = class CollectionDetailsViewModel {
+export class CollectionDetailsViewModel {
   constructor() {
     this.itemAdded = this.itemAdded.bind(this);
     this.itemRemoved = this.itemRemoved.bind(this);
@@ -41,7 +37,7 @@ z.viewModel.content.CollectionDetailsViewModel = class CollectionDetailsViewMode
     this.removedFromView = this.removedFromView.bind(this);
     this.setConversation = this.setConversation.bind(this);
 
-    this.logger = getLogger('z.viewModel.CollectionDetailsViewModel');
+    this.logger = getLogger('CollectionDetailsViewModel');
 
     this.template = ko.observable();
     this.conversationEntity = ko.observable();
@@ -156,4 +152,4 @@ z.viewModel.content.CollectionDetailsViewModel = class CollectionDetailsViewMode
 
     return isCurrentYear(messageDate) ? messageDate.format('MMMM') : messageDate.format('MMMM Y');
   }
-};
+}

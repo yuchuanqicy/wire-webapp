@@ -23,6 +23,8 @@ import {safeWindowOpen} from 'Util/SanitizationUtil';
 import {sortByPriority} from 'Util/StringUtil';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
+
 import {getManageServicesUrl} from '../../externalRoute';
 import * as trackingHelpers from '../../tracking/Helpers';
 import {EventName} from '../../tracking/EventName';
@@ -47,8 +49,9 @@ export class AddParticipantsViewModel extends BasePanelViewModel {
     this.teamRepository = team;
     this.userRepository = user;
     this.MotionDuration = MotionDuration;
+    this.PanelViewModel = PanelViewModel;
 
-    this.logger = getLogger('z.viewModel.panel.AddParticipantsViewModel');
+    this.logger = getLogger('AddParticipantsViewModel');
 
     this.isTeam = this.teamRepository.isTeam;
     this.selfUser = this.userRepository.self;
@@ -126,7 +129,7 @@ export class AddParticipantsViewModel extends BasePanelViewModel {
 
   clickOnSelectService(serviceEntity) {
     this.selectedService(serviceEntity);
-    this.navigateTo(z.viewModel.PanelViewModel.STATE.GROUP_PARTICIPANT_SERVICE, {
+    this.navigateTo(PanelViewModel.STATE.GROUP_PARTICIPANT_SERVICE, {
       addMode: true,
       entity: serviceEntity,
     });

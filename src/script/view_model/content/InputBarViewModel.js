@@ -42,12 +42,8 @@ import {MentionEntity} from '../../message/MentionEntity';
 import {Shortcut} from '../../ui/Shortcut';
 import {ShortcutType} from '../../ui/ShortcutType';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
 // Parent: ContentViewModel
-z.viewModel.content.InputBarViewModel = class InputBarViewModel {
+export class InputBarViewModel {
   static get CONFIG() {
     return {
       ASSETS: {
@@ -87,7 +83,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.storageRepository = repositories.storage;
     this.userRepository = repositories.user;
     this.ParticipantAvatar = ParticipantAvatar;
-    this.logger = getLogger('z.viewModel.content.InputBarViewModel');
+    this.logger = getLogger('InputBarViewModel');
 
     this.conversationEntity = this.conversationRepository.active_conversation;
     this.selfUser = this.userRepository.self;
@@ -883,4 +879,4 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
 
     amplify.publish(WebAppEvents.WARNING.MODAL, ModalsViewModel.TYPE.ACKNOWLEDGE, modalOptions);
   }
-};
+}

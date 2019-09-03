@@ -30,6 +30,7 @@ import {PreferencesListViewModel} from './list/PreferencesListViewModel';
 import {StartUIViewModel} from './list/StartUIViewModel';
 import {TakeoverViewModel} from './list/TakeoverViewModel';
 import {TemporaryGuestViewModel} from './list/TemporaryGuestViewModel';
+import {PanelViewModel} from './PanelViewModel';
 import {WebAppEvents} from '../event/WebApp';
 
 import {Context} from '../ui/ContextMenu';
@@ -37,10 +38,7 @@ import {Shortcut} from '../ui/Shortcut';
 import {ShortcutType} from '../ui/ShortcutType';
 import {ContentViewModel} from './ContentViewModel';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-
-z.viewModel.ListViewModel = class ListViewModel {
+export class ListViewModel {
   static get MODAL_TYPE() {
     return {
       TAKEOVER: 'ListViewModel.MODAL_TYPE.TAKEOVER',
@@ -81,7 +79,7 @@ z.viewModel.ListViewModel = class ListViewModel {
     this.isProAccount = this.teamRepository.isTeam;
     this.selfUser = this.userRepository.self;
 
-    this.logger = getLogger('z.viewModel.ListViewModel');
+    this.logger = getLogger('ListViewModel');
 
     // State
     this.state = ko.observable(ListViewModel.STATE.CONVERSATIONS);
@@ -159,7 +157,7 @@ z.viewModel.ListViewModel = class ListViewModel {
 
   changeNotificationSetting() {
     if (this.isProAccount()) {
-      this.panelViewModel.togglePanel(z.viewModel.PanelViewModel.STATE.NOTIFICATIONS);
+      this.panelViewModel.togglePanel(PanelViewModel.STATE.NOTIFICATIONS);
     } else {
       this.clickToToggleMute();
     }
@@ -461,4 +459,4 @@ z.viewModel.ListViewModel = class ListViewModel {
 
     return isStateConversations && isActiveConversation;
   }
-};
+}

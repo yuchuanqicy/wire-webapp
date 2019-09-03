@@ -18,6 +18,7 @@
  */
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {MotionDuration} from '../../motion/MotionDuration';
 
 export class ConversationParticipantsViewModel extends BasePanelViewModel {
@@ -43,6 +44,7 @@ export class ConversationParticipantsViewModel extends BasePanelViewModel {
 
     this.searchInput = ko.observable('');
     this.MotionDuration = MotionDuration;
+    this.PanelViewModel = PanelViewModel;
   }
 
   getElementId() {
@@ -50,7 +52,7 @@ export class ConversationParticipantsViewModel extends BasePanelViewModel {
   }
 
   clickOnShowUser(userEntity) {
-    this.navigateTo(z.viewModel.PanelViewModel.STATE.GROUP_PARTICIPANT_USER, {entity: userEntity});
+    this.navigateTo(PanelViewModel.STATE.GROUP_PARTICIPANT_USER, {entity: userEntity});
   }
 
   initView(highlightedUsers = []) {

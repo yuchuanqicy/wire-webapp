@@ -19,13 +19,14 @@
 
 import {getLogger} from 'Util/Logger';
 
+import {ListViewModel} from '../ListViewModel';
 import {WebAppEvents} from '../../event/WebApp';
 
 export class ArchiveViewModel {
   /**
    * View model for the archive.
    *
-   * @param {z.viewModel.ListViewModel} listViewModel - List view model
+   * @param {ListViewModel} listViewModel - List view model
    * @param {ConversationRepository} conversationRepository - Repository responsible for conversations
    * @param {Function} onJoinCall - Callback called when the user wants to join a call
    */
@@ -49,12 +50,12 @@ export class ArchiveViewModel {
 
   clickOnConversation(conversationEntity) {
     this.conversationRepository.unarchiveConversation(conversationEntity, 'opened conversation from archive');
-    this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.CONVERSATIONS);
+    this.listViewModel.switchList(ListViewModel.STATE.CONVERSATIONS);
     amplify.publish(WebAppEvents.CONVERSATION.SHOW, conversationEntity);
   }
 
   clickOnClose() {
-    this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.CONVERSATIONS);
+    this.listViewModel.switchList(ListViewModel.STATE.CONVERSATIONS);
   }
 
   updateList() {

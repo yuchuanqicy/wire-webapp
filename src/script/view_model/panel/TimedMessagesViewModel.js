@@ -20,6 +20,7 @@
 import {formatDuration} from 'Util/TimeUtil';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {EphemeralTimings} from '../../ephemeral/EphemeralTimings';
 
 export class TimedMessagesViewModel extends BasePanelViewModel {
@@ -31,6 +32,7 @@ export class TimedMessagesViewModel extends BasePanelViewModel {
     this.conversationRepository = params.repositories.conversation;
 
     this.currentMessageTimer = ko.observable(0);
+    this.PanelViewModel = PanelViewModel;
 
     ko.pureComputed(() => {
       const hasGlobalMessageTimer = this.activeConversation() && this.activeConversation().hasGlobalMessageTimer();

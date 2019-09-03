@@ -28,6 +28,7 @@ import {safeWindowOpen, safeMailOpen} from 'Util/SanitizationUtil';
 
 import {Conversation} from '../../entity/Conversation';
 import {ModalsViewModel} from '../ModalsViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {WebAppEvents} from '../../event/WebApp';
 import {MessageCategory} from '../../message/MessageCategory';
 import {MotionDuration} from '../../motion/MotionDuration';
@@ -390,13 +391,13 @@ class MessageListViewModel {
     const isSingleModeConversation = conversationEntity.is1to1() || conversationEntity.isRequest();
 
     if (isSingleModeConversation && !userEntity.is_me) {
-      return this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.CONVERSATION_DETAILS);
+      return this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.CONVERSATION_DETAILS);
     }
 
     const params = {entity: userEntity};
     const panelId = userEntity.isService
-      ? z.viewModel.PanelViewModel.STATE.GROUP_PARTICIPANT_SERVICE
-      : z.viewModel.PanelViewModel.STATE.GROUP_PARTICIPANT_USER;
+      ? PanelViewModel.STATE.GROUP_PARTICIPANT_SERVICE
+      : PanelViewModel.STATE.GROUP_PARTICIPANT_USER;
 
     this.mainViewModel.panel.togglePanel(panelId, params);
   }
@@ -507,7 +508,7 @@ class MessageListViewModel {
   }
 
   clickOnInvitePeople() {
-    this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.GUEST_OPTIONS);
+    this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.GUEST_OPTIONS);
   }
 
   /**
@@ -633,12 +634,12 @@ class MessageListViewModel {
   }
 
   showParticipants(participants) {
-    this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.CONVERSATION_PARTICIPANTS, participants);
+    this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.CONVERSATION_PARTICIPANTS, participants);
   }
 
   showMessageDetails(view, showLikes) {
     if (!this.conversation().is1to1()) {
-      this.mainViewModel.panel.togglePanel(z.viewModel.PanelViewModel.STATE.MESSAGE_DETAILS, {
+      this.mainViewModel.panel.togglePanel(PanelViewModel.STATE.MESSAGE_DETAILS, {
         entity: {id: view.message.id},
         showLikes,
       });

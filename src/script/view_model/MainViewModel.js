@@ -20,11 +20,16 @@
 import {getLogger} from 'Util/Logger';
 import {afterRender} from 'Util/util';
 
-import {WindowTitleViewModel} from './WindowTitleViewModel';
-import {modals} from './ModalsViewModel';
-import {WarningsViewModel} from './WarningsViewModel';
-import {ContentViewModel} from './ContentViewModel';
+import {ActionsViewModel} from './ActionsViewModel';
 import {CallingViewModel} from './CallingViewModel';
+import {ContentViewModel} from './ContentViewModel';
+import {FaviconViewModel} from './FaviconViewModel';
+import {ImageDetailViewViewModel} from './ImageDetailViewViewModel';
+import {ListViewModel} from './ListViewModel';
+import {modals} from './ModalsViewModel';
+import {PanelViewModel} from './PanelViewModel';
+import {WarningsViewModel} from './WarningsViewModel';
+import {WindowTitleViewModel} from './WindowTitleViewModel';
 
 export class MainViewModel {
   static get CONFIG() {
@@ -74,9 +79,9 @@ export class MainViewModel {
 
     this.isPanelOpen = ko.observable(false);
 
-    this.actions = new z.viewModel.ActionsViewModel(this, repositories);
+    this.actions = new ActionsViewModel(this, repositories);
 
-    this.panel = new z.viewModel.PanelViewModel(this, repositories);
+    this.panel = new PanelViewModel(this, repositories);
     this.calling = new CallingViewModel(
       repositories.calling,
       repositories.conversation,
@@ -88,13 +93,14 @@ export class MainViewModel {
       this.multitasking,
     );
     this.content = new ContentViewModel(this, repositories);
-    this.list = new z.viewModel.ListViewModel(this, repositories);
+    this.list = new ListViewModel(this, repositories);
 
     this.modals = modals;
-    this.lightbox = new z.viewModel.ImageDetailViewViewModel(this, repositories);
+    this.lightbox = new ImageDetailViewViewModel(this, repositories);
     this.title = new WindowTitleViewModel(this, repositories);
-    this.favicon = new z.viewModel.FaviconViewModel(window.amplify);
+    this.favicon = new FaviconViewModel(window.amplify);
     this.warnings = new WarningsViewModel();
+    this.ListViewModel = ListViewModel;
 
     this.mainClasses = ko.pureComputed(() => {
       if (this.selfUser()) {

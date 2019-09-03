@@ -29,13 +29,9 @@ import {
   getWebsiteUrl,
 } from '../../externalRoute';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.PreferencesAboutViewModel = class PreferencesAboutViewModel {
+export class PreferencesAboutViewModel {
   constructor(mainViewModel, contentViewModel, repositories) {
-    this.logger = getLogger('z.viewModel.content.PreferencesAboutViewModel');
+    this.logger = getLogger('PreferencesAboutViewModel');
 
     this.userRepository = repositories.user;
     this.selfUser = this.userRepository.self;
@@ -59,4 +55,4 @@ z.viewModel.content.PreferencesAboutViewModel = class PreferencesAboutViewModel 
   showSupportSection() {
     return this.supportUrl || this.supportContactUrl;
   }
-};
+}

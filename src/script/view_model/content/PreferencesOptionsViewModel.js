@@ -32,11 +32,7 @@ import {ModalsViewModel} from '../ModalsViewModel';
 import {ConnectSource} from '../../connect/ConnectSource';
 import {AudioPreference} from '../../audio/AudioPreference';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewModel {
+export class PreferencesOptionsViewModel {
   static get CONFIG() {
     return {
       MINIMUM_CALL_LOG_LENGTH: 15,
@@ -45,7 +41,7 @@ z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewMo
   }
 
   constructor(repositories) {
-    this.logger = getLogger('z.viewModel.content.PreferencesOptionsViewModel');
+    this.logger = getLogger('PreferencesOptionsViewModel');
 
     this.callingRepository = repositories.calling;
     this.propertiesRepository = repositories.properties;
@@ -125,4 +121,4 @@ z.viewModel.content.PreferencesOptionsViewModel = class PreferencesOptionsViewMo
     this.optionSendPreviews(settings.previews.send);
     this.optionNotifications(settings.notifications);
   };
-};
+}

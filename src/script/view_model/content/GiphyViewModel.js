@@ -22,11 +22,7 @@ import {getLogger} from 'Util/Logger';
 import {WebAppEvents} from '../../event/WebApp';
 import {Modal} from '../../ui/Modal';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.GiphyViewModel = class GiphyViewModel {
+export class GiphyViewModel {
   static get CONFIG() {
     return {
       NUMBER_OF_GIFS: 6,
@@ -47,7 +43,7 @@ z.viewModel.content.GiphyViewModel = class GiphyViewModel {
     this.clickToSelectGif = this.clickToSelectGif.bind(this);
 
     this.giphyRepository = repositories.giphy;
-    this.logger = getLogger('z.viewModel.content.GiphyViewModel');
+    this.logger = getLogger('GiphyViewModel');
 
     this.modal = undefined;
     this.state = ko.observable(GiphyViewModel.STATE.DEFAULT);
@@ -195,4 +191,4 @@ z.viewModel.content.GiphyViewModel = class GiphyViewModel {
         });
     }
   }
-};
+}

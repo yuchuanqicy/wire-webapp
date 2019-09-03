@@ -28,13 +28,10 @@ import {WebAppEvents} from '../../event/WebApp';
 import {Shortcut} from '../../ui/Shortcut';
 import {ShortcutType} from '../../ui/ShortcutType';
 import {ContentViewModel} from '../ContentViewModel';
-
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
+import {PanelViewModel} from '../PanelViewModel';
 
 // Parent: ContentViewModel
-z.viewModel.content.TitleBarViewModel = class TitleBarViewModel {
+export class TitleBarViewModel {
   constructor(callingViewModel, panelViewModel, contentViewModel, repositories) {
     this.addedToView = this.addedToView.bind(this);
 
@@ -43,7 +40,7 @@ z.viewModel.content.TitleBarViewModel = class TitleBarViewModel {
     this.conversationRepository = repositories.conversation;
     this.userRepository = repositories.user;
     this.multitasking = contentViewModel.multitasking;
-    this.logger = getLogger('z.viewModel.content.TitleBarViewModel');
+    this.logger = getLogger('TitleBarViewModel');
 
     this.panelViewModel = panelViewModel;
     this.contentViewModel = contentViewModel;
@@ -151,10 +148,8 @@ z.viewModel.content.TitleBarViewModel = class TitleBarViewModel {
   }
 
   showDetails(addParticipants) {
-    const panelId = addParticipants
-      ? z.viewModel.PanelViewModel.STATE.ADD_PARTICIPANTS
-      : z.viewModel.PanelViewModel.STATE.CONVERSATION_DETAILS;
+    const panelId = addParticipants ? PanelViewModel.STATE.ADD_PARTICIPANTS : PanelViewModel.STATE.CONVERSATION_DETAILS;
 
     this.panelViewModel.togglePanel(panelId);
   }
-};
+}

@@ -20,6 +20,7 @@
 import {getLogger} from 'Util/Logger';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 
 export class GroupParticipantServiceViewModel extends BasePanelViewModel {
   constructor(params) {
@@ -29,8 +30,9 @@ export class GroupParticipantServiceViewModel extends BasePanelViewModel {
 
     this.integrationRepository = repositories.integration;
     this.actionsViewModel = mainViewModel.actions;
+    this.PanelViewModel = PanelViewModel;
 
-    this.logger = getLogger('z.viewModel.panel.GroupParticipantServiceViewModel');
+    this.logger = getLogger('GroupParticipantServiceViewModel');
 
     this.selectedParticipant = ko.observable(undefined);
     this.selectedService = ko.observable(undefined);

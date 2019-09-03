@@ -30,6 +30,7 @@ import {Config} from '../../auth/config';
 import {User} from '../../entity/User';
 import {ConnectSource} from '../../connect/ConnectSource';
 import {ModalsViewModel} from '../ModalsViewModel';
+import {ListViewModel} from '../ListViewModel';
 import {generatePermissionHelpers} from '../../user/UserPermission';
 import {validateHandle} from '../../user/UserHandleGenerator';
 import {ParticipantAvatar} from 'Components/participantAvatar';
@@ -49,7 +50,7 @@ class StartUIViewModel {
 
   /**
    * @param {MainViewModel} mainViewModel - Main view model
-   * @param {z.viewModel.ListViewModel} listViewModel - List view model
+   * @param {ListViewModel} listViewModel - List view model
    * @param {Object} repositories - Object containing all repositories
    */
   constructor(mainViewModel, listViewModel, repositories) {
@@ -75,7 +76,7 @@ class StartUIViewModel {
     this.searchRepository = repositories.search;
     this.teamRepository = repositories.team;
     this.userRepository = repositories.user;
-    this.logger = getLogger('z.viewModel.list.StartUIViewModel');
+    this.logger = getLogger('StartUIViewModel');
     this.brandName = Config.BRAND_NAME;
     this.UserlistMode = UserlistMode;
     this.ParticipantAvatar = ParticipantAvatar;
@@ -89,7 +90,7 @@ class StartUIViewModel {
     this.teamSize = this.teamRepository.teamSize;
 
     this.state = ko.observable(StartUIViewModel.STATE.ADD_PEOPLE);
-    this.isVisible = ko.pureComputed(() => listViewModel.state() === z.viewModel.ListViewModel.STATE.START_UI);
+    this.isVisible = ko.pureComputed(() => listViewModel.state() === ListViewModel.STATE.START_UI);
 
     this.peopleTabActive = ko.pureComputed(() => this.state() === StartUIViewModel.STATE.ADD_PEOPLE);
 
@@ -394,7 +395,7 @@ class StartUIViewModel {
     $('user-input input').blur();
 
     amplify.publish(WebAppEvents.SEARCH.HIDE);
-    this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.CONVERSATIONS);
+    this.listViewModel.switchList(ListViewModel.STATE.CONVERSATIONS);
 
     this.resetView();
   }

@@ -18,6 +18,7 @@
  */
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {NOTIFICATION_STATE, getNotificationText} from '../../conversation/NotificationSetting';
 
 export class NotificationsViewModel extends BasePanelViewModel {
@@ -34,6 +35,7 @@ export class NotificationsViewModel extends BasePanelViewModel {
     }));
 
     this.currentNotificationSetting = ko.observable();
+    this.PanelViewModel = PanelViewModel;
 
     ko.pureComputed(() => {
       return this.activeConversation() && this.activeConversation().notificationState();

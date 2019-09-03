@@ -28,6 +28,7 @@ import {STATE as CALL_STATE, REASON as CALL_REASON} from '@wireapp/avs';
 import {AvailabilityContextMenu} from '../../ui/AvailabilityContextMenu';
 import {Shortcut} from '../../ui/Shortcut';
 import {ShortcutType} from '../../ui/ShortcutType';
+import {ListViewModel} from '../ListViewModel';
 import {ContentViewModel} from '../ContentViewModel';
 
 import 'Components/legalHoldDot';
@@ -38,7 +39,7 @@ export class ConversationListViewModel {
    * View model for conversation list.
    *
    * @param {MainViewModel} mainViewModel - Main view model
-   * @param {z.viewModel.ListViewModel} listViewModel - List view model
+   * @param {ListViewModel} listViewModel - List view model
    * @param {Object} repositories - Object containing all repositories
    * @param {Function} onJoinCall - Callback called when the user wants to join a call
    */
@@ -60,7 +61,7 @@ export class ConversationListViewModel {
     this.listViewModel = listViewModel;
     this.onJoinCall = onJoinCall;
 
-    this.logger = getLogger('z.viewModel.list.ConversationListViewModel');
+    this.logger = getLogger('list.ConversationListViewModel');
 
     this.showCalls = ko.observable();
     this.setShowCallsState(repositories.event.notificationHandlingState());
@@ -188,7 +189,7 @@ export class ConversationListViewModel {
   //##############################################################################
 
   clickOnArchivedButton() {
-    this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.ARCHIVE);
+    this.listViewModel.switchList(ListViewModel.STATE.ARCHIVE);
   }
 
   clickOnPreferencesButton() {
@@ -197,7 +198,7 @@ export class ConversationListViewModel {
 
   clickOnPeopleButton() {
     if (this.isActivatedAccount()) {
-      this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.START_UI);
+      this.listViewModel.switchList(ListViewModel.STATE.START_UI);
     }
   }
 }

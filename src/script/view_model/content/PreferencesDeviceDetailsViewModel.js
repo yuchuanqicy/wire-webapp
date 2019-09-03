@@ -26,11 +26,7 @@ import {WebAppEvents} from '../../event/WebApp';
 import {MotionDuration} from '../../motion/MotionDuration';
 import {ContentViewModel} from '../ContentViewModel';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.PreferencesDeviceDetailsViewModel = class PreferencesDeviceDetailsViewModel {
+export class PreferencesDeviceDetailsViewModel {
   static get SESSION_RESET_STATE() {
     return {
       CONFIRMATION: 'confirmation',
@@ -43,7 +39,7 @@ z.viewModel.content.PreferencesDeviceDetailsViewModel = class PreferencesDeviceD
     this.clientRepository = repositories.client;
     this.conversationRepository = repositories.conversation;
     this.cryptographyRepository = repositories.cryptography;
-    this.logger = getLogger('z.viewModel.content.PreferencesDeviceDetailsViewModel');
+    this.logger = getLogger('PreferencesDeviceDetailsViewModel');
 
     this.actionsViewModel = mainViewModel.actions;
     this.selfUser = this.clientRepository.selfUser;
@@ -106,4 +102,4 @@ z.viewModel.content.PreferencesDeviceDetailsViewModel = class PreferencesDeviceD
     const toggleVerified = !this.device().meta.isVerified();
     this.clientRepository.verifyClient(this.selfUser().id, this.device(), toggleVerified);
   }
-};
+}

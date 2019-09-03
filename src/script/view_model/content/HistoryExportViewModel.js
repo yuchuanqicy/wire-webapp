@@ -28,11 +28,7 @@ import {ContentViewModel} from '../ContentViewModel';
 
 import 'Components/loadingBar';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.HistoryExportViewModel = class HistoryExportViewModel {
+export class HistoryExportViewModel {
   static get STATE() {
     return {
       COMPRESSING: 'HistoryExportViewModel.STATE.COMPRESSING',
@@ -51,7 +47,7 @@ z.viewModel.content.HistoryExportViewModel = class HistoryExportViewModel {
   constructor(mainViewModel, contentViewModel, repositories) {
     this.backupRepository = repositories.backup;
     this.userRepository = repositories.user;
-    this.logger = getLogger('z.viewModel.content.HistoryExportViewModel');
+    this.logger = getLogger('HistoryExportViewModel');
 
     this.hasError = ko.observable(false);
     this.state = ko.observable(HistoryExportViewModel.STATE.PREPARING);
@@ -161,4 +157,4 @@ z.viewModel.content.HistoryExportViewModel = class HistoryExportViewModel {
   dismissExport() {
     amplify.publish(WebAppEvents.CONTENT.SWITCH, ContentViewModel.STATE.PREFERENCES_ACCOUNT);
   }
-};
+}

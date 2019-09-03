@@ -24,17 +24,14 @@ import {ModalsViewModel} from './ModalsViewModel';
 import {NOTIFICATION_STATE} from '../conversation/NotificationSetting';
 import {WebAppEvents} from '../event/WebApp';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-
-z.viewModel.ActionsViewModel = class ActionsViewModel {
+export class ActionsViewModel {
   constructor(mainViewModel, repositories) {
     this.clientRepository = repositories.client;
     this.connectionRepository = repositories.connection;
     this.conversationRepository = repositories.conversation;
     this.integrationRepository = repositories.integration;
     this.userRepository = repositories.user;
-    this.logger = getLogger('z.viewModel.ListViewModel');
+    this.logger = getLogger('ActionsViewModel');
   }
 
   acceptConnectionRequest(userEntity, showConversation) {
@@ -308,4 +305,4 @@ z.viewModel.ActionsViewModel = class ActionsViewModel {
       });
     }
   }
-};
+}

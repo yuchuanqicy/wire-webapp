@@ -83,7 +83,7 @@ class AuthViewModel {
   constructor(backendClient) {
     this.click_on_remove_device_submit = this.click_on_remove_device_submit.bind(this);
 
-    this.logger = getLogger('z.viewModel.AuthViewModel');
+    this.logger = getLogger('AuthViewModel');
 
     this.authRepository = resolveDependency(graph.AuthRepository);
     this.audio_repository = resolveDependency(graph.AudioRepository);

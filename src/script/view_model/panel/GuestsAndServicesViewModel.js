@@ -24,6 +24,7 @@ import {t} from 'Util/LocalizerUtil';
 import {Config} from '../../auth/config';
 import {BasePanelViewModel} from './BasePanelViewModel';
 import {ModalsViewModel} from '../ModalsViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {ACCESS_STATE} from '../../conversation/AccessState';
 import {WebAppEvents} from '../../event/WebApp';
 import {EventName} from '../../tracking/EventName';
@@ -47,7 +48,7 @@ export class GuestsAndServicesViewModel extends BasePanelViewModel {
     const conversationRepository = repositories.conversation;
     this.stateHandler = conversationRepository.stateHandler;
 
-    this.logger = getLogger('z.viewModel.panel.GuestsAndServicesViewModel');
+    this.logger = getLogger('GuestsAndServicesViewModel');
 
     this.isLinkCopied = ko.observable(false);
     this.requestOngoing = ko.observable(false);
@@ -57,6 +58,7 @@ export class GuestsAndServicesViewModel extends BasePanelViewModel {
     this.hasAccessCode = ko.pureComputed(() => (this.isGuestRoom() ? !!this.activeConversation().accessCode() : false));
     this.isGuestEnabled = ko.pureComputed(() => !this.isTeamOnly());
     this.showLinkOptions = ko.pureComputed(() => this.isGuestEnabled());
+    this.PanelViewModel = PanelViewModel;
 
     this.activeConversation.subscribe(conversationEntity => this._updateCode(this.isVisible(), conversationEntity));
     this.isVisible.subscribe(isVisible => this._updateCode(isVisible, this.activeConversation()));

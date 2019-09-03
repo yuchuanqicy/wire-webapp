@@ -23,11 +23,7 @@ import {isLastItem} from 'Util/ArrayUtil';
 
 import {ParticipantAvatar} from 'Components/participantAvatar';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.ConnectRequestsViewModel = class ConnectRequestsViewModel {
+export class ConnectRequestsViewModel {
   /**
    * View model for connection requests.
    *
@@ -42,7 +38,7 @@ z.viewModel.content.ConnectRequestsViewModel = class ConnectRequestsViewModel {
 
     this.mainViewModel = mainViewModel;
     this.userRepository = repositories.user;
-    this.logger = getLogger('z.viewModel.content.ConnectRequestsViewModel');
+    this.logger = getLogger('ConnectRequestsViewModel');
 
     this.actionsViewModel = this.mainViewModel.actions;
     this.connectRequests = this.userRepository.connect_requests;
@@ -81,4 +77,4 @@ z.viewModel.content.ConnectRequestsViewModel = class ConnectRequestsViewModel {
   clickOnIgnore(userEntity) {
     this.actionsViewModel.ignoreConnectionRequest(userEntity);
   }
-};
+}

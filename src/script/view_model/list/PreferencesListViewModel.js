@@ -21,12 +21,13 @@ import {getLogger} from 'Util/Logger';
 import {Environment} from 'Util/Environment';
 
 import {ContentViewModel} from '../ContentViewModel';
+import {ListViewModel} from '../ListViewModel';
 
 class PreferencesListViewModel {
   /**
    * View model for the preferences list.
    * @param {ContentViewModel} contentViewModel - content view model
-   * @param {z.viewModel.ListViewModel} listViewModel - List view model
+   * @param {ListViewModel} listViewModel - List view model
    * @param {UserRepository} userRepository - Repository managing users
    * @param {CallingRepository} callingRepository - Repository managing calls
    */
@@ -62,7 +63,7 @@ class PreferencesListViewModel {
       if (!this.isActivatedAccount()) {
         return this.listViewModel.showTemporaryGuest();
       }
-      this.listViewModel.switchList(z.viewModel.ListViewModel.STATE.CONVERSATIONS);
+      this.listViewModel.switchList(ListViewModel.STATE.CONVERSATIONS);
     }
   }
 

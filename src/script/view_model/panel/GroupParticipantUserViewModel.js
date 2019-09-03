@@ -24,6 +24,7 @@ import 'Components/panel/enrichedFields';
 import 'Components/panel/userDetails';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 
 export class GroupParticipantUserViewModel extends BasePanelViewModel {
   constructor(params) {
@@ -34,6 +35,7 @@ export class GroupParticipantUserViewModel extends BasePanelViewModel {
     this.userRepository = repositories.user;
     this.actionsViewModel = mainViewModel.actions;
     this.teamRepository = repositories.team;
+    this.PanelViewModel = PanelViewModel;
 
     this.logger = getLogger('GroupParticipantUserViewModel');
 
@@ -61,7 +63,7 @@ export class GroupParticipantUserViewModel extends BasePanelViewModel {
   }
 
   clickOnDevices() {
-    this.navigateTo(z.viewModel.PanelViewModel.STATE.PARTICIPANT_DEVICES, {entity: this.selectedParticipant()});
+    this.navigateTo(PanelViewModel.STATE.PARTICIPANT_DEVICES, {entity: this.selectedParticipant()});
   }
 
   initView({entity: user}) {

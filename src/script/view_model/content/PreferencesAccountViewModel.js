@@ -46,15 +46,12 @@ import {AvailabilityContextMenu} from '../../ui/AvailabilityContextMenu';
 import {MotionDuration} from '../../motion/MotionDuration';
 import {EventName} from '../../tracking/EventName';
 import {ContentViewModel} from '../ContentViewModel';
+import {HistoryExportViewModel} from './HistoryExportViewModel';
 
 import 'Components/availabilityState';
 import {isAppLockEnabled} from './AppLockViewModel';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.PreferencesAccountViewModel = class PreferencesAccountViewModel {
+export class PreferencesAccountViewModel {
   static get CONFIG() {
     return {
       PROFILE_IMAGE: {
@@ -75,7 +72,7 @@ z.viewModel.content.PreferencesAccountViewModel = class PreferencesAccountViewMo
     this.changeAccentColor = this.changeAccentColor.bind(this);
     this.removedFromView = this.removedFromView.bind(this);
 
-    this.logger = getLogger('z.viewModel.content.PreferencesAccountViewModel');
+    this.logger = getLogger('PreferencesAccountViewModel');
 
     this.mainViewModel = mainViewModel;
     this.backupRepository = repositories.backup;
@@ -86,6 +83,7 @@ z.viewModel.content.PreferencesAccountViewModel = class PreferencesAccountViewMo
     this.teamRepository = repositories.team;
     this.userRepository = repositories.user;
     this.Environment = Environment;
+    this.HistoryExportViewModel = HistoryExportViewModel;
     this.brandName = Config.BRAND_NAME;
 
     this.isActivatedAccount = this.userRepository.isActivatedAccount;
@@ -436,4 +434,4 @@ z.viewModel.content.PreferencesAccountViewModel = class PreferencesAccountViewMo
   updateProperties = ({settings}) => {
     this.optionPrivacy(settings.privacy.improve_wire);
   };
-};
+}

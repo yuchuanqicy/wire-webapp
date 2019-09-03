@@ -30,11 +30,7 @@ import {ContentViewModel} from '../ContentViewModel';
 
 import 'Components/loadingBar';
 
-window.z = window.z || {};
-window.z.viewModel = z.viewModel || {};
-window.z.viewModel.content = z.viewModel.content || {};
-
-z.viewModel.content.HistoryImportViewModel = class HistoryImportViewModel {
+export class HistoryImportViewModel {
   static get STATE() {
     return {
       DONE: 'HistoryImportViewModel.STATE.DONE',
@@ -46,7 +42,7 @@ z.viewModel.content.HistoryImportViewModel = class HistoryImportViewModel {
   constructor(mainViewModel, contentViewModel, repositories) {
     this.backupRepository = repositories.backup;
 
-    this.logger = getLogger('z.viewModel.content.HistoryExportViewModel');
+    this.logger = getLogger('HistoryExportViewModel');
 
     this.error = ko.observable(null);
     this.errorHeadline = ko.observable('');
@@ -143,4 +139,4 @@ z.viewModel.content.HistoryImportViewModel = class HistoryImportViewModel {
     this.logger.error(`Failed to import history: ${error.message}`, error);
     amplify.publish(WebAppEvents.ANALYTICS.EVENT, EventName.HISTORY.RESTORE_FAILED);
   }
-};
+}

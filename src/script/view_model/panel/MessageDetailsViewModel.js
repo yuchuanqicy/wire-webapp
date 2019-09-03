@@ -22,6 +22,7 @@ import moment from 'moment';
 import {t} from 'Util/LocalizerUtil';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
+import {PanelViewModel} from '../PanelViewModel';
 import {WebAppEvents} from '../../event/WebApp';
 import {SuperType} from '../../message/SuperType';
 
@@ -43,6 +44,7 @@ export class MessageDetailsViewModel extends BasePanelViewModel {
     const userRepository = params.repositories.user;
     this.conversationRepository = params.repositories.conversation;
     this.teamRepository = params.repositories.team;
+    this.PanelViewModel = PanelViewModel;
 
     this.states = {
       LIKES: 'likes',
