@@ -44,6 +44,7 @@ export class ClientRepository {
   static get CONFIG() {
     return {
       AVERAGE_NUMBER_OF_CLIENTS: 4,
+      MINIMUM_LABEL_LENGTH: 2,
     };
   }
 
@@ -509,6 +510,26 @@ export class ClientRepository {
     return this.cryptographyRepository
       .deleteSession(userId, clientId)
       .then(() => this.deleteClientFromDb(userId, clientId));
+  }
+
+  /**
+   * Sets the client's label on the backend and updates it locally.
+   *
+   * @param {string} userId - User ID of the client owner
+   * @param {string} clientId - Client ID which needs to be updated
+   * @param {string} label - Label entered by the user
+   * @returns {Promise} Resolves with the new client
+   */
+  async updateClientLabel(userId, clientId, label) {
+    await this.clientService.putClientById(clientId, {label});
+    await this.updateClientInDb(userId, clientId, {label, meta: {}});
+  }
+
+  /**
+   * @returns {string} The client's label
+   */
+  getClientLabel() {
+    return this.currentClient().label;
   }
 
   /**

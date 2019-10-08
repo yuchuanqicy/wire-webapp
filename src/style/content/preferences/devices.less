@@ -61,6 +61,31 @@
   }
 }
 
+.preferences-devices-model-wrapper {
+  position: relative;
+  width: 256px;
+
+  edit-icon,
+  animated-check-icon {
+    position: absolute;
+    top: 0;
+    right: 12px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    pointer-events: none;
+    transition: opacity @animation-timing-faster;
+
+    svg {
+      width: 12px;
+    }
+  }
+
+  edit-icon {
+    opacity: 0;
+  }
+}
+
 .preferences-devices-card + .preferences-devices-card {
   border-top: 1px solid @separator-color;
 }
@@ -78,6 +103,31 @@
   height: 16px;
   margin-right: 16px;
   cursor: pointer;
+}
+
+.preferences-devices-input {
+  .reset-textarea;
+
+  width: 100%;
+  height: @line-height-xl;
+  padding-right: 28px;
+  padding-left: 4px;
+  margin-left: -4px;
+  background: transparent;
+  line-height: @line-height-xl;
+
+  &::placeholder {
+    .label-xs;
+  }
+
+  &:hover + edit-icon {
+    opacity: 1;
+  }
+
+  &:not([readonly]):focus,
+  &:not([readonly]):hover {
+    background-color: var(--preference-account-input-bg);
+  }
 }
 
 .preferences-devices-id {

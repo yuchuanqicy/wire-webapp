@@ -94,7 +94,8 @@ export class ClientEntity {
 
   getName(): string {
     const hasModel = this.model && this.model !== ClientEntity.CONFIG.DEFAULT_VALUE;
-    return hasModel ? this.model : this.class.toUpperCase();
+    const hasLabel = this.label && this.label !== ClientEntity.CONFIG.DEFAULT_VALUE;
+    return hasLabel ? this.label : hasModel ? this.model : this.class.toUpperCase();
   }
 
   /**

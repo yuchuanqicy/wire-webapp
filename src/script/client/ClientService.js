@@ -200,6 +200,22 @@ export class ClientService {
   }
 
   /**
+   * Retrieves meta information about all the clients of a specific user.
+   * @see https://staging-nginz-https.zinfra.io/swagger-ui/#!/users/getClients
+   *
+   * @param {string} clientId - ID of client to update
+   * @param {Object} data - Data to update
+   * @returns {Promise} Resolves without data
+   */
+  putClientById(clientId, data) {
+    return this.backendClient.sendJson({
+      data,
+      type: 'PUT',
+      url: `${ClientService.URL_CLIENTS}/${clientId}`,
+    });
+  }
+
+  /**
    * Updates a persisted client in the database.
    *
    * @param {string} primaryKey - Primary key used to find a client in the database

@@ -22,7 +22,9 @@ import {t} from 'Util/LocalizerUtil';
 import {formatTimestamp} from 'Util/TimeUtil';
 
 import {WebAppEvents} from '../../event/WebApp';
+import {ClientRepository} from '../../client/ClientRepository';
 import {ContentViewModel} from '../ContentViewModel';
+import {MotionDuration} from '../../motion/MotionDuration';
 import {sortUserDevices} from 'Components/userDevices';
 
 window.z = window.z || {};
@@ -30,6 +32,12 @@ window.z.viewModel = z.viewModel || {};
 window.z.viewModel.content = z.viewModel.content || {};
 
 z.viewModel.content.PreferencesDevicesViewModel = class PreferencesDevicesViewModel {
+  static get CONFIG() {
+    return {
+      SAVE_ANIMATION_TIMEOUT: MotionDuration.X_LONG * 2,
+    };
+  }
+
   constructor(mainViewModel, contentViewModel, repositories) {
     this.clickOnRemoveDevice = this.clickOnRemoveDevice.bind(this);
     this.clickOnShowDevice = this.clickOnShowDevice.bind(this);
@@ -56,6 +64,29 @@ z.viewModel.content.PreferencesDevicesViewModel = class PreferencesDevicesViewMo
     this.localFingerprint = ko.observableArray([]);
     this.selfUser = this.userRepository.self;
     this.isSSO = ko.pureComputed(() => this.selfUser() && this.selfUser().isSingleSignOn);
+    this.labelSaved = ko.observable();
+  }
+
+  getLabel() {
+    return this.currentClient().label;
+  }
+
+  changeLabel(viewModel, event) {
+    const newLabel = event.target.value.trim();
+
+    const isUnchanged = newLabel === this.getLabel();
+    if (isUnchanged) {
+      return event.target.blur();
+    }
+
+    const isValidName = newLabel.length >= ClientRepository.CONFIG.MINIMUM_LABEL_LENGTH;
+    if (isValidName) {
+      this.clientRepository.updateClientLabel(this.selfUser().id, this.currentClient().id, newLabel).then(() => {
+        this.labelSaved(true);
+        event.target.blur();
+        window.setTimeout(() => this.labelSaved(false), PreferencesDevicesViewModel.CONFIG.SAVE_ANIMATION_TIMEOUT);
+      });
+    }
   }
 
   clickOnShowDevice(clientEntity) {
@@ -66,6 +97,12 @@ z.viewModel.content.PreferencesDevicesViewModel = class PreferencesDevicesViewMo
   clickOnRemoveDevice(clientEntity, event) {
     this.actionsViewModel.deleteClient(clientEntity);
     event.stopPropagation();
+  }
+
+  resetLabelInput() {
+    // if (!this.labelSaved())
+    //   this.label.notifySubscribers();
+    // }
   }
 
   updateDeviceInfo() {

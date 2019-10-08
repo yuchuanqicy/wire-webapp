@@ -3,7 +3,19 @@
   <div class="preferences-content" data-bind="fadingscrollbar">
     <section class="preferences-section" data-uie-name="preferences-device-current">
       <header class="preferences-header" data-bind="text: t('preferencesDevicesCurrent')"></header>
-      <div class="preferences-devices-model" data-bind="text: currentClient().model"></div>
+      <div class="preferences-devices-model-wrapper">
+        <input class="preferences-devices-model preferences-devices-input"
+               id="label" type="text"
+               data-bind="value: getLabel(), event: {blur: resetLabelInput}, enter: changeLabel, attr: {placeholder: getLabel()}"
+               data-uie-name="enter-label"
+               maxlength="64"
+               spellcheck="false" />
+        <!-- ko if: labelSaved() -->
+          <animated-check-icon data-uie-name="enter-label-icon-check"></animated-check-icon>
+        <!-- /ko -->
+        <!-- ko ifnot: labelSaved() -->
+          <edit-icon data-uie-name="enter-label-icon"></edit-icon>
+        <!-- /ko -->
       <div class="preferences-devices-id"><span data-bind="text: t('preferencesDevicesId')"></span>
         <span data-bind="foreach: displayClientId()" data-uie-name="preferences-device-current-id"><span class="device-id-part" data-bind="text: $data"></span></span>
       </div>
