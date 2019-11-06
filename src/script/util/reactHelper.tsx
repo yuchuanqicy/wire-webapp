@@ -17,7 +17,19 @@
  *
  */
 
-import {wrapReactComponent} from 'Util/reactHelper';
-import AccentColorPicker from './AccentColorPicker';
+import React, {ComponentType} from 'react';
+import ReactDOM from 'react-dom';
 
-wrapReactComponent(AccentColorPicker, 'accent-color-picker', {selected: [, 'setSelected'], user: ['user']});
+export function wrapReactComponent(Component: ComponentType, name: string, paramMapper: {}): void {
+  ko.components.register(name, {
+    template: '<!-- ignore me -->',
+    viewModel: {
+      createViewModel(params: {}, {element}: {element: HTMLElement}) {
+        /*const reactParams = paramMapper? params: params){
+        Object.entries(paramMapper).map
+        }*/
+        ReactDOM.render(<Component {...params} />, element);
+      },
+    },
+  });
+}
