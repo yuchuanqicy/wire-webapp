@@ -18,6 +18,6 @@
  */
 
 import {wrapReactComponent} from 'Util/reactHelper';
-import AccentColorPicker from './AccentColorPicker';
+import AccentColorPicker from './AccentColorPicker.tsx';
 
 wrapReactComponent(AccentColorPicker, 'accent-color-picker', {selected: [, 'setSelected'], user: ['user']});

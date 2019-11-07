@@ -17,18 +17,32 @@
  *
  */
 
+import ko from 'knockout';
 import React, {ComponentType} from 'react';
 import ReactDOM from 'react-dom';
 
-export function wrapReactComponent(Component: ComponentType, name: string, paramMapper: {}): void {
+export function wrapReactComponent(
+  Component: ComponentType,
+  name: string,
+  paramMapper: Record<string, string[]>,
+): void {
   ko.components.register(name, {
     template: '<!-- ignore me -->',
     viewModel: {
-      createViewModel(params: {}, {element}: {element: HTMLElement}) {
-        /*const reactParams = paramMapper? params: params){
-        Object.entries(paramMapper).map
-        }*/
-        ReactDOM.render(<Component {...params} />, element);
+      createViewModel(params: Record<string, ko.Observable>, {element}: {element: HTMLElement}) {
+        const reactParams = !paramMapper
+          ? params
+          : Object.entries(paramMapper).reduce((newParams: Record<string, unknown>, [name, [varName, setterName]]) => {
+              if (varName) {
+                newParams[varName] = params[name]();
+              }
+              if (setterName) {
+                newParams[setterName] = (value: unknown) => params[name](value);
+              }
+              return newParams;
+            }, {});
+
+        ReactDOM.render(<Component {...reactParams} />, element);
       },
     },
   });

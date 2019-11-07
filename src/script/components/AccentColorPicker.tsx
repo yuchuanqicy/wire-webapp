@@ -17,20 +17,17 @@
  *
  */
 
-import ko from 'knockout';
 import React from 'react';
 import {User} from '../entity/User';
 
 interface AccentColorPickerProps {
-  user: ko.Observable<User>;
-  selected: ko.Observable<number>;
+  user: User;
+  setSelected: (id: number) => void;
 }
 
-const accentColorPicker = ({user: koUser, selected}: AccentColorPickerProps) => {
-  const user = ko.unwrap(koUser);
-
+const accentColorPicker = ({user, setSelected}: AccentColorPickerProps) => {
   const accentColorIds = [1, 2, 4, 5, 6, 7];
-
+  // console.log('RENDER PICKER');
   return accentColorIds.map(id => (
     <React.Fragment key={id}>
       <input
@@ -38,7 +35,7 @@ const accentColorPicker = ({user: koUser, selected}: AccentColorPickerProps) => 
         name="accent"
         id={`accent${id}`}
         defaultChecked={user.accent_id() === id}
-        onClick={() => selected(id)}
+        onClick={() => setSelected(id)}
       />
       <label htmlFor={`accent${id}`} className={`accent-color-${id}`} />
     </React.Fragment>
