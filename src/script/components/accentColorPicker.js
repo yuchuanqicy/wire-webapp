@@ -16,8 +16,20 @@
  * along with this program. If not, see http://www.gnu.org/licenses/.
  *
  */
-
+import React from 'react';
 import {wrapReactComponent} from 'Util/reactHelper';
 import AccentColorPicker from './AccentColorPicker.tsx';
 
-wrapReactComponent(AccentColorPicker, 'accent-color-picker', {selected: [, 'setSelected'], user: ['user']});
+const useObservable = observable => {
+  const [value, setValue] = React.useState(observable());
+  observable.subscribe(setValue);
+  return [value, newValue => observable(newValue)];
+};
+
+const Wrapper = ({user: koUser, selected: koSelected}) => {
+  const [, setSelected] = useObservable(koSelected);
+  const [accentId] = useObservable(koUser().accent_id);
+  return React.createElement(AccentColorPicker, {accentId, setSelected});
+};
+
+wrapReactComponent(Wrapper, 'accent-color-picker');

@@ -17,24 +17,23 @@
  *
  */
 
+import {AccentColorID} from '@wireapp/commons/dist/commonjs/util/AccentColor';
 import React from 'react';
-import {User} from '../entity/User';
 
 interface AccentColorPickerProps {
-  user: User;
-  setSelected: (id: number) => void;
+  accentId: AccentColorID;
+  setSelected: (id: AccentColorID) => void;
 }
 
-const accentColorPicker = ({user, setSelected}: AccentColorPickerProps) => {
-  const accentColorIds = [1, 2, 4, 5, 6, 7];
-  // console.log('RENDER PICKER');
+const accentColorPicker = ({accentId, setSelected}: AccentColorPickerProps) => {
+  const accentColorIds: AccentColorID[] = [1, 2, 4, 5, 6, 7];
   return accentColorIds.map(id => (
     <React.Fragment key={id}>
       <input
         type="radio"
         name="accent"
         id={`accent${id}`}
-        defaultChecked={user.accent_id() === id}
+        defaultChecked={accentId === id}
         onClick={() => setSelected(id)}
       />
       <label htmlFor={`accent${id}`} className={`accent-color-${id}`} />
