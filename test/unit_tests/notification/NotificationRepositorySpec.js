@@ -56,9 +56,6 @@ import {MentionEntity} from 'src/script/message/MentionEntity';
 import {ConnectionMapper} from 'src/script/connection/ConnectionMapper';
 import {ContentViewModel} from 'src/script/view_model/ContentViewModel';
 
-window.wire = window.wire || {};
-window.wire.app = window.wire.app || {};
-
 describe('NotificationRepository', () => {
   const test_factory = new TestFactory();
   let conversation_et = null;
@@ -108,9 +105,6 @@ describe('NotificationRepository', () => {
       TestFactory.notification_repository.permissionState(PermissionStatusState.GRANTED);
       Environment.browser.supports.notifications = true;
       TestFactory.notification_repository.__test__assignEnvironment(Environment);
-      window.wire.app = {
-        service: {asset: {generateAssetUrl: () => Promise.resolve('/image/logo/notification.png')}},
-      };
       contentViewModelState.state = ko.observable(ContentViewModel.STATE.CONVERSATION);
       contentViewModelState.multitasking = {
         isMinimized: () => true,

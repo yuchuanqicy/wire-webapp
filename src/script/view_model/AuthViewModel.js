@@ -234,15 +234,6 @@ class AuthViewModel {
     this.posted_mode = ko.observable(undefined);
     this.posted_mode_verify = ko.pureComputed(() => this.posted_mode() === AuthView.MODE.POSTED_VERIFY);
 
-    // dirty fix: The AssetRemoteData class consumes the global `wire.app` object.
-    // so we need to publish a fake `wire.app` object only with what the class consumes (namely the assetService)
-    // more engineering will be required to get rid of that global dependency
-    window.wire.app = {
-      service: {
-        asset: new AssetService(backendClient),
-      },
-    };
-
     const elementSelector = '.auth-page';
     ko.applyBindings(this, document.querySelector(elementSelector));
 

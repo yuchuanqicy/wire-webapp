@@ -22,8 +22,10 @@ import {loadUrlBuffer, noop} from 'Util/util';
 import {ValidationUtilError} from 'Util/ValidationUtil';
 
 import {decryptAesAsset} from './AssetCrypto';
+import {AssetService} from './AssetService';
 import {getAssetUrl, setAssetUrl} from './AssetURLCache';
 
+import {graph, resolve as resolveDependency} from '../config/appResolver';
 import {BackendClientError} from '../error/BackendClientError';
 
 export type AssetUrlData = AssetUrlDataVersion1 | AssetUrlDataVersion2 | AssetUrlDataVersion3;
@@ -59,6 +61,7 @@ export class AssetRemoteData {
   private readonly otrKey?: Uint8Array;
   private readonly sha256?: Uint8Array;
   private readonly urlData?: AssetUrlData;
+  private readonly assetService: AssetService;
 
   constructor(identifier: string, urlData: AssetUrlData, otrKey?: Uint8Array, sha256Checksum?: Uint8Array) {
     this.cancelDownload = noop;
@@ -69,24 +72,25 @@ export class AssetRemoteData {
     this.otrKey = otrKey;
     this.sha256 = sha256Checksum;
     this.urlData = urlData;
+    this.assetService = new AssetService(resolveDependency(graph.BackendClient));
   }
 
   generateUrl(): Promise<string> {
     switch (this.urlData.version) {
       case 3:
-        return window.wire.app.service.asset.generateAssetUrlV3(
+        return this.assetService.generateAssetUrlV3(
           this.urlData.assetKey,
           this.urlData.assetToken,
           this.urlData.forceCaching,
         );
       case 2:
-        return window.wire.app.service.asset.generateAssetUrlV2(
+        return this.assetService.generateAssetUrlV2(
           this.urlData.assetId,
           this.urlData.conversationId,
           this.urlData.forceCaching,
         );
       case 1:
-        return window.wire.app.service.asset.generateAssetUrl(
+        return this.assetService.generateAssetUrl(
           this.urlData.assetId,
           this.urlData.conversationId,
           this.urlData.forceCaching,
