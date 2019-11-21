@@ -18,6 +18,7 @@
  */
 
 import {User} from 'src/script/entity/User';
+import {TestFactory} from '../../api/TestFactory';
 
 describe('SearchRepository', () => {
   const test_factory = new TestFactory();

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class DeviceRemove {
   constructor(params) {
     this.dispose = this.dispose.bind(this);

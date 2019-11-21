@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {Logger, getLogger} from 'Util/Logger';
 import {loadUrlBuffer, noop} from 'Util/util';
 import {ValidationUtilError} from 'Util/ValidationUtil';

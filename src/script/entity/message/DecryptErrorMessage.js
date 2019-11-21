@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {errors as ProteusErrors} from '@wireapp/proteus';
 
 import {t} from 'Util/LocalizerUtil';

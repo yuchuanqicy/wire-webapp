@@ -17,8 +17,12 @@
  *
  */
 
+import {amplify} from 'amplify';
+
 import {WebAppEvents} from 'src/script/event/WebApp';
 import {EventTrackingRepository} from 'src/script/tracking/EventTrackingRepository';
+
+import {TestFactory} from '../../api/TestFactory';
 
 describe('EventTrackingRepository', () => {
   const test_factory = new TestFactory();

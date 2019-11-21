@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {WebAppEvents} from '../event/WebApp';
 
 window.z = window.z || {};

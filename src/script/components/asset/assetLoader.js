@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class AssetLoader {
   constructor(params) {
     const elementScale = params.large ? 2 : 1;

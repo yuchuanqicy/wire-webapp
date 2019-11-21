@@ -22,6 +22,8 @@ import {ClientEvent} from 'src/script/event/Client';
 import {BackendEvent} from 'src/script/event/Backend';
 import {ServiceMiddleware} from 'src/script/event/preprocessor/ServiceMiddleware';
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('ServiceMiddleware', () => {
   const testFactory = new TestFactory();
   let serviceMiddleware;

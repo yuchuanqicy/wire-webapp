@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {debounce} from 'underscore';
 
 import {interpolate} from 'Util/ArrayUtil';

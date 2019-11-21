@@ -17,6 +17,8 @@
  *
  */
 
+import {amplify} from 'amplify';
+
 import {getLogger} from 'Util/Logger';
 
 import {EventInfoEntity} from '../conversation/EventInfoEntity';

@@ -17,6 +17,9 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
+
 import {loadValue, storeValue} from 'Util/StorageUtil';
 import {getCursorPixelPosition} from 'Util/PopupUtil';
 import {KEY, isKey, isEnterKey} from 'Util/KeyboardUtil';

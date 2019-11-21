@@ -41,6 +41,8 @@ import {ConnectionMapper} from 'src/script/connection/ConnectionMapper';
 import {ClientEntity} from 'src/script/client/ClientEntity';
 import {MentionEntity} from 'src/script/message/MentionEntity';
 
+import {entities} from '../../api/payloads';
+
 describe('Conversation', () => {
   let conversation_et = null;
   let other_user = null;

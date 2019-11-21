@@ -25,6 +25,9 @@ import {ClientType} from 'src/script/client/ClientType';
 import {ClientEntity} from 'src/script/client/ClientEntity';
 import {ClientMapper} from 'src/script/client/ClientMapper';
 
+import {TestFactory} from '../../api/TestFactory';
+import {entities} from '../../api/payloads';
+
 describe('ClientRepository', () => {
   const testFactory = new TestFactory();
   const clientId = '5021d77752286cac';

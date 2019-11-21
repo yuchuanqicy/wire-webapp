@@ -103,7 +103,7 @@ export class UserRepository {
   // tslint:disable-next-line:typedef
   static get CONFIG() {
     return {
-      MAXIMUM_TEAM_SIZE_BROADCAST: 400,
+      MAXIMUM_TEAM_SIZE_BROADCAST: 2,
       MINIMUM_NAME_LENGTH: 2,
       MINIMUM_PICTURE_SIZE: {
         HEIGHT: 320,

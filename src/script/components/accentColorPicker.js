@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class AccentColorPicker {
   constructor({user, selected}) {
     this.user = ko.unwrap(user);

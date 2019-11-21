@@ -17,12 +17,15 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
+import {CALL_TYPE} from '@wireapp/avs';
+
 import {getLogger} from 'Util/Logger';
 import {t} from 'Util/LocalizerUtil';
 import {iterateItem} from 'Util/ArrayUtil';
 import {Environment} from 'Util/Environment';
 import {isEscapeKey} from 'Util/KeyboardUtil';
-import {CALL_TYPE} from '@wireapp/avs';
 
 import {ArchiveViewModel} from './list/ArchiveViewModel';
 import {ConversationListViewModel} from './list/ConversationListViewModel';

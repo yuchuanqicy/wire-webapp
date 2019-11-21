@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
-import {amplify} from 'amplify';
-import Cookies from 'js-cookie';
 import jQuery from 'jquery';
-import ko from 'knockout';
-import raygun from '../../../node_modules/raygun4js/dist/raygun.vanilla.js';
+import Raygun from '../../../node_modules/raygun4js/dist/raygun.vanilla.js';
 
 // Needed for the wrapper
 import '../event/WebApp';
@@ -83,8 +80,5 @@ import serviceDetailsGlobal from 'Components/panel/serviceDetails.js';
 import MessageCategorizationGlobal from '../message/MessageCategorization.js';
 /* eslint-enable no-unused-vars */
 
-window.amplify = amplify;
-window.Cookies = Cookies;
 // we need to publish jQuery on the window so that knockout can use it
 window.jQuery = jQuery;
-window.ko = ko;

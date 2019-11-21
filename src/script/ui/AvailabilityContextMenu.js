@@ -17,7 +17,9 @@
  *
  */
 
+import {amplify} from 'amplify';
 import {Availability} from '@wireapp/protocol-messaging';
+
 import {t} from 'Util/LocalizerUtil';
 
 import {WebAppEvents} from '../event/WebApp';

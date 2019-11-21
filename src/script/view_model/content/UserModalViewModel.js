@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {noop} from 'Util/util';
 
 import {Config} from '../../Config';

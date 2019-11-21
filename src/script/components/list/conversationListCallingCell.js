@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {formatSeconds} from 'Util/TimeUtil';
 import {afterRender} from 'Util/util';
 import {t} from 'Util/LocalizerUtil';

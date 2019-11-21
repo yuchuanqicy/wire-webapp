@@ -17,6 +17,8 @@
  *
  */
 
+import {amplify} from 'amplify';
+
 import {PROPERTIES_TYPE} from '../properties/PropertiesType';
 import {WebAppEvents} from '../event/WebApp';
 

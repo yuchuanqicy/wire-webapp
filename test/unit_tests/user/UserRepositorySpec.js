@@ -17,7 +17,12 @@
  *
  */
 
+import sinon from 'sinon';
+
 import {backendConfig} from '../../api/testResolver';
+import {entities} from '../../api/payloads';
+import {TestFactory} from '../../api/TestFactory';
+
 import {ConsentValue} from 'src/script/user/ConsentValue';
 import {PropertiesRepository} from 'src/script/properties/PropertiesRepository';
 import {ReceiptMode} from 'src/script/conversation/ReceiptMode';

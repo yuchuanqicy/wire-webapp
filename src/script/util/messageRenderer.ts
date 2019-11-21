@@ -16,6 +16,7 @@
  * along with this program. If not, see http://www.gnu.org/licenses/.
  *
  */
+
 import hljs from 'highlightjs';
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';

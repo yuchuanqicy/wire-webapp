@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {BasePanelViewModel} from './BasePanelViewModel';
 import {MotionDuration} from '../../motion/MotionDuration';
 

@@ -17,6 +17,9 @@
  *
  */
 
+import Raygun from 'raygun4js';
+
+import {amplify} from 'amplify';
 import {error as StoreEngineError, MemoryEngine} from '@wireapp/store-engine';
 import {IndexedDBEngine} from '@wireapp/store-engine-dexie';
 import {Cryptobox, version as cryptoboxVersion} from '@wireapp/cryptobox';

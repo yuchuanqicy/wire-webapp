@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import JSZip from 'jszip';
 
 import {getLogger} from 'Util/Logger';

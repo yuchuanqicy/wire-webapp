@@ -45,7 +45,7 @@ describe('MediaDevicesHandler', () => {
   describe('constructor', () => {
     it('loads available devices and listens to input devices changes', done => {
       const devicesHandler = new MediaDevicesHandler();
-      setTimeout(() => {
+     window.setTimeout(() => {
         expect(navigator.mediaDevices.enumerateDevices).toHaveBeenCalledTimes(1);
         expect(devicesHandler.availableDevices.videoInput()).toEqual(cameras);
         expect(devicesHandler.availableDevices.audioInput()).toEqual(mics);
@@ -55,7 +55,7 @@ describe('MediaDevicesHandler', () => {
         navigator.mediaDevices.enumerateDevices.and.returnValue(Promise.resolve(newCameras));
         navigator.mediaDevices.ondevicechange();
 
-        setTimeout(() => {
+       window.setTimeout(() => {
           expect(navigator.mediaDevices.enumerateDevices).toHaveBeenCalledTimes(2);
           expect(devicesHandler.availableDevices.videoInput()).toEqual(newCameras);
           expect(devicesHandler.availableDevices.audioInput()).toEqual([]);
@@ -69,7 +69,7 @@ describe('MediaDevicesHandler', () => {
   describe('currentAvailableDeviceId', () => {
     it('only exposes available device', done => {
       const devicesHandler = new MediaDevicesHandler();
-      setTimeout(() => {
+     window.setTimeout(() => {
         devicesHandler.currentDeviceId.videoInput(cameras[0].deviceId);
 
         expect(devicesHandler.currentAvailableDeviceId.videoInput()).toBe(cameras[0].deviceId);

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {getLogger} from 'Util/Logger';
 import {downloadBlob} from 'Util/util';
 

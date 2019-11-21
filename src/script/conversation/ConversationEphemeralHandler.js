@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {Article, LinkPreview} from '@wireapp/protocol-messaging';
 
 import {getLogger} from 'Util/Logger';

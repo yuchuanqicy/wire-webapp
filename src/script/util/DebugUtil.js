@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import $ from 'jquery';
 import sodium from 'libsodium-wrappers-sumo';
 import Dexie from 'dexie';
@@ -389,7 +390,7 @@ export class DebugUtil {
       const height = 240;
       const canvas = Object.assign(document.createElement('canvas'), {height, width});
       const ctx = canvas.getContext('2d');
-      setInterval(() => {
+      window.setInterval(() => {
         ctx.fillStyle = `#${color}`;
         ctx.fillRect(0, 0, width, height);
         ctx.fillStyle = `#000`;
@@ -476,7 +477,7 @@ export class DebugUtil {
       const call = this.callingRepository.joinedCall();
       if (call) {
         renderFrame();
-        this.liveCallingStatsInterval = setInterval(renderFrame, 500);
+        this.liveCallingStatsInterval = window.setInterval(renderFrame, 500);
       } else {
         vdom = patch(vdom, createElement('div'));
         clearInterval(this.liveCallingStatsInterval);

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import {Availability} from '@wireapp/protocol-messaging';
 
 import {t} from 'Util/LocalizerUtil';
@@ -55,6 +57,9 @@ import {MentionEntity} from 'src/script/message/MentionEntity';
 
 import {ConnectionMapper} from 'src/script/connection/ConnectionMapper';
 import {ContentViewModel} from 'src/script/view_model/ContentViewModel';
+
+import {entities} from '../../api/payloads';
+import {TestFactory} from '../../api/TestFactory';
 
 window.wire = window.wire || {};
 window.wire.app = window.wire.app || {};

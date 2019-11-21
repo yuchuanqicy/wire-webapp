@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {formatDuration} from 'Util/TimeUtil';
 
 import {BasePanelViewModel} from './BasePanelViewModel';

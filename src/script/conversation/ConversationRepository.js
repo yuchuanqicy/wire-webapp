@@ -17,6 +17,9 @@
  *
  */
 
+import Raygun from 'raygun4js';
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import poster from 'poster-image';
 import {
   Asset,

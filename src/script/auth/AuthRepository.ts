@@ -21,6 +21,7 @@ import {AccessTokenData, LoginData} from '@wireapp/api-client/dist/commonjs/auth
 import {amplify} from 'amplify';
 import ko from 'knockout';
 import {Logger} from 'logdown';
+import {RaygunStatic} from 'raygun4js'
 
 import {Environment} from 'Util/Environment';
 import {getLogger} from 'Util/Logger';
@@ -32,6 +33,8 @@ import {StorageKey} from '../storage/StorageKey';
 import {WarningsViewModel} from '../view_model/WarningsViewModel';
 import {AuthService} from './AuthService';
 import {SIGN_OUT_REASON} from './SignOutReason';
+
+declare const Raygun: RaygunStatic;
 
 export class AuthRepository {
   private accessTokenRefresh: number;
@@ -111,7 +114,7 @@ export class AuthRepository {
           const isRequestForbidden = type === z.error.AccessTokenError.TYPE.REQUEST_FORBIDDEN;
           if (isRequestForbidden || Environment.frontend.isLocalhost()) {
             this.logger.warn(`Session expired on access token refresh: ${message}`, error);
-            window.Raygun.send(error);
+            Raygun.send(error);
             return amplify.publish(WebAppEvents.LIFECYCLE.SIGN_OUT, SIGN_OUT_REASON.SESSION_EXPIRED, false);
           }
 

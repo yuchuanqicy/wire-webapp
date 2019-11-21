@@ -18,7 +18,9 @@
  */
 
 import UUID from 'uuidjs';
+
 import {instantiateComponent} from '../../helper/knockoutHelpers';
+import {TestFactory} from '../../api/TestFactory';
 
 import {Conversation} from 'src/script/entity/Conversation';
 import {ContentMessage} from 'src/script/entity/message/ContentMessage';
@@ -101,7 +103,7 @@ describe('message', () => {
     const params = Object.assign({}, defaultParams, {isMarked: () => true});
     return instantiateComponent('message', params)
       .then(() => {
-        setTimeout(() => {
+        window.setTimeout(() => {
           expect(defaultParams.onMessageMarked).toHaveBeenCalled();
           done();
         }, 1);

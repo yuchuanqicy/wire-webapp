@@ -17,6 +17,8 @@
  *
  */
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('AuthRepository', () => {
   const test_factory = new TestFactory();
 

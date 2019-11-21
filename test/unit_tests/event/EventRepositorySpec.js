@@ -17,14 +17,15 @@
  *
  */
 
+import {amplify} from 'amplify';
 import {MemoryEngine} from '@wireapp/store-engine';
 import {Cryptobox} from '@wireapp/cryptobox';
 import {GenericMessage, Text} from '@wireapp/protocol-messaging';
-import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 import * as Proteus from '@wireapp/proteus';
 
 import {createRandomUuid, arrayToBase64} from 'Util/util';
 
+import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 import {AssetUploadFailedReason} from 'src/script/assets/AssetUploadFailedReason';
 import {ClientEvent} from 'src/script/event/Client';
 import {BackendEvent} from 'src/script/event/Backend';
@@ -34,6 +35,8 @@ import {EventRepository} from 'src/script/event/EventRepository';
 import {NotificationService} from 'src/script/event/NotificationService';
 import {AssetTransferState} from 'src/script/assets/AssetTransferState';
 import {ClientEntity} from 'src/script/client/ClientEntity';
+
+import {TestFactory} from '../../api/TestFactory';
 
 async function createEncodedCiphertext(
   preKey,

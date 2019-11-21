@@ -24,6 +24,8 @@ import {Conversation} from 'src/script/entity/Conversation';
 import {ConversationVerificationState} from 'src/script/conversation/ConversationVerificationState';
 import {User} from 'src/script/entity/User';
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('ConversationVerificationStateHandler', () => {
   const testFactory = new TestFactory();
   let stateHandler = undefined;

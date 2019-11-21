@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import keyboardJS from 'keyboardjs';
 
 import {Environment} from 'Util/Environment';

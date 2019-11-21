@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import ko from 'knockout';
 import {Availability} from '@wireapp/protocol-messaging';
 

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import {Availability} from '@wireapp/protocol-messaging';
 
 import {getLogger} from 'Util/Logger';

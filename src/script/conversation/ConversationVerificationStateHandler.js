@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import {intersection} from 'underscore';
 
 import {getLogger} from 'Util/Logger';

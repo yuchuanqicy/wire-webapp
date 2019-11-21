@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {getMapsUrl} from 'Util/locationUtil';
 
 ko.components.register('location-asset', {

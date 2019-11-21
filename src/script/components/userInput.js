@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {isRemovalAction} from 'Util/KeyboardUtil';
 
 class UserInput {

@@ -19,6 +19,7 @@
 
 import {ClientType} from 'src/script/client/ClientType';
 import {ClientMapper} from 'src/script/client/ClientMapper';
+import {entities} from '../../api/payloads';
 
 describe('ClientMapper', () => {
   describe('mapClient', () => {

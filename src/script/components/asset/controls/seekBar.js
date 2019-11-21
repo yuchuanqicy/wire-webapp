@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {clamp} from 'Util/NumberUtil';
 
 class SeekBarComponent {

@@ -17,6 +17,8 @@
  *
  */
 
+import sinon from 'sinon';
+
 import {resolve, graph, backendConfig} from './../../api/testResolver';
 import {ConnectionService} from 'src/script/connection/ConnectionService';
 

@@ -17,6 +17,9 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
+
 import {getLogger} from 'Util/Logger';
 import {t} from 'Util/LocalizerUtil';
 import {Environment} from 'Util/Environment';
@@ -176,4 +179,8 @@ export class WarningsViewModel {
     }
     this.warnings.push(type);
   }
+
+  sendWarningLifecycleUpdate = () => {
+    amplify.publish(WebAppEvents.LIFECYCLE.REFRESH);
+  };
 }

@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {Decoder} from 'bazinga64';
 import JsMD5 from 'js-md5';
 import {ObservableArray} from 'knockout';

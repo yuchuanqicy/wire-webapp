@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {Availability} from '@wireapp/protocol-messaging';
 
 import {nameFromType} from '../../user/AvailabilityMapper';

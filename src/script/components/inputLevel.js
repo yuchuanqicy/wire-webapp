@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class InputLevel {
   constructor(params) {
     this.input_level = params.level;

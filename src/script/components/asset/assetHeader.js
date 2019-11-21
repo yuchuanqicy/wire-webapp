@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import moment from 'moment';
 
 import {LDM} from 'Util/moment';

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {getGrid} from 'src/script/calling/videoGridHandler';
 import {Participant} from 'src/script/calling/Participant';
 

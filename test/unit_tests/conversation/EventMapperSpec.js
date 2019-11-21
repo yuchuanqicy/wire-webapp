@@ -28,6 +28,8 @@ import {AssetType} from 'src/script/assets/AssetType';
 import {ClientEvent} from 'src/script/event/Client';
 import {MentionEntity} from 'src/script/message/MentionEntity';
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('Event Mapper', () => {
   const test_factory = new TestFactory();
   let conversation_et = null;

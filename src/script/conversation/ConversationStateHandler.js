@@ -17,6 +17,8 @@
  *
  */
 
+import {amplify} from 'amplify';
+
 import {t} from 'Util/LocalizerUtil';
 
 import {ModalsViewModel} from '../view_model/ModalsViewModel';

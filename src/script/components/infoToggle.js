@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import UUID from 'uuidjs';
 
 class InfoToggle {

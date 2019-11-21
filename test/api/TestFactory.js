@@ -23,7 +23,7 @@ import ko from 'knockout';
 
 import 'src/script/main/globals';
 
-import {backendConfig, graph, resolve as resolveDependency} from './testResolver';
+import {graph, resolve as resolveDependency} from './testResolver';
 import {CallingRepository} from 'src/script/calling/CallingRepository';
 import {serverTimeHandler} from 'src/script/time/serverTimeHandler';
 import {User} from 'src/script/entity/User';
@@ -62,11 +62,9 @@ import {PermissionRepository} from 'src/script/permission/PermissionRepository';
 import {AuthRepository} from 'src/script/auth/AuthRepository';
 import {AuthService} from 'src/script/auth/AuthService';
 
-window.testConfig = {
-  connection: backendConfig,
-};
+import {entities} from '../../api/payloads';
 
-window.TestFactory = class TestFactory {
+export class TestFactory {
   /**
    * @returns {Promise<AuthRepository>} The authentication repository.
    */
@@ -374,7 +372,7 @@ window.TestFactory = class TestFactory {
     );
     return TestFactory.lifecycle_repository;
   }
-};
+}
 
 const actorsCache = new Map();
 

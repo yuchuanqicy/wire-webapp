@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import ko from 'knockout';
 
 import {t} from 'Util/LocalizerUtil';
@@ -33,6 +34,8 @@ import {ConversationType} from 'src/script/conversation/ConversationType';
 import {WindowTitleViewModel} from 'src/script/view_model/WindowTitleViewModel';
 import {ContentViewModel} from 'src/script/view_model/ContentViewModel';
 import {WebAppEvents} from 'src/script/event/WebApp';
+
+import {TestFactory} from '../../api/TestFactory';
 
 describe('WindowTitleViewModel', () => {
   const suffix = 'Wire';

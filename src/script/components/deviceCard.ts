@@ -17,7 +17,9 @@
  *
  */
 
+import ko from 'knockout';
 import {ClientClassification} from '@wireapp/api-client/dist/commonjs/client';
+
 import {formatTimestamp} from 'Util/TimeUtil';
 import {ClientEntity} from '../client/ClientEntity';
 

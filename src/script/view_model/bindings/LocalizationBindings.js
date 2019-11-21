@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {buildSupportUrl} from 'Util/UrlUtil';
 
 ko.bindingHandlers.supportLink = {

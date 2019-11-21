@@ -17,6 +17,8 @@
  *
  */
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('StorageRepository', () => {
   const test_factory = new TestFactory();
 

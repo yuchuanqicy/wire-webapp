@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 const fileList = require.context('Resource/image/icon', true, /.+\.svg$/);
 
 fileList.keys().forEach(iconFileName => {

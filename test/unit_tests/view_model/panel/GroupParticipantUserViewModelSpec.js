@@ -24,6 +24,8 @@ import {noop} from 'Util/util';
 import {GroupParticipantUserViewModel} from 'src/script/view_model/panel/GroupParticipantUserViewModel';
 import {User} from 'src/script/entity/User';
 
+import {TestFactory} from '../../../api/TestFactory';
+
 describe('GroupParticipantUserViewModel', () => {
   const testFactory = new window.TestFactory();
   let groupParticipantUserViewModel;

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {safeWindowOpen} from 'Util/SanitizationUtil';
 import {isTweetUrl} from 'Util/ValidationUtil';
 import {getDomainName} from 'Util/UrlUtil';

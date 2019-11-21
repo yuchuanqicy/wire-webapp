@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import moment from 'moment';
 
 import {t} from 'Util/LocalizerUtil';

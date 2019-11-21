@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class GroupAvatar {
   constructor({users}) {
     this.users = ko.pureComputed(() => users().slice(0, 4));

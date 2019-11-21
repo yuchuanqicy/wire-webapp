@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import Cookies from 'js-cookie';
 import {formatNumberForMobileDialing} from 'phoneformat.js';
 import moment from 'moment';

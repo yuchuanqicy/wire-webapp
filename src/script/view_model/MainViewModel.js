@@ -17,6 +17,9 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
+
 import {getLogger} from 'Util/Logger';
 import {afterRender} from 'Util/util';
 
@@ -95,7 +98,7 @@ export class MainViewModel {
 
     this.lightbox = new z.viewModel.ImageDetailViewViewModel(this, repositories);
     this.title = new WindowTitleViewModel(this, repositories);
-    this.favicon = new z.viewModel.FaviconViewModel(window.amplify);
+    this.favicon = new z.viewModel.FaviconViewModel(amplify);
     this.warnings = new WarningsViewModel();
 
     this.mainClasses = ko.pureComputed(() => {

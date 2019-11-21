@@ -17,6 +17,9 @@
  *
  */
 
+import sinon from 'sinon';
+import {amplify} from 'amplify';
+
 import {resolve, graph} from './../../api/testResolver';
 import {WebAppEvents} from 'src/script/event/WebApp';
 

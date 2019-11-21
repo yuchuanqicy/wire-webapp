@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {t} from 'Util/LocalizerUtil';
 
 import {BackendEvent} from '../../event/Backend';

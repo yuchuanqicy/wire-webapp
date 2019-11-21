@@ -22,12 +22,9 @@ import {AssetService} from './assets/AssetService';
 
 declare global {
   interface Window {
-    $: any;
-    amplify: amplify.Static;
-    bazinga64: any;
-    jQuery: any;
+    $: JQuery;
+    jQuery: JQuery;
     platform: any;
-    Raygun: any;
     wire: {
       app: {
         service: {

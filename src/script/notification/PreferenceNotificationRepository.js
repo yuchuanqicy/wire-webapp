@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {groupBy} from 'underscore';
 import {amplify} from 'amplify';
 

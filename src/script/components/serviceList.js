@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {noop} from 'Util/util';
 
 import {ParticipantAvatar} from 'Components/participantAvatar';

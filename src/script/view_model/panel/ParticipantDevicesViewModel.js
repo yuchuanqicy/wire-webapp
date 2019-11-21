@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {BasePanelViewModel} from './BasePanelViewModel';
 import {makeUserDevicesHistory, UserDevicesState} from 'Components/userDevices';
 

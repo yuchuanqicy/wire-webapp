@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {amplify} from 'amplify';
 import {Observable, ObservableArray, PureComputed} from 'knockout';
 

@@ -53,7 +53,7 @@ describe('AssetsUploader', () => {
     const xhr = {upload: {}};
     spyOn(assetUploader.assetService, 'uploadAsset').and.callFake((fileParam, optionsParam, callback) => {
       callback(xhr);
-      return new Promise(resolve => setTimeout(resolve));
+      return new Promise(resolve => window.setTimeout(resolve));
     });
 
     const uploadPromise = assetUploader.uploadAsset(messageId, file, options);

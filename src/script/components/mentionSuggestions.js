@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {clamp} from 'Util/NumberUtil';
 import {noop} from 'Util/util';
 import {KEY, isEnterKey} from 'Util/KeyboardUtil';

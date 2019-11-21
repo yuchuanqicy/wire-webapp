@@ -17,6 +17,9 @@
  *
  */
 
+import sinon from 'sinon';
+
+import {TestFactory} from '../../api/TestFactory';
 import {backendConfig} from '../../api/testResolver';
 
 describe('TeamRepository', () => {

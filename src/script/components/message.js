@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import moment from 'moment';
 import {amplify} from 'amplify';
 
@@ -95,7 +96,7 @@ class Message {
     ko.computed(
       () => {
         if (isMarked()) {
-          setTimeout(() => onMessageMarked(componentInfo.element));
+          window.setTimeout(() => onMessageMarked(componentInfo.element));
         }
       },
       {disposeWhenNodeIsRemoved: componentInfo.element},

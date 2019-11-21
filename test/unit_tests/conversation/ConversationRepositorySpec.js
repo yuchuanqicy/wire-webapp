@@ -17,12 +17,14 @@
  *
  */
 
+import ko from 'knockout';
+import sinon from 'sinon';
+import {amplify} from 'amplify';
 import {GenericMessage, LegalHoldStatus, Text} from '@wireapp/protocol-messaging';
-import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 
 import {createRandomUuid} from 'Util/util';
 
-import {backendConfig} from '../../api/testResolver';
+import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 import {Conversation} from 'src/script/entity/Conversation';
 import {User} from 'src/script/entity/User';
 import {Message} from 'src/script/entity/message/Message';
@@ -52,7 +54,11 @@ import {File} from 'src/script/entity/message/File';
 import {ConnectionEntity} from 'src/script/connection/ConnectionEntity';
 import {ConnectionStatus} from 'src/script/connection/ConnectionStatus';
 import {MessageCategory} from 'src/script/message/MessageCategory';
+
 import {UserGenerator} from '../../helper/UserGenerator';
+import {entities} from '../../api/payloads';
+import {TestFactory} from '../../api/TestFactory';
+import {backendConfig} from '../../api/testResolver';
 
 describe('ConversationRepository', () => {
   const test_factory = new TestFactory();
@@ -84,7 +90,7 @@ describe('ConversationRepository', () => {
   beforeEach(() => {
     server = sinon.fakeServer.create();
     server.autoRespond = true;
-    sinon.spy(jQuery, 'ajax');
+    sinon.spy($, 'ajax');
 
     return test_factory.exposeConversationActors().then(conversation_repository => {
       amplify.publish(WebAppEvents.EVENT.NOTIFICATION_HANDLING_STATE, NOTIFICATION_HANDLING_STATE.WEB_SOCKET);
@@ -111,7 +117,7 @@ describe('ConversationRepository', () => {
   afterEach(() => {
     server.restore();
     storage_service.clearStores();
-    jQuery.ajax.restore();
+    $.ajax.restore();
     TestFactory.conversation_repository.conversations.removeAll();
   });
 

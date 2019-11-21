@@ -17,9 +17,14 @@
  *
  */
 
+import {amplify} from 'amplify';
+import sinon from 'sinon';
+
 import {createRandomUuid} from 'Util/util';
 
 import {backendConfig} from '../../api/testResolver';
+import {entities} from '../../api/payloads';
+import {TestFactory} from '../../api/TestFactory';
 
 import {Conversation} from 'src/script/entity/Conversation';
 import {User} from 'src/script/entity/User';

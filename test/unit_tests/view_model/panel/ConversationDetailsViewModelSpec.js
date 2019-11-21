@@ -23,6 +23,8 @@ import {ConversationDetailsViewModel} from 'src/script/view_model/panel/Conversa
 import {Conversation} from 'src/script/entity/Conversation';
 import {ConversationType} from 'src/script/conversation/ConversationType';
 
+import {TestFactory} from '../../../api/TestFactory';
+
 describe('ConversationDetailsViewModel', () => {
   const testFactory = new window.TestFactory();
   let conversationDetailsViewModel;

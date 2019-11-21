@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {viewportObserver} from '../ui/viewportObserver';
 
 class Image {

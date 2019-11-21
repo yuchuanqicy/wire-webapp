@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import {base64ToBlob} from 'Util/util';
 
 import {getFirstLinkWithOffset} from './LinkPreviewHelpers';

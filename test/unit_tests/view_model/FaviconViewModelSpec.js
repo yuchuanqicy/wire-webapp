@@ -17,6 +17,7 @@
  *
  */
 
+import {amplify} from 'amplify';
 import {WebAppEvents} from 'src/script/event/WebApp';
 
 describe('z.viewModel.FaviconViewModel', () => {
@@ -38,7 +39,7 @@ describe('z.viewModel.FaviconViewModel', () => {
     let dispatcher;
 
     beforeEach(() => {
-      dispatcher = Object.assign({}, window.amplify);
+      dispatcher = {...amplify};
       faviconViewModel = new z.viewModel.FaviconViewModel(dispatcher);
     });
 

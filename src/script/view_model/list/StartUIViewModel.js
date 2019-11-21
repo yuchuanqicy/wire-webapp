@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+import {amplify} from 'amplify';
 import {debounce} from 'underscore';
 
 import {getLogger} from 'Util/Logger';

@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {BasePanelViewModel} from './BasePanelViewModel';
 import {NOTIFICATION_STATE, getNotificationText} from '../../conversation/NotificationSetting';
 

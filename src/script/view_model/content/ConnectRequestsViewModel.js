@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {getLogger} from 'Util/Logger';
 import {scrollToBottom} from 'Util/scroll-helpers';
 import {isLastItem} from 'Util/ArrayUtil';

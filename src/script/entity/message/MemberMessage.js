@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {t, Declension, joinNames} from 'Util/LocalizerUtil';
 import {getFirstName} from 'Util/SanitizationUtil';
 import {capitalizeFirstChar} from 'Util/StringUtil';

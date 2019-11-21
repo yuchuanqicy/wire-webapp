@@ -17,6 +17,7 @@
  *
  */
 
+import ko from 'knockout';
 import {instantiateComponent} from '../../helper/knockoutHelpers';
 
 import 'src/script/components/icons';

@@ -27,6 +27,9 @@ import {arrayToBase64, createRandomUuid} from 'Util/util';
 import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 import {ClientEvent} from 'src/script/event/Client';
 
+import {TestFactory} from '../../api/TestFactory';
+import {entities} from '../../api/payloads';
+
 describe('CryptographyRepository', () => {
   const test_factory = new TestFactory();
 

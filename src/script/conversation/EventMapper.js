@@ -17,6 +17,7 @@
  *
  */
 
+import Raygun from 'raygun4js';
 import {LinkPreview, Mention} from '@wireapp/protocol-messaging';
 
 import {getLogger} from 'Util/Logger';

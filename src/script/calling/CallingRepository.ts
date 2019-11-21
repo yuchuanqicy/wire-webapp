@@ -164,7 +164,7 @@ export class CallingRepository {
     wCall.init(avsEnv);
     wCall.setUserMediaHandler(this.getCallMediaStream);
     wCall.setMediaStreamHandler(this.updateParticipantStream);
-    setInterval(() => wCall.poll(), 500);
+   window.setInterval(() => wCall.poll(), 500);
     return wCall;
   }
 
@@ -714,7 +714,7 @@ export class CallingRepository {
           This bug crashes the browser if the mediaStream is returned right away (probably some race condition in Chrome internal code)
           The timeout(0) fixes this issue.
         */
-        setTimeout(() => resolve(selfParticipant.getMediaStream()), 0);
+       window.setTimeout(() => resolve(selfParticipant.getMediaStream()), 0);
       });
     }
     const isGroup = call.conversationType === CONV_TYPE.GROUP;

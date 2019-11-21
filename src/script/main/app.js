@@ -17,7 +17,9 @@
  *
  */
 
+import {amplify} from 'amplify';
 import ko from 'knockout';
+import Raygun from 'raygun4js';
 import platform from 'platform';
 
 import {getLogger} from 'Util/Logger';

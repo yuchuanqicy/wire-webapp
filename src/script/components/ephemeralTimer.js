@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 class EphemeralTimer {
   constructor({message: messageEntity}) {
     this.started = messageEntity.ephemeral_started();

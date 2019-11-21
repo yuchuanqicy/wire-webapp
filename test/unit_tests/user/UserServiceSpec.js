@@ -17,7 +17,10 @@
  *
  */
 
+import sinon from 'sinon';
+
 import {backendConfig} from './../../api/testResolver';
+import {TestFactory} from '../../api/TestFactory';
 
 describe('UserService', () => {
   let server = null;

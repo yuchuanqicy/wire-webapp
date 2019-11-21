@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout';
+
 import {ParticipantAvatar} from 'Components/participantAvatar';
 
 ko.components.register('panel-service-details', {

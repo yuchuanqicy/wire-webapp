@@ -26,6 +26,8 @@ import {QuotedMessageMiddleware} from 'src/script/event/preprocessor/QuotedMessa
 import {QuoteEntity} from 'src/script/message/QuoteEntity';
 import {MessageHasher} from 'src/script/message/MessageHasher';
 
+import {TestFactory} from '../../api/TestFactory';
+
 describe('QuotedMessageMiddleware', () => {
   const testFactory = new TestFactory();
   let quotedMessageMiddleware;
