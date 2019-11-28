@@ -17,8 +17,8 @@
  *
  */
 
-import {Self} from '@wireapp/api-client/dist/commonjs/self';
-import {Config} from '../../config';
+import {Self} from '@wireapp/api-client/dist/self';
+import {Config} from '../../../Config';
 import {RootState} from '../reducer';
 
 const unsetSelf: Self = {

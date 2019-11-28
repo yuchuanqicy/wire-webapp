@@ -17,8 +17,8 @@
  *
  */
 
-import {LoginData} from '@wireapp/api-client/dist/commonjs/auth';
-import {ClientType} from '@wireapp/api-client/dist/commonjs/client/index';
+import {LoginData} from '@wireapp/api-client/dist/auth';
+import {ClientType} from '@wireapp/api-client/dist/client/index';
 import {
   ArrowIcon,
   COLOR,
@@ -42,13 +42,12 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {AnyAction, Dispatch} from 'redux';
 import useReactRouter from 'use-react-router';
-import {save} from 'Util/ephemeralValueStore';
 import {getLogger} from 'Util/Logger';
+import {Config} from '../../Config';
 import {loginStrings, logoutReasonStrings} from '../../strings';
 import AppAlreadyOpen from '../component/AppAlreadyOpen';
 import LoginForm from '../component/LoginForm';
 import RouterLink from '../component/RouterLink';
-import {Config} from '../config';
 import {externalRoute as EXTERNAL_ROUTE} from '../externalRoute';
 import {actionRoot as ROOT_ACTIONS} from '../module/action/';
 import {BackendError} from '../module/action/BackendError';
@@ -144,11 +143,6 @@ const Login = ({
       } else {
         await doLogin(login);
       }
-
-      // Save encrypted database key
-      const secretKey = new Uint32Array(64);
-      self.crypto.getRandomValues(secretKey);
-      await save(secretKey);
 
       return history.push(ROUTE.HISTORY_INFO);
     } catch (error) {

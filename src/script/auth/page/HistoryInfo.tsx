@@ -17,14 +17,14 @@
  *
  */
 
-import {ClientType} from '@wireapp/api-client/dist/commonjs/client';
+import {ClientType} from '@wireapp/api-client/dist/client';
 import {Button, ContainerXS, H1, Link, Paragraph} from '@wireapp/react-ui-kit';
 import React from 'react';
 import {FormattedHTMLMessage, useIntl} from 'react-intl';
 import {connect} from 'react-redux';
 import useReactRouter from 'use-react-router';
+import {Config} from '../../Config';
 import {historyInfoStrings} from '../../strings';
-import {Config} from '../config';
 import {externalRoute as EXTERNAL_ROUTE} from '../externalRoute';
 import {RootState} from '../module/reducer';
 import * as ClientSelector from '../module/selector/ClientSelector';
