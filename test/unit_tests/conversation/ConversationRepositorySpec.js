@@ -22,7 +22,6 @@ import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 
 import {createRandomUuid} from 'Util/util';
 
-import {backendConfig} from '../../api/testResolver';
 import {Conversation} from 'src/script/entity/Conversation';
 import {User} from 'src/script/entity/User';
 import {Message} from 'src/script/entity/message/Message';
@@ -52,7 +51,10 @@ import {File} from 'src/script/entity/message/File';
 import {ConnectionEntity} from 'src/script/connection/ConnectionEntity';
 import {ConnectionStatus} from 'src/script/connection/ConnectionStatus';
 import {MessageCategory} from 'src/script/message/MessageCategory';
+
 import {UserGenerator} from '../../helper/UserGenerator';
+import {backendConfig} from '../../api/testResolver';
+import {entities, payload} from '../../api/payloads';
 
 describe('ConversationRepository', () => {
   const test_factory = new TestFactory();

@@ -24,6 +24,8 @@ import {User} from 'src/script/entity/User';
 import {UserMapper} from 'src/script/user/UserMapper';
 import {serverTimeHandler} from 'src/script/time/serverTimeHandler';
 
+import {entities, payload} from '../../api/payloads';
+
 describe('User Mapper', () => {
   const mapper = new UserMapper(serverTimeHandler);
 

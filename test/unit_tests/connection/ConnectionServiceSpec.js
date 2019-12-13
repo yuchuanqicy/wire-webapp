@@ -17,8 +17,9 @@
  *
  */
 
-import {resolve, graph, backendConfig} from './../../api/testResolver';
+import {resolve, graph, backendConfig} from '../../api/testResolver';
 import {ConnectionService} from 'src/script/connection/ConnectionService';
+import {payload} from '../../api/payloads';
 
 describe('ConnectionService', () => {
   let server = null;

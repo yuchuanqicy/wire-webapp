@@ -17,13 +17,10 @@
  *
  */
 
-/* eslint no-undef: "off" */
-
 import ko from 'knockout';
 
 import 'src/script/main/globals';
 
-import {backendConfig, graph, resolve as resolveDependency} from './testResolver';
 import {CallingRepository} from 'src/script/calling/CallingRepository';
 import {serverTimeHandler} from 'src/script/time/serverTimeHandler';
 import {User} from 'src/script/entity/User';
@@ -61,12 +58,48 @@ import {MediaRepository} from 'src/script/media/MediaRepository';
 import {PermissionRepository} from 'src/script/permission/PermissionRepository';
 import {AuthRepository} from 'src/script/auth/AuthRepository';
 import {AuthService} from 'src/script/auth/AuthService';
+import {ClientService} from 'src/script/client/ClientService';
 
-window.testConfig = {
-  connection: backendConfig,
-};
+import {graph, resolve as resolveDependency} from './testResolver';
+import {entities} from './payloads';
 
-window.TestFactory = class TestFactory {
+declare global {
+  interface Window {
+    TestFactory: typeof TestFactory;
+  }
+}
+
+export class TestFactory {
+  static asset_service?: AssetService;
+  static auth_repository?: AuthRepository;
+  static backup_repository?: BackupRepository;
+  static backup_service?: BackupService;
+  static calling_repository?: CallingRepository;
+  static client_repository?: ClientRepository;
+  static client_service?: ClientService;
+  static connection_repository?: ConnectionRepository;
+  static connection_service?: ConnectionService;
+  static conversation_repository?: ConversationRepository;
+  static conversation_service?: ConversationService;
+  static cryptography_repository?: CryptographyRepository;
+  static cryptography_service?: CryptographyService;
+  static event_repository?: EventRepository;
+  static event_service_no_compound?: EventServiceNoCompound;
+  static event_service?: EventService;
+  static lifecycle_repository?: any;
+  static lifecycle_service?: any;
+  static notification_repository?: NotificationRepository;
+  static notification_service?: NotificationService;
+  static propertyRepository?: PropertiesRepository;
+  static search_repository?: SearchRepository;
+  static storage_repository?: StorageRepository;
+  static storage_service?: StorageService;
+  static team_repository?: TeamRepository;
+  static tracking_repository?: EventTrackingRepository;
+  static user_repository?: UserRepository;
+  static user_service?: UserService;
+  static web_socket_service?: WebSocketService;
+
   /**
    * @returns {Promise<AuthRepository>} The authentication repository.
    */
@@ -187,7 +220,6 @@ window.TestFactory = class TestFactory {
 
     TestFactory.web_socket_service = new WebSocketService(
       resolveDependency(graph.BackendClient),
-      TestFactory.storage_service,
     );
     TestFactory.event_service = new EventService(TestFactory.storage_service);
     TestFactory.event_service_no_compound = new EventServiceNoCompound(TestFactory.storage_service);
@@ -310,6 +342,7 @@ window.TestFactory = class TestFactory {
       TestFactory.team_repository,
       TestFactory.user_repository,
       TestFactory.propertyRepository,
+      undefined,
     );
 
     return TestFactory.conversation_repository;
@@ -366,9 +399,9 @@ window.TestFactory = class TestFactory {
    */
   async exposeLifecycleActors() {
     await this.exposeUserActors();
-    TestFactory.lifecycle_service = new z.lifecycle.LifecycleService();
+    TestFactory.lifecycle_service = new (z as any).lifecycle.LifecycleService();
 
-    TestFactory.lifecycle_repository = new z.lifecycle.LifecycleRepository(
+    TestFactory.lifecycle_repository = new (z as any).lifecycle.LifecycleRepository(
       TestFactory.lifecycle_service,
       TestFactory.user_repository,
     );
@@ -376,15 +409,23 @@ window.TestFactory = class TestFactory {
   }
 };
 
-const actorsCache = new Map();
+window.TestFactory = TestFactory;
+
+const actorsCache = new Map<any, any>();
+
+interface ParameterlessConstructor<T> {
+  new (...dependencies: any[]): T;
+}
 
 /**
  * Will instantiate a service only once (uses the global actorsCache to store instances)
- * @param {Constructor} Service - the service to instantiate
- * @param {any} ...dependencies - the dependencies required by the service
- * @returns {Object} the instantiated service
+ * @param service the service to instantiate
+ * @param dependencies the dependencies required by the service
+ * @returns the instantiated service
  */
-function singleton(Service, ...dependencies) {
-  actorsCache[Service] = actorsCache[Service] || new Service(...dependencies);
-  return actorsCache[Service];
+function singleton<T>(service: ParameterlessConstructor<T>, ...dependencies: any[]): T {
+  if (!actorsCache.has(service)) {
+    actorsCache.set(service, new service(...dependencies))
+  }
+  return actorsCache.get(service);
 }

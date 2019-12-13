@@ -67,6 +67,7 @@ class User {
     this.providerId = undefined;
     this.serviceId = undefined;
     this.providerName = ko.observable(undefined);
+    this.locale = undefined;
 
     this.joaatHash = -1;
 

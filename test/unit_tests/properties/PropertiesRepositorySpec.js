@@ -17,7 +17,7 @@
  *
  */
 
-import {resolve, graph} from './../../api/testResolver';
+import {resolve, graph} from '../../api/testResolver';
 import {PropertiesRepository} from 'src/script/properties/PropertiesRepository';
 import {PropertiesService} from 'src/script/properties/PropertiesService';
 import {SelfService} from 'src/script/self/SelfService';

@@ -19,7 +19,7 @@
 
 import UUID from 'uuidjs';
 
-import {resolve as resolveDependency, graph} from './../../api/testResolver';
+import {resolve as resolveDependency, graph} from '../../api/testResolver';
 import {AssetUploader} from 'src/script/assets/AssetUploader';
 import {AssetService} from 'src/script/assets/AssetService';
 

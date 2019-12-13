@@ -17,7 +17,7 @@
  *
  */
 
-import {resolve, graph} from './../../api/testResolver';
+import {resolve, graph} from '../../api/testResolver';
 import UUID from 'uuidjs';
 import {RichProfileRepository} from 'src/script/user/RichProfileRepository';
 

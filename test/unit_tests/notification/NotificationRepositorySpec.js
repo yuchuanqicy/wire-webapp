@@ -57,6 +57,8 @@ import {MentionEntity} from 'src/script/message/MentionEntity';
 import {ConnectionMapper} from 'src/script/connection/ConnectionMapper';
 import {ContentViewModel} from 'src/script/view_model/ContentViewModel';
 
+import {payload, entities} from '../../api/payloads';
+
 window.wire = window.wire || {};
 window.wire.app = window.wire.app || {};
 

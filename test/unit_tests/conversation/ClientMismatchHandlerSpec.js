@@ -18,12 +18,13 @@
  */
 
 import {GenericMessage, Text} from '@wireapp/protocol-messaging';
-import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 
 import {createRandomUuid} from 'Util/util';
 
+import {GENERIC_MESSAGE_TYPE} from 'src/script/cryptography/GenericMessageType';
 import {Conversation} from 'src/script/entity/Conversation';
 import {EventInfoEntity} from 'src/script/conversation/EventInfoEntity';
+import {entities} from '../../api/payloads';
 
 describe('ClientMismatchHandler', () => {
   const testFactory = new TestFactory();

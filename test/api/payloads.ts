@@ -17,16 +17,14 @@
  *
  */
 
-/* eslint no-undef: "off", sort-keys: "off" */
-
-window.lorem_ipsum =
+export const lorem_ipsum: string =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-window.entities = {
+const entities = {
   picture: [
     {
       content_length: 26466,
-      data: null,
+      data: null as null,
       content_type: 'image/jpeg',
       id: '6cb67e89-d48a-50e2-88f1-1733fff5c119',
       info: {
@@ -34,7 +32,7 @@ window.entities = {
         tag: 'smallProfile',
         original_width: 1886,
         width: 280,
-        name: null,
+        name: null as null,
         correlation_id: '0d095659-68b7-477e-a7d2-7cecd876617f',
         original_height: 1333,
         nonce: '0d095659-68b7-477e-a7d2-7cecd876617f',
@@ -79,7 +77,7 @@ window.entities = {
         status_time: '2015-01-13T10:41:55.032Z',
         status_ref: '0.0',
         id: 'd5a39ffb-6ce3-4cc8-9048-0e15d031b4c5',
-        archived: null,
+        archived: null as null,
       },
       others: [
         {
@@ -107,52 +105,51 @@ window.entities = {
     last_event: '1.800122000a4b6e15',
     team: '537992e5-3782-4b6c-8718-a5db2cc786ee',
   },
-};
-
-entities.clients = {
-  john_doe: {
-    permanent: {
-      cookie: 'webapp@2153234453@permanent@1458071394172',
-      time: '2016-03-15T19:59:20.278Z',
-      location: {
-        lat: 52.5233,
-        lon: 13.4138,
+  clients: {
+    john_doe: {
+      permanent: {
+        cookie: 'webapp@2153234453@permanent@1458071394172',
+        time: '2016-03-15T19:59:20.278Z',
+        location: {
+          lat: 52.5233,
+          lon: 13.4138,
+        },
+        address: '62.96.148.44',
+        model: 'Chrome',
+        id: '93fa36b916a91118',
+        type: 'permanent',
+        class: 'desktop',
+        label: 'Windows 10',
       },
-      address: '62.96.148.44',
-      model: 'Chrome',
-      id: '93fa36b916a91118',
-      type: 'permanent',
-      class: 'desktop',
-      label: 'Windows 10',
-    },
-    plain: {
-      class: 'desktop',
-      id: '93fa36b916a91118',
-    },
-    temporary: {
-      cookie: 'webapp@2153234453@temporary@1458070104403',
-      time: '2016-03-15T19:28:25.685Z',
-      location: {
-        lat: 52.5233,
-        lon: 13.4138,
+      plain: {
+        class: 'desktop',
+        id: '93fa36b916a91118',
       },
-      address: '62.96.148.44',
-      model: 'Chrome (Temporary)',
-      id: '9d1b37cab836df45',
-      type: 'temporary',
-      class: 'desktop',
-      label: 'Windows 10',
+      temporary: {
+        cookie: 'webapp@2153234453@temporary@1458070104403',
+        time: '2016-03-15T19:28:25.685Z',
+        location: {
+          lat: 52.5233,
+          lon: 13.4138,
+        },
+        address: '62.96.148.44',
+        model: 'Chrome (Temporary)',
+        id: '9d1b37cab836df45',
+        type: 'temporary',
+        class: 'desktop',
+        label: 'Windows 10',
+      },
+    },
+    jane_roe: {
+      plain: {
+        class: 'phone',
+        id: '2b22b7c59aab5f8',
+      },
     },
   },
-  jane_roe: {
-    plain: {
-      class: 'phone',
-      id: '2b22b7c59aab5f8',
-    },
-  },
 };
 
-entities.user = {
+const user = {
   john_doe: {
     email: 'jd@wire.com',
     phone: '+49177123456',
@@ -164,7 +161,7 @@ entities.user = {
   },
   jane_roe: {
     email: 'jr@wire.com',
-    phone: null,
+    phone: null as null,
     accent_id: 1,
     picture: entities.picture,
     name: 'Jane Roe',
@@ -173,7 +170,9 @@ entities.user = {
   },
 };
 
-window.payload = {
+const mergedEntities = {...entities, user}
+
+export const payload = {
   clients: {
     get: {
       one: entities.clients.john_doe.permanent,
@@ -254,7 +253,7 @@ window.payload = {
             email: 'jd@wire.com',
             connected: false,
             total_mutual_friends: 0,
-            mutual_friends: [],
+            mutual_friends: [] as any[],
             weight: 2399,
             accent_id: 4,
             name: 'John Doe',
@@ -280,12 +279,14 @@ window.payload = {
     },
   },
   self: {
-    get: entities.user.john_doe,
+    get: mergedEntities.user.john_doe,
   },
   users: {
     get: {
-      one: [entities.user.john_doe],
-      many: [entities.user.john_doe, entities.user.jane_roe],
+      one: [mergedEntities.user.john_doe],
+      many: [mergedEntities.user.john_doe, mergedEntities.user.jane_roe],
     },
   },
 };
+
+export {mergedEntities as entities}

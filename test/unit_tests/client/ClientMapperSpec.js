@@ -20,6 +20,8 @@
 import {ClientType} from 'src/script/client/ClientType';
 import {ClientMapper} from 'src/script/client/ClientMapper';
 
+import {entities, payload} from '../../api/payloads';
+
 describe('ClientMapper', () => {
   describe('mapClient', () => {
     it('can map a permanent client payload from the backend', () => {

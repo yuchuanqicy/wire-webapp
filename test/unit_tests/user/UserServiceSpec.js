@@ -17,7 +17,8 @@
  *
  */
 
-import {backendConfig} from './../../api/testResolver';
+import {backendConfig} from '../../api/testResolver';
+import {payload} from '../../api/payloads';
 
 describe('UserService', () => {
   let server = null;

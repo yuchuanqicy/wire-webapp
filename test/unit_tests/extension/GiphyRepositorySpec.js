@@ -17,7 +17,7 @@
  *
  */
 
-import {resolve, graph, backendConfig} from './../../api/testResolver';
+import {resolve, graph, backendConfig} from '../../api/testResolver';
 import {GiphyRepository} from 'src/script/extension/GiphyRepository';
 import {GiphyService} from 'src/script/extension/GiphyService';
 

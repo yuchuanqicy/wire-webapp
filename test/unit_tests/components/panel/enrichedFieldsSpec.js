@@ -17,8 +17,9 @@
  *
  */
 
-import {instantiateComponent} from '../../../helper/knockoutHelpers';
 import UUID from 'uuidjs';
+
+import {instantiateComponent} from '../../../helper/knockoutHelpers';
 import {resolve, graph} from '../../../api/testResolver';
 
 import 'src/script/components/panel/enrichedFields';

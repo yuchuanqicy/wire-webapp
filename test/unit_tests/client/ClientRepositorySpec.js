@@ -24,6 +24,7 @@ import {ClientRepository} from 'src/script/client/ClientRepository';
 import {ClientType} from 'src/script/client/ClientType';
 import {ClientEntity} from 'src/script/client/ClientEntity';
 import {ClientMapper} from 'src/script/client/ClientMapper';
+import {entities} from '../../api/payloads';
 
 describe('ClientRepository', () => {
   const testFactory = new TestFactory();
