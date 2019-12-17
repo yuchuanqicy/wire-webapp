@@ -22,7 +22,7 @@ import {TIME_IN_MILLIS} from 'Util/TimeUtil';
 
 import {BackendClientError} from '../error/BackendClientError';
 
-import {AccessTokenData, LoginData} from '@wireapp/api-client/dist/auth';
+import {AccessTokenData} from '@wireapp/api-client/dist/auth';
 import {BackendClient} from '../service/BackendClient';
 import {QUEUE_STATE} from '../service/QueueState';
 
@@ -46,13 +46,6 @@ export class AuthService {
   constructor(backendClient: any) {
     this.backendClient = backendClient;
     this.logger = getLogger('AuthService');
-  }
-
-  getCookies(): Promise<string[]> {
-    return this.backendClient.sendRequest({
-      type: 'GET',
-      url: AuthService.CONFIG.URL_COOKIES,
-    });
   }
 
   /**
@@ -131,60 +124,6 @@ export class AuthService {
       };
 
       $.ajax(ajaxConfig);
-    });
-  }
-
-  validatePassword(password: string): Promise<void> {
-    return this.backendClient.sendJson({
-      data: {
-        password: password,
-      },
-      type: 'POST',
-      url: `${AuthService.CONFIG.URL_COOKIES}/remove`,
-    });
-  }
-
-  postCookiesRemove(email: string, password: string, labels: string[]): Promise<void> {
-    return this.backendClient.sendJson({
-      data: {
-        email: email,
-        labels: labels,
-        password: password,
-      },
-      type: 'POST',
-      url: `${AuthService.CONFIG.URL_COOKIES}/remove`,
-    });
-  }
-
-  postLogin(login: LoginData, persist: boolean): Promise<AccessTokenData> {
-    const persistParam = encodeURIComponent(persist.toString());
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        crossDomain: true,
-        data: JSON.stringify(login),
-        processData: false,
-        type: 'POST',
-        url: this.backendClient.createUrl(`${AuthService.CONFIG.URL_LOGIN}?persist=${persistParam}`),
-        xhrFields: {
-          withCredentials: true,
-        },
-      })
-        .done(resolve)
-        .fail((jqXHR, textStatus, errorThrown) => reject(jqXHR.responseJSON || errorThrown));
-    });
-  }
-
-  postLoginSend(requestCode: {
-    force: number;
-    phone: string;
-  }): Promise<{
-    expires_in: number;
-  }> {
-    return this.backendClient.sendJson({
-      data: requestCode,
-      type: 'POST',
-      url: `${AuthService.CONFIG.URL_LOGIN}/send`,
     });
   }
 

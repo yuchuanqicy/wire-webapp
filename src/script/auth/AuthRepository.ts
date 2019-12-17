@@ -17,14 +17,14 @@
  *
  */
 
-import {AccessTokenData, LoginData} from '@wireapp/api-client/dist/auth';
+import {AccessTokenData} from '@wireapp/api-client/dist/auth';
 import {amplify} from 'amplify';
 import ko from 'knockout';
 import {Logger} from 'logdown';
 
 import {Environment} from 'Util/Environment';
 import {getLogger} from 'Util/Logger';
-import {loadValue, resetStoreValue, storeValue} from 'Util/StorageUtil';
+import {loadValue, storeValue} from 'Util/StorageUtil';
 import {TIME_IN_MILLIS, formatTimestamp} from 'Util/TimeUtil';
 import {WebAppEvents} from '../event/WebApp';
 import {QUEUE_STATE} from '../service/QueueState';
@@ -72,15 +72,6 @@ export class AuthRepository {
     amplify.subscribe(WebAppEvents.CONNECTION.ACCESS_TOKEN.RENEW, this.renewAccessToken.bind(this));
   }
 
-  login(login: LoginData, persist: boolean): Promise<AccessTokenData> {
-    return this.authService.postLogin(login, persist).then(accessTokenResponse => {
-      this.saveAccessToken(accessTokenResponse);
-      storeValue(StorageKey.AUTH.PERSIST, persist);
-      storeValue(StorageKey.AUTH.SHOW_LOGIN, true);
-      return accessTokenResponse;
-    });
-  }
-
   logout(): Promise<void> {
     return this.authService
       .postLogout()
@@ -88,11 +79,7 @@ export class AuthRepository {
       .catch(error => this.logger.warn(`Log out on backend failed: ${error.message}`, error));
   }
 
-  requestLoginCode(requestCode: {force: number; phone: string}): Promise<{expires_in: number}> {
-    return this.authService.postLoginSend(requestCode);
-  }
-
-  renewAccessToken(renewalTrigger: string): void {
+  private renewAccessToken(renewalTrigger: string): void {
     const isRefreshingToken = this.queueState() === QUEUE_STATE.ACCESS_TOKEN_REFRESH;
 
     if (!isRefreshingToken) {
@@ -121,13 +108,6 @@ export class AuthRepository {
     }
   }
 
-  deleteAccessToken(): void {
-    resetStoreValue(StorageKey.AUTH.ACCESS_TOKEN.VALUE);
-    resetStoreValue(StorageKey.AUTH.ACCESS_TOKEN.EXPIRATION);
-    resetStoreValue(StorageKey.AUTH.ACCESS_TOKEN.TTL);
-    resetStoreValue(StorageKey.AUTH.ACCESS_TOKEN.TYPE);
-  }
-
   getCachedAccessToken(): Promise<void> {
     return new Promise((resolve, reject) => {
       const accessToken = loadValue<string>(StorageKey.AUTH.ACCESS_TOKEN.VALUE);
@@ -148,7 +128,7 @@ export class AuthRepository {
     return this.authService.postAccess().then(accessToken => this.saveAccessToken(accessToken));
   }
 
-  saveAccessToken(accessTokenResponse: AccessTokenData): AccessTokenData {
+  private saveAccessToken(accessTokenResponse: AccessTokenData): AccessTokenData {
     const {access_token: accessToken, expires_in: expiresIn, token_type: accessTokenType} = accessTokenResponse;
     const expiresInMillis = expiresIn * TIME_IN_MILLIS.SECOND;
     const expirationTimestamp = Date.now() + expiresInMillis;
