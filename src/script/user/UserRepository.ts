@@ -93,13 +93,13 @@ export class UserRepository {
   private readonly teamUsers: ko.ObservableArray<User>;
   private readonly user_mapper: UserMapper;
   private readonly user_service: UserService;
-  private readonly users: ko.ObservableArray<User>;
   private should_set_username: boolean;
   readonly connect_requests: ko.PureComputed<User[]>;
   readonly isActivatedAccount: ko.PureComputed<boolean>;
   readonly isTemporaryGuest: ko.PureComputed<boolean>;
   readonly number_of_contacts: ko.PureComputed<number>;
   readonly self: ko.Observable<User>;
+  readonly users: ko.ObservableArray<User>;
 
   // tslint:disable-next-line:typedef
   static get CONFIG() {

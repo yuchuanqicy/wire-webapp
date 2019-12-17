@@ -72,7 +72,9 @@ export class Conversation {
 
     this.is_loaded = ko.observable(false);
     this.is_pending = ko.observable(false);
+    this.needsLegalHoldApproval = false;
 
+    /** @type {ko.ObservableArray<User>} */
     this.participating_user_ets = ko.observableArray([]); // Does not include self user
     this.participating_user_ids = ko.observableArray([]); // Does not include self user
     this.selfUser = ko.observable();
@@ -418,7 +420,7 @@ export class Conversation {
    * Set the timestamp of a given type.
    * @note This will only increment timestamps
    * @param {string|number} timestamp - Timestamp to be set
-   * @param {Conversation.TIMESTAMP_TYPE} type - Type of timestamp to be updated
+   * @param {string} type - Type of timestamp to be updated
    * @param {boolean} forceUpdate - set the timestamp regardless of previous timestamp value (no checks)
    * @returns {boolean|number} Timestamp value which can be 'false' (boolean) if there is no timestamp
    */

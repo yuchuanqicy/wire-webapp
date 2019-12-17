@@ -17,6 +17,8 @@
  *
  */
 
+import ko from 'knockout'
+
 import {getLogger} from 'Util/Logger';
 import {Environment} from 'Util/Environment';
 import {t} from 'Util/LocalizerUtil';
@@ -56,6 +58,7 @@ export class TeamRepository {
     /** Note: this does not include the self user */
     this.teamMembers = ko.pureComputed(() => (this.isTeam() ? this.team().members() : []));
     this.memberRoles = ko.observable({});
+    /** @type {ko.Observable<any>} */
     this.memberInviters = ko.observable({});
 
     this.isSelfConnectedTo = userId => {

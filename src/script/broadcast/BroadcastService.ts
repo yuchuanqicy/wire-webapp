@@ -47,7 +47,7 @@ export class BroadcastService {
    *
    * @param payload Payload to be posted
    * @param preconditionOption Level that backend checks for missing clients
-   * @returnsPromise that resolves when the message was sent
+   * @returns Resolves when the message was sent
    */
   postBroadcastMessage(
     payload: {recipients: {}; sender: string},

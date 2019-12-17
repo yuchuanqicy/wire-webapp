@@ -722,7 +722,6 @@ export class NotificationRepository {
    * Plays the sound from the audio repository.
    *
    * @param messageEntity Message entity
-   * @param No return value
    */
   private notifySound(messageEntity: Message): void {
     const muteSound = !document.hasFocus() && Environment.browser.firefox && Environment.os.mac;

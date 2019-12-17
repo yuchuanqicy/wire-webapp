@@ -69,8 +69,8 @@ export class BackendClient {
   private readonly connectivityQueue: PromiseQueue;
   private readonly logger: Logger;
   private readonly numberOfRequests: ko.Observable<number>;
-  private readonly queueState: ko.Observable<string>;
   private readonly requestQueue: PromiseQueue;
+  public readonly queueState: ko.Observable<string>;
   public accessToken: string;
   public restUrl: string;
   public webSocketUrl: string;

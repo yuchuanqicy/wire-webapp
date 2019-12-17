@@ -41,7 +41,7 @@ import {BaseError} from '../error/BaseError';
  * @property {number=} message_timer
  * @property {string=} name
  * @property {string=} team
- * @property {number} type
+ * @property {number=} type
  */
 
 /**
@@ -97,7 +97,7 @@ export class ConversationMapper {
   /**
    * Converts JSON conversations into conversation entities.
    *
-   * @param {Array} conversationsData - Conversation data
+   * @param {Array<import('@wireapp/api-client/dist/conversation/Conversation').Conversation>} conversationsData - Conversation data
    * @param {number} [timestamp=1] - Initial timestamp for conversation
    * @returns {Array<Conversation>} Mapped conversation entities
    */
@@ -143,7 +143,7 @@ export class ConversationMapper {
    * Update the membership properties of a conversation.
    *
    * @param {Conversation} conversationEntity - Conversation to be updated
-   * @param {SelfStatusUpdate} selfState - Conversation self data from the database
+   * @param {any} selfState - Conversation self data from the database
    * @param {boolean} [disablePersistence=false] - Disable persistence of state changes during update
    * @returns {Conversation} Updated conversation entity
    */

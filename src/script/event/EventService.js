@@ -201,7 +201,7 @@ export class EventService {
    * @param {string} conversationId - ID of conversation
    * @param {Date} fromDate - Load until this date (excluded)
    * @param {number} [limit=Number.MAX_SAFE_INTEGER] - Amount of events to load
-   * @param {number} [includeFrom=true] - Should upper bound be part of the messages
+   * @param {boolean} [includeFrom=true] - Should upper bound be part of the messages
    * @returns {Promise} Resolves with the retrieved records
    */
   async loadFollowingEvents(conversationId, fromDate, limit = Number.MAX_SAFE_INTEGER, includeFrom = true) {

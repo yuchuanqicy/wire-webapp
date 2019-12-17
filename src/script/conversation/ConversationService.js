@@ -118,7 +118,7 @@ export class ConversationService {
    * @see https://staging-nginz-https.zinfra.io/swagger-ui/#!/conversations/conversation
    *
    * @param {string} conversation_id - ID of conversation to get
-   * @returns {Promise} Resolves with the server response
+   * @returns {Promise<import('@wireapp/api-client/dist/conversation/Conversation').Conversation>} Resolves with the server response
    */
   get_conversation_by_id(conversation_id) {
     return this.backendClient.sendRequest({
@@ -167,7 +167,7 @@ export class ConversationService {
    * @see https://staging-nginz-https.zinfra.io/swagger-ui/#!/conversations/updateConversationMessageTimer
    *
    * @param {string} conversationId - ID of conversation to rename
-   * @param {number} receiptMode - new receipt mode
+   * @param {ReceiptMode} receiptMode - new receipt mode
    * @returns {Promise} Resolves with the server response
    */
   updateConversationReceiptMode(conversationId, receiptMode) {
@@ -429,7 +429,7 @@ export class ConversationService {
 
   /**
    * Get active conversations from database.
-   * @returns {Promise} Resolves with active conversations
+   * @returns {Promise<string[]>} Resolves with active conversations
    */
   async get_active_conversations_from_db() {
     const min_date = new Date();
