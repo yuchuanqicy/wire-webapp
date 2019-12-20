@@ -80,7 +80,7 @@ after_success:
 
 # https://github.com/travis-ci/dpl#elastic-beanstalk
 deploy:
-  # https://wire-webapp-avs.zinfra.io/
+  # AVS: https://wire-webapp-avs.zinfra.io/
   - provider: elasticbeanstalk
     skip_cleanup: true
     zip-file: 'server/dist/s3/ebs.zip'
@@ -96,6 +96,7 @@ deploy:
       repo: wireapp/wire-webapp
       branch: avs
       condition: $DISTRIBUTION = wire
+
   # Stage 1: https://wire-webapp-edge.zinfra.io/
   - provider: elasticbeanstalk
     skip_cleanup: true
