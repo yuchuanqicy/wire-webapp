@@ -17,29 +17,19 @@
  *
  */
 
-export class BasePanelViewModel {
-  constructor({isVisible, navigateTo, onClose, onGoBack, onGoToRoot, repositories}) {
-    this.onClose = onClose;
-    this.onGoBack = onGoBack;
-    this.onGoToRoot = onGoToRoot;
-    this.navigateTo = navigateTo;
+import ko from 'knockout';
+import {Router} from './Router';
 
-    this.isVisible = isVisible;
+export function initRouterBindings(routerInstance: Router): void {
+  ko.bindingHandlers.link_to = {
+    init(element: Node, valueAccessor): void {
+      const navigate = (event: Event) => {
+        routerInstance.navigate(valueAccessor());
+        event.preventDefault();
+      };
+      element.addEventListener('click', navigate);
 
-    this.activeConversation = repositories.conversation.active_conversation;
-  }
-
-  initView() {}
-
-  getElementId() {
-    return 'conversation-details';
-  }
-
-  getEntityId() {
-    return this.activeConversation() ? this.activeConversation().id : false;
-  }
-
-  shouldSkipTransition() {
-    return false;
-  }
+      ko.utils.domNodeDisposal.addDisposeCallback(element, () => element.removeEventListener('click', navigate));
+    },
+  };
 }
