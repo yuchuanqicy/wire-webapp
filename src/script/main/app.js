@@ -391,6 +391,9 @@ class App {
       loadingView.updateProgress(5, t('initReceivedSelfUser', userRepository.self().first_name()));
       telemetry.time_step(AppInitTimingsStep.RECEIVED_SELF_USER);
       const clientEntity = await this._initiateSelfUserClients();
+
+      this.apiClient.getClient().context.clientId = clientEntity.id;
+
       const selfUser = userRepository.self();
       callingRepository.initAvs(selfUser, clientEntity.id);
       loadingView.updateProgress(7.5, t('initValidatedClient'));
@@ -481,11 +484,11 @@ class App {
    */
   onInternetConnectionGained() {
     this.logger.info('Internet connection regained. Re-establishing WebSocket connection...');
-    this.backendClient.executeOnConnectivity(BackendClient.CONNECTIVITY_CHECK_TRIGGER.CONNECTION_REGAINED).then(() => {
-      amplify.publish(WebAppEvents.WARNING.DISMISS, WarningsViewModel.TYPE.NO_INTERNET);
-      amplify.publish(WebAppEvents.WARNING.SHOW, WarningsViewModel.TYPE.CONNECTIVITY_RECONNECT);
-      this.repository.event.reconnectWebSocket(WebSocketService.CHANGE_TRIGGER.ONLINE);
-    });
+    // this.backendClient.executeOnConnectivity(BackendClient.CONNECTIVITY_CHECK_TRIGGER.CONNECTION_REGAINED).then(() => {
+    amplify.publish(WebAppEvents.WARNING.DISMISS, WarningsViewModel.TYPE.NO_INTERNET);
+    amplify.publish(WebAppEvents.WARNING.SHOW, WarningsViewModel.TYPE.CONNECTIVITY_RECONNECT);
+    this.repository.event.reconnectWebSocket(WebSocketService.CHANGE_TRIGGER.ONLINE);
+    // });
   }
 
   /**

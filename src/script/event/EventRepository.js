@@ -208,7 +208,7 @@ export class EventRepository {
    * @returns {undefined} No return value
    */
   disconnectWebSocket(trigger) {
-    this.webSocketService.reset(trigger);
+    // this.webSocketService.reset(trigger);
   }
 
   /**
@@ -218,7 +218,7 @@ export class EventRepository {
    */
   reconnectWebSocket(trigger) {
     this.notificationHandlingState(NOTIFICATION_HANDLING_STATE.RECOVERY);
-    this.webSocketService.reconnect(trigger);
+    // this.webSocketService.reconnect(trigger);
   }
 
   /**
@@ -292,7 +292,8 @@ export class EventRepository {
           limit,
         );
         return _gotNotifications(notificationList);
-      } catch (errorResponse) {
+      } catch (axiosError) {
+        const errorResponse = axiosError.response?.data || axiosError;
         // When asking for /notifications with a `since` set to a notification ID that the backend doesn't know of (because it does not belong to our client or it is older than the lifetime of the notification stream),
         // we will receive a HTTP 404 status code with a `notifications` payload
         // TODO: In the future we should ask the backend for the last known notification id (HTTP GET /notifications/{id}) instead of using the "errorResponse.notifications" payload
