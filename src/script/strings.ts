@@ -59,14 +59,6 @@ export const indexStrings = defineMessages({
     defaultMessage: 'create a team',
     id: 'index.createTeam',
   },
-  login: {
-    defaultMessage: 'Log in',
-    id: 'index.login',
-  },
-  loginInfo: {
-    defaultMessage: 'Already have an account?',
-    id: 'index.loginInfo',
-  },
 });
 
 export const teamNameStrings = defineMessages({
@@ -553,10 +545,6 @@ export const errorHandlerStrings = defineMessages({
   [BackendError.LABEL.SSO_NO_MATCHING_AUTH]: {
     defaultMessage: 'Something went wrong. Please contact your team administrator for details (Error 9).',
     id: 'BackendError.LABEL.SSO_NO_MATCHING_AUTH',
-  },
-  [BackendError.LABEL.SSO_NO_SSO_CODE]: {
-    defaultMessage: 'No SSO access code detected',
-    id: 'BackendError.LABEL.NO_SSO_CODE',
   },
   [BackendError.LABEL.SSO_NOT_FOUND]: {
     defaultMessage: 'Something went wrong. Please contact your team administrator for details (Error 7).',
