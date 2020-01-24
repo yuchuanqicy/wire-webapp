@@ -610,7 +610,7 @@ export const validationErrorStrings = defineMessages({
     id: 'ValidationError.FIELD.PASSWORD_LOGIN.PATTERN_MISMATCH',
   },
   [ValidationError.FIELD.SSO_LOGIN.PATTERN_MISMATCH]: {
-    defaultMessage: 'Invalid code',
+    defaultMessage: 'Invalid code or email',
     id: 'ValidationError.FIELD.SSO_LOGIN.PATTERN_MISMATCH',
   },
   [ValidationError.FIELD.EMAIL.TYPE_MISMATCH]: {
@@ -659,9 +659,9 @@ export const loginStrings = defineMessages({
 });
 
 export const ssoLoginStrings = defineMessages({
-  codeInputPlaceholder: {
+  codeOrMailInputPlaceholder: {
     defaultMessage: 'SSO Code',
-    id: 'ssoLogin.codeInputPlaceholder',
+    id: 'ssoLogin.codeOrMailInputPlaceholder',
   },
   headline: {
     defaultMessage: 'Company log in',

@@ -18,6 +18,7 @@
  */
 
 import {ClientType} from '@wireapp/api-client/dist/client/index';
+import {PATTERN, isValidEmail} from '@wireapp/commons/dist/commonjs/util/ValidationUtil';
 import {
   ArrowIcon,
   Checkbox,
@@ -43,7 +44,6 @@ import * as ClientSelector from '../module/selector/ClientSelector';
 import {ROUTE} from '../route';
 import {isDesktopApp} from '../Runtime';
 import {parseError, parseValidationErrors} from '../util/errorUtil';
-import {UUID_REGEX} from '../util/stringUtil';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   doLogin: (code: string) => Promise<void>;
@@ -60,28 +60,29 @@ const SingleSignOnForm = ({
   validateSSOCode,
   doLogin,
   doFinalizeSSOLogin,
+  doSendNavigationEvent,
 }: Props & ConnectedProps & DispatchProps) => {
-  const codeInput = useRef<HTMLInputElement>();
-  const [code, setCode] = useState('');
+  const codeOrMailInput = useRef<HTMLInputElement>();
+  const [codeOrMail, setCodeOrMail] = useState('');
   const {formatMessage: _} = useIntl();
   const {history} = useReactRouter();
   const [persist, setPersist] = useState(true);
   const [ssoError, setSsoError] = useState(null);
-  const [isCodeInputValid, setIsCodeInputValid] = useState(true);
+  const [isCodeOrMailInputValid, setIsCodeOrMailInputValid] = useState(true);
   const [validationError, setValidationError] = useState();
 
   useEffect(() => {
-    if (initialCode && initialCode !== code) {
-      setCode(initialCode);
+    if (initialCode && initialCode !== codeOrMail) {
+      setCodeOrMail(initialCode);
     }
   }, [initialCode]);
 
-  // Automatically submit if code is set via url
+  // Automatically submit if codeOrMail is set via url
   useEffect(() => {
-    if (initialCode === code) {
+    if (initialCode === codeOrMail) {
       handleSubmit();
     }
-  }, [code]);
+  }, [codeOrMail]);
 
   const handleSubmit = async (event?: React.FormEvent): Promise<void> => {
     if (event) {
@@ -91,24 +92,34 @@ const SingleSignOnForm = ({
     if (isFetching) {
       return;
     }
-    codeInput.current.value = codeInput.current.value.trim();
-    const currentValidationError = codeInput.current.checkValidity()
+    codeOrMailInput.current.value = codeOrMailInput.current.value.trim();
+    const currentValidationError = codeOrMailInput.current.checkValidity()
       ? null
-      : ValidationError.handleValidationState(codeInput.current.name, codeInput.current.validity);
+      : ValidationError.handleValidationState(codeOrMailInput.current.name, codeOrMailInput.current.validity);
 
     setValidationError(currentValidationError);
-    setIsCodeInputValid(codeInput.current.validity.valid);
+    setIsCodeOrMailInputValid(codeOrMailInput.current.validity.valid);
 
     try {
       if (currentValidationError) {
         throw currentValidationError;
       }
-      const strippedCode = stripPrefix(code);
-      await validateSSOCode(strippedCode);
-      await doLogin(strippedCode);
-      const clientType = persist ? ClientType.PERMANENT : ClientType.TEMPORARY;
-      await doFinalizeSSOLogin({clientType});
-      history.push(ROUTE.HISTORY_INFO);
+      if (isValidEmail(codeOrMail)) {
+        // TODO fetch domain info - redirect to the current host for testing purposes
+        const customWebappUrl = `${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ''}`;
+        if (isDesktopApp()) {
+          await doSendNavigationEvent(customWebappUrl);
+        } else {
+          window.location.assign(customWebappUrl);
+        }
+      } else {
+        const strippedCode = stripPrefix(codeOrMail);
+        await validateSSOCode(strippedCode);
+        await doLogin(strippedCode);
+        const clientType = persist ? ClientType.PERMANENT : ClientType.TEMPORARY;
+        await doFinalizeSSOLogin({clientType});
+        history.push(ROUTE.HISTORY_INFO);
+      }
     } catch (error) {
       switch (error.label) {
         case BackendError.LABEL.TOO_MANY_CLIENTS: {
@@ -149,22 +160,28 @@ const SingleSignOnForm = ({
           name="sso-code"
           tabIndex={1}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setCode(event.target.value);
-            setIsCodeInputValid(true);
+            setCodeOrMail(event.target.value);
+            setIsCodeOrMailInputValid(true);
           }}
-          ref={codeInput}
-          markInvalid={!isCodeInputValid}
-          placeholder={_(ssoLoginStrings.codeInputPlaceholder)}
-          value={code}
+          ref={codeOrMailInput}
+          markInvalid={!isCodeOrMailInputValid}
+          placeholder={_(ssoLoginStrings.codeOrMailInputPlaceholder)}
+          value={codeOrMail}
           autoComplete="section-login sso-code"
           maxLength={1024}
-          pattern={`${SSO_CODE_PREFIX_REGEX}${UUID_REGEX}`}
+          pattern={`(${SSO_CODE_PREFIX_REGEX}${PATTERN.UUID_V4}|${PATTERN.EMAIL})`}
           autoFocus
           type="text"
           required
           data-uie-name="enter-code"
         />
-        <RoundIconButton tabIndex={2} disabled={!code} type="submit" formNoValidate data-uie-name="do-sso-sign-in">
+        <RoundIconButton
+          tabIndex={2}
+          disabled={!codeOrMail}
+          type="submit"
+          formNoValidate
+          data-uie-name="do-sso-sign-in"
+        >
           <ArrowIcon />
         </RoundIconButton>
       </InputSubmitCombo>
@@ -205,6 +222,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
     {
       doFinalizeSSOLogin: ROOT_ACTIONS.authAction.doFinalizeSSOLogin,
       doGetAllClients: ROOT_ACTIONS.clientAction.doGetAllClients,
+      doSendNavigationEvent: ROOT_ACTIONS.wrapperEventAction.doSendNavigationEvent,
       resetAuthError: ROOT_ACTIONS.authAction.resetAuthError,
       validateSSOCode: ROOT_ACTIONS.authAction.validateSSOCode,
     },
