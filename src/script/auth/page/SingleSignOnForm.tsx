@@ -24,7 +24,6 @@ import {
   ArrowIcon,
   Checkbox,
   CheckboxLabel,
-  ErrorMessage,
   Form,
   Input,
   InputSubmitCombo,
@@ -63,9 +62,11 @@ const SingleSignOnForm = ({
   doFinalizeSSOLogin,
   doSendNavigationEvent,
   doGetDomainInfo,
+  doNavigate,
 }: Props & ConnectedProps & DispatchProps) => {
   const codeOrMailInput = useRef<HTMLInputElement>();
   const [codeOrMail, setCodeOrMail] = useState('');
+  const [disableInput, setDisableInput] = useState(false);
   const {formatMessage: _} = useIntl();
   const {history} = useReactRouter();
   const [persist, setPersist] = useState(true);
@@ -76,6 +77,7 @@ const SingleSignOnForm = ({
   useEffect(() => {
     if (initialCode && initialCode !== codeOrMail) {
       setCodeOrMail(initialCode);
+      setDisableInput(true);
     }
   }, [initialCode]);
 
@@ -94,6 +96,10 @@ const SingleSignOnForm = ({
     if (isFetching) {
       return;
     }
+
+    const currentlyDisabled = codeOrMailInput.current.disabled;
+    codeOrMailInput.current.disabled = false;
+
     codeOrMailInput.current.value = codeOrMailInput.current.value.trim();
     const currentValidationError = codeOrMailInput.current.checkValidity()
       ? null
@@ -101,6 +107,8 @@ const SingleSignOnForm = ({
 
     setValidationError(currentValidationError);
     setIsCodeOrMailInputValid(codeOrMailInput.current.validity.valid);
+
+    codeOrMailInput.current.disabled = currentlyDisabled;
 
     try {
       if (currentValidationError) {
@@ -112,7 +120,7 @@ const SingleSignOnForm = ({
         if (isDesktopApp()) {
           await doSendNavigationEvent(webapp_welcome_url);
         } else {
-          window.location.assign(webapp_welcome_url);
+          doNavigate(webapp_welcome_url);
         }
       } else {
         const strippedCode = stripPrefix(codeOrMail);
@@ -179,6 +187,7 @@ const SingleSignOnForm = ({
           autoFocus
           type="text"
           required
+          disabled={disableInput}
           data-uie-name="enter-code"
         />
         <RoundIconButton
@@ -194,9 +203,9 @@ const SingleSignOnForm = ({
       {validationError ? (
         parseValidationErrors([validationError])
       ) : loginError ? (
-        <ErrorMessage data-uie-name="error-message">{parseError(loginError)}</ErrorMessage>
+        parseError(loginError)
       ) : ssoError ? (
-        <ErrorMessage data-uie-name="error-message">{parseError(ssoError)}</ErrorMessage>
+        parseError(ssoError)
       ) : (
         <span style={{marginBottom: '4px'}}>&nbsp;</span>
       )}
@@ -229,6 +238,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
       doFinalizeSSOLogin: ROOT_ACTIONS.authAction.doFinalizeSSOLogin,
       doGetAllClients: ROOT_ACTIONS.clientAction.doGetAllClients,
       doGetDomainInfo: ROOT_ACTIONS.authAction.doGetDomainInfo,
+      doNavigate: ROOT_ACTIONS.navigationAction.doNavigate,
       doSendNavigationEvent: ROOT_ACTIONS.wrapperEventAction.doSendNavigationEvent,
       resetAuthError: ROOT_ACTIONS.authAction.resetAuthError,
       validateSSOCode: ROOT_ACTIONS.authAction.validateSSOCode,
