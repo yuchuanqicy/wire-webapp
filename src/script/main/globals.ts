@@ -87,7 +87,6 @@ import '../view_model/bindings/LocalizationBindings';
 import '../view_model/bindings/MessageListBindings';
 import '../view_model/bindings/VideoCallingBindings';
 import '../view_model/content/CollectionDetailsViewModel';
-import '../view_model/content/CollectionViewModel';
 import '../view_model/content/ConnectRequestsViewModel';
 import '../view_model/content/GiphyViewModel';
 import '../view_model/content/HistoryExportViewModel';
