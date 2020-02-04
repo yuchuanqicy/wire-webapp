@@ -31,16 +31,6 @@ window.z.viewModel.content = z.viewModel.content || {};
 // Parent: ContentViewModel
 z.viewModel.content.CollectionViewModel = class CollectionViewModel {
   constructor(mainViewModel, contentViewModel, repositories) {
-    this.addedToView = this.addedToView.bind(this);
-    this.clickOnMessage = this.clickOnMessage.bind(this);
-    this.itemAdded = this.itemAdded.bind(this);
-    this.itemRemoved = this.itemRemoved.bind(this);
-    this.messageRemoved = this.messageRemoved.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
-    this.removedFromView = this.removedFromView.bind(this);
-    this.searchInConversation = this.searchInConversation.bind(this);
-    this.setConversation = this.setConversation.bind(this);
-
     this.collectionDetails = contentViewModel.collectionDetails;
     this.conversation_repository = repositories.conversation;
     this.logger = getLogger('z.viewModel.CollectionViewModel');
@@ -55,7 +45,7 @@ z.viewModel.content.CollectionViewModel = class CollectionViewModel {
     this.searchInput = ko.observable('');
   }
 
-  addedToView() {
+  addedToView = () => {
     amplify.subscribe(WebAppEvents.CONVERSATION.EPHEMERAL_MESSAGE_TIMEOUT, this.messageRemoved);
     amplify.subscribe(WebAppEvents.CONVERSATION.MESSAGE.ADDED, this.itemAdded);
     amplify.subscribe(WebAppEvents.CONVERSATION.MESSAGE.REMOVED, this.itemRemoved);
@@ -64,36 +54,30 @@ z.viewModel.content.CollectionViewModel = class CollectionViewModel {
         amplify.publish(WebAppEvents.CONVERSATION.SHOW, this.conversationEntity());
       }
     });
-  }
+  };
 
-  searchInConversation(query) {
-    return this.conversation_repository.searchInConversation(this.conversationEntity(), query);
-  }
+  searchInConversation = query => this.conversation_repository.searchInConversation(this.conversationEntity(), query);
 
-  onInputChange(input) {
-    this.searchInput(input || '');
-  }
+  onInputChange = input => this.searchInput(input || '');
 
-  itemAdded(messageEntity) {
+  itemAdded = messageEntity => {
     const isCurrentConversation = this.conversationEntity().id === messageEntity.conversation_id;
     if (isCurrentConversation) {
       this._populateItems([messageEntity]);
     }
-  }
+  };
 
-  itemRemoved(messageId, conversationId) {
+  itemRemoved = (messageId, conversationId) => {
     const isCurrentConversation = this.conversationEntity().id === conversationId;
     if (isCurrentConversation) {
       const _removeItem = messageEntity => messageEntity.id === messageId;
       [this.audio, this.files, this.images, this.links].forEach(array => array.remove(_removeItem));
     }
-  }
+  };
 
-  messageRemoved(messageEntity) {
-    this.itemRemoved(messageEntity.id, messageEntity.conversation_id);
-  }
+  messageRemoved = messageEntity => this.itemRemoved(messageEntity.id, messageEntity.conversation_id);
 
-  removedFromView() {
+  removedFromView = () => {
     amplify.unsubscribe(WebAppEvents.CONVERSATION.EPHEMERAL_MESSAGE_TIMEOUT, this.messageRemoved);
     amplify.unsubscribe(WebAppEvents.CONVERSATION.MESSAGE.ADDED, this.itemAdded);
     amplify.unsubscribe(WebAppEvents.CONVERSATION.MESSAGE.REMOVED, this.itemRemoved);
@@ -101,9 +85,9 @@ z.viewModel.content.CollectionViewModel = class CollectionViewModel {
     this.conversationEntity(null);
     this.searchInput('');
     [this.images, this.files, this.links, this.audio].forEach(array => array.removeAll());
-  }
+  };
 
-  setConversation(conversationEntity = this.conversation_repository.active_conversation()) {
+  setConversation = (conversationEntity = this.conversation_repository.active_conversation()) => {
     if (conversationEntity) {
       this.conversationEntity(conversationEntity);
 
@@ -111,7 +95,7 @@ z.viewModel.content.CollectionViewModel = class CollectionViewModel {
         .get_events_for_category(conversationEntity, MessageCategory.LINK_PREVIEW)
         .then(messageEntities => this._populateItems(messageEntities));
     }
-  }
+  };
 
   _populateItems(messageEntities) {
     messageEntities.forEach(messageEntity => {
@@ -137,20 +121,16 @@ z.viewModel.content.CollectionViewModel = class CollectionViewModel {
     });
   }
 
-  clickOnMessage(messageEntity) {
+  clickOnMessage = messageEntity =>
     amplify.publish(WebAppEvents.CONVERSATION.SHOW, this.conversationEntity(), {exposeMessage: messageEntity});
-  }
 
-  clickOnBackButton() {
-    amplify.publish(WebAppEvents.CONVERSATION.SHOW, this.conversationEntity());
-  }
+  clickOnBackButton = () => amplify.publish(WebAppEvents.CONVERSATION.SHOW, this.conversationEntity());
 
   clickOnSection(category, items) {
     this.collectionDetails.setConversation(this.conversationEntity(), category, [].concat(items));
     amplify.publish(WebAppEvents.CONTENT.SWITCH, ContentViewModel.STATE.COLLECTION_DETAILS);
   }
 
-  clickOnImage(messageEntity) {
+  clickOnImage = messageEntity =>
     amplify.publish(WebAppEvents.CONVERSATION.DETAIL_VIEW.SHOW, messageEntity, this.images(), 'collection');
-  }
 };
