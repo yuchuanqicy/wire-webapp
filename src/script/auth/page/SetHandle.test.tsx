@@ -19,26 +19,17 @@
 
 import {ReactWrapper} from 'enzyme';
 import React from 'react';
-import {Config as ReadOnlyConfig} from '../../Config';
 import {actionRoot} from '../module/action';
 import {initialRootState} from '../module/reducer';
 import {mockStoreFactory} from '../util/test/mockStoreFactory';
 import {mountComponent} from '../util/test/TestUtil';
 import SetHandle from './SetHandle';
 
-const Config = ReadOnlyConfig as any;
-
 describe('"SetHandle"', () => {
   let wrapper: ReactWrapper;
 
   const handleInput = () => wrapper.find('input[data-uie-name="enter-handle"]').first();
   const setHandleButton = () => wrapper.find('button[data-uie-name="do-send-handle"]').first();
-
-  beforeAll(() => {
-    Config.FEATURE = {
-      CHECK_CONSENT: false,
-    };
-  });
 
   it('has disabled submit button as long as there is no input', () => {
     wrapper = mountComponent(
@@ -56,6 +47,7 @@ describe('"SetHandle"', () => {
     expect(handleInput().exists())
       .withContext('handle input should be present')
       .toBe(true);
+
     expect(setHandleButton().exists())
       .withContext('Submit button should be present')
       .toBe(true);
@@ -64,6 +56,7 @@ describe('"SetHandle"', () => {
       .withContext('Submit button should be disabled')
       .toBe(true);
     handleInput().simulate('change', {target: {value: 'e'}});
+
     expect(setHandleButton().props().disabled)
       .withContext('Submit button should be enabled')
       .toBe(false);

@@ -34,7 +34,8 @@ describe('"CheckPassword"', () => {
 
   const passwordInput = () => wrapper.find('input[data-uie-name="enter-password"]').first();
   const loginButton = () => wrapper.find('button[data-uie-name="do-sign-in"]').first();
-  const errorMessage = () => wrapper.find('[data-uie-name="error-message"]').first();
+  const errorMessage = (errorLabel?: string) =>
+    wrapper.find(`[data-uie-name="error-message"]${errorLabel ? `[data-uie-value="${errorLabel}"]` : ''}`);
 
   it('has disabled submit button as long as there is no input', () => {
     wrapper = mountComponent(
@@ -52,6 +53,7 @@ describe('"CheckPassword"', () => {
     expect(passwordInput().exists())
       .withContext('password input is present')
       .toBe(true);
+
     expect(loginButton().exists())
       .withContext('submit button is present')
       .toBe(true);
@@ -61,6 +63,7 @@ describe('"CheckPassword"', () => {
       .toBe(true);
 
     passwordInput().simulate('change', {target: {value: 'e'}});
+
     expect(loginButton().props().disabled)
       .withContext('submit button should be enabled')
       .toBe(false);
@@ -86,6 +89,7 @@ describe('"CheckPassword"', () => {
     );
 
     passwordInput().simulate('change', {target: {value: 'e'}});
+
     expect(loginButton().props().disabled)
       .withContext('submit button should be enabled')
       .toBe(false);
@@ -96,6 +100,7 @@ describe('"CheckPassword"', () => {
       expect(actionRoot.authAction.doLogin)
         .withContext('action was called')
         .toHaveBeenCalled();
+
       expect(historyPushSpy)
         .withContext('navigation to history page was triggered')
         .toHaveBeenCalledWith(ROUTE.HISTORY_INFO as any);
@@ -119,6 +124,7 @@ describe('"CheckPassword"', () => {
     );
 
     passwordInput().simulate('change', {target: {value: 'e'}});
+
     expect(loginButton().props().disabled)
       .withContext('submit button should be enabled')
       .toBe(false);
@@ -128,10 +134,14 @@ describe('"CheckPassword"', () => {
     await waitForExpect(() => {
       expect(actionRoot.authAction.doLogin)
         .withContext('action was called')
-        .toHaveBeenCalled();
-      expect(errorMessage().text())
+        .toHaveBeenCalledTimes(1);
+    });
+    await waitForExpect(() => {
+      wrapper.update();
+
+      expect(errorMessage(BackendError.LABEL.INVALID_CREDENTIALS).exists())
         .withContext('Shows invalid credentials error')
-        .toEqual('Please verify your details and try again');
+        .toBe(true);
     });
   });
 
@@ -156,6 +166,7 @@ describe('"CheckPassword"', () => {
     );
 
     passwordInput().simulate('change', {target: {value: 'e'}});
+
     expect(loginButton().props().disabled)
       .withContext('submit button should be enabled')
       .toBe(false);
@@ -166,6 +177,7 @@ describe('"CheckPassword"', () => {
       expect(actionRoot.authAction.doLogin)
         .withContext('action was called')
         .toHaveBeenCalled();
+
       expect(historyPushSpy)
         .withContext('navigation to too many clients page was triggered')
         .toHaveBeenCalledWith(ROUTE.CLIENTS as any);
