@@ -28,7 +28,7 @@ import {createRandomUuid, arrayToBase64} from 'Util/util';
 import {AssetUploadFailedReason} from 'src/script/assets/AssetUploadFailedReason';
 import {ClientEvent} from 'src/script/event/Client';
 import {BackendEvent} from 'src/script/event/Backend';
-import {WebAppEvents} from 'src/script/event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {NOTIFICATION_HANDLING_STATE} from 'src/script/event/NotificationHandlingState';
 import {EventRepository} from 'src/script/event/EventRepository';
 import {NotificationService} from 'src/script/event/NotificationService';

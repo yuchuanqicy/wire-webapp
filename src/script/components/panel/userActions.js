@@ -22,7 +22,7 @@ import ko from 'knockout';
 import {t} from 'Util/LocalizerUtil';
 import {noop} from 'Util/util';
 
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 import './panelActions';
 

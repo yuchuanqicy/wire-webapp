@@ -26,7 +26,7 @@ import {ReceiptMode} from '../../conversation/ReceiptMode';
 import * as trackingHelpers from '../../tracking/Helpers';
 import {EventName} from '../../tracking/EventName';
 import {ACCESS_STATE} from '../../conversation/AccessState';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {ConversationRepository} from '../../conversation/ConversationRepository';
 
 export class GroupCreationViewModel {

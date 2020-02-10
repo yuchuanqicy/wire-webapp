@@ -20,7 +20,7 @@
 import {getLogger} from 'Util/Logger';
 
 import {AppInitStatisticsValue} from './AppInitStatisticsValue';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 export class AppInitStatistics {
   static get CONFIG() {

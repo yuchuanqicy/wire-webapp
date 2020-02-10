@@ -26,7 +26,7 @@ import {BasePanelViewModel} from './BasePanelViewModel';
 import {getManageServicesUrl} from '../../externalRoute';
 import * as trackingHelpers from '../../tracking/Helpers';
 import {EventName} from '../../tracking/EventName';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {MotionDuration} from '../../motion/MotionDuration';
 
 export class AddParticipantsViewModel extends BasePanelViewModel {

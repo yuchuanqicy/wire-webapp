@@ -30,7 +30,7 @@ import {PreferencesListViewModel} from './list/PreferencesListViewModel';
 import {StartUIViewModel} from './list/StartUIViewModel';
 import {TakeoverViewModel} from './list/TakeoverViewModel';
 import {TemporaryGuestViewModel} from './list/TemporaryGuestViewModel';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 import {Context} from '../ui/ContextMenu';
 import {showLabelContextMenu} from '../ui/LabelContextMenu';

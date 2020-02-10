@@ -22,7 +22,7 @@ import {Environment} from 'Util/Environment';
 
 import {AppInitStatistics} from './AppInitStatistics';
 import {AppInitTimings} from './AppInitTimings';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {EventName} from '../../tracking/EventName';
 
 export class AppInitTelemetry {

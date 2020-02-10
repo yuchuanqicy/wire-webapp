@@ -33,7 +33,7 @@ import {User} from '../entity/User';
 import {BaseError} from '../error/BaseError';
 import {EventRepository} from '../event/EventRepository';
 import {EventSource} from '../event/EventSource';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {SystemMessageType} from '../message/SystemMessageType';
 import {BackendClient} from '../service/BackendClient';
 import {UserRepository} from '../user/UserRepository';

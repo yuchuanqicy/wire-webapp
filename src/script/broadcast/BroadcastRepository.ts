@@ -29,7 +29,7 @@ import {EventInfoEntity} from '../conversation/EventInfoEntity';
 import {CryptographyRepository} from '../cryptography/CryptographyRepository';
 import {User} from '../entity/User';
 import {BackendClientError} from '../error/BackendClientError';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {MessageSender} from '../message/MessageSender';
 import {BroadcastService} from './BroadcastService';
 

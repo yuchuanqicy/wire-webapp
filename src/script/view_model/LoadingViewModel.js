@@ -22,7 +22,7 @@ import ko from 'knockout';
 import {t} from 'Util/LocalizerUtil';
 
 import {Config} from '../Config';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 import 'Components/loadingBar';
 

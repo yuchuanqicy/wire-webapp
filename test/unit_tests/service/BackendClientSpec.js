@@ -19,7 +19,7 @@
 
 import {amplify} from 'amplify';
 import {resolve, graph} from './../../api/testResolver';
-import {WebAppEvents} from 'src/script/event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 describe('BackendClient', () => {
   let backendClient = null;

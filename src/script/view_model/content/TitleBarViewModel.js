@@ -24,7 +24,7 @@ import {TIME_IN_MILLIS} from 'Util/TimeUtil';
 import {CONV_TYPE, CALL_TYPE} from '@wireapp/avs';
 
 import {ConversationVerificationState} from '../../conversation/ConversationVerificationState';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {Shortcut} from '../../ui/Shortcut';
 import {ShortcutType} from '../../ui/ShortcutType';
 import {ContentViewModel} from '../ContentViewModel';

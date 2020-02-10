@@ -26,7 +26,7 @@ import {createRandomUuid} from 'Util/util';
 
 import {Conversation} from '../entity/Conversation';
 import {BackendEvent} from '../event/Backend';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {PropertiesService} from '../properties/PropertiesService';
 import {ModalsViewModel} from '../view_model/ModalsViewModel';
 

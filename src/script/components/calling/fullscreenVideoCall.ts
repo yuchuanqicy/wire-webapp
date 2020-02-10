@@ -26,7 +26,7 @@ import {Grid} from '../../calling/videoGridHandler';
 import {Conversation} from '../../entity/Conversation';
 import {ElectronDesktopCapturerSource, MediaDevicesHandler} from '../../media/MediaDevicesHandler';
 
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 import 'Components/calling/deviceToggleButton';
 

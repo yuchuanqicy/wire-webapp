@@ -28,7 +28,7 @@ import {ACCESS_STATE} from '../conversation/AccessState';
 import {ConversationRepository} from '../conversation/ConversationRepository';
 import {Conversation} from '../entity/Conversation';
 import {User} from '../entity/User';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {TeamRepository} from '../team/TeamRepository';
 import {EventName} from '../tracking/EventName';
 import {ModalsViewModel} from '../view_model/ModalsViewModel';

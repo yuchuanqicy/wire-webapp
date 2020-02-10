@@ -26,7 +26,7 @@ import {TIME_IN_MILLIS} from 'Util/TimeUtil';
 import {isValidApiPath} from 'Util/ValidationUtil';
 import {AuthRepository} from '../auth/AuthRepository';
 import {BackendClientError} from '../error/BackendClientError';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {QUEUE_STATE} from './QueueState';
 
 /**

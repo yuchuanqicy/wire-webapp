@@ -23,7 +23,7 @@ import {Environment} from 'Util/Environment';
 import {capitalizeFirstChar, includesString} from 'Util/StringUtil';
 
 import {ShortcutType} from './ShortcutType';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 const SHORTCUT_MAP = {
   [ShortcutType.ADD_PEOPLE]: {

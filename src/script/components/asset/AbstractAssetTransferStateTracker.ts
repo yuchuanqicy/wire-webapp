@@ -25,7 +25,7 @@ import {AssetUploader} from '../../assets/AssetUploader';
 import {graph, resolve} from '../../config/appResolver';
 import {ContentMessage} from '../../entity/message/ContentMessage';
 import {File as FileAsset} from '../../entity/message/File';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 export class AbstractAssetTransferStateTracker {
   assetUploader: AssetUploader;

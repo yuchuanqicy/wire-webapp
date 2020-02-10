@@ -29,7 +29,7 @@ import {getURLParameter} from '../../auth/util/urlUtil';
 import {ClientRepository} from '../../client/ClientRepository';
 import {Config} from '../../Config';
 import {User} from '../../entity/User';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 export enum APPLOCK_STATE {
   NONE = 'applock.none',

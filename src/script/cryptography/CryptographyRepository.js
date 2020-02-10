@@ -31,7 +31,7 @@ import {CryptographyMapper} from './CryptographyMapper';
 import {CryptographyService} from './CryptographyService';
 
 import {Config} from '../Config';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {EventName} from '../tracking/EventName';
 import {ClientEntity} from '../client/ClientEntity';
 import {BackendClientError} from '../error/BackendClientError';

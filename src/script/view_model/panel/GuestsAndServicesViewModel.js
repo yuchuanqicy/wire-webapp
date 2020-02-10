@@ -25,7 +25,7 @@ import {Config} from '../../Config';
 import {BasePanelViewModel} from './BasePanelViewModel';
 import {ModalsViewModel} from '../ModalsViewModel';
 import {ACCESS_STATE} from '../../conversation/AccessState';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {EventName} from '../../tracking/EventName';
 
 export class GuestsAndServicesViewModel extends BasePanelViewModel {

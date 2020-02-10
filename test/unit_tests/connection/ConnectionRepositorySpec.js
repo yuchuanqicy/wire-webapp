@@ -25,7 +25,7 @@ import {backendConfig} from '../../api/testResolver';
 
 import {Conversation} from 'src/script/entity/Conversation';
 import {User} from 'src/script/entity/User';
-import {WebAppEvents} from 'src/script/event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {ConnectionEntity} from 'src/script/connection/ConnectionEntity';
 
 describe('ConnectionRepository', () => {

@@ -23,7 +23,7 @@ import {t} from 'Util/LocalizerUtil';
 
 import {BackendClientError} from '../error/BackendClientError';
 import {BackendEvent} from '../event/Backend';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {EventName} from '../tracking/EventName';
 import {ModalsViewModel} from '../view_model/ModalsViewModel';
 

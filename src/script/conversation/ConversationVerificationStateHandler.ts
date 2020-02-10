@@ -24,7 +24,7 @@ import {Logger, getLogger} from 'Util/Logger';
 
 import {Conversation} from '../entity/Conversation';
 import {EventRepository} from '../event/EventRepository';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {VerificationMessageType} from '../message/VerificationMessageType';
 import {ServerTimeHandler} from '../time/serverTimeHandler';
 import {ConversationRepository} from './ConversationRepository';

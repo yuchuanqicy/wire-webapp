@@ -30,7 +30,7 @@ import {User} from '../../entity/User';
 import {generatePermissionHelpers} from '../../user/UserPermission';
 import {validateHandle} from '../../user/UserHandleGenerator';
 import {ParticipantAvatar} from 'Components/participantAvatar';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {EventName} from '../../tracking/EventName';
 import {SearchRepository} from '../../search/SearchRepository';
 

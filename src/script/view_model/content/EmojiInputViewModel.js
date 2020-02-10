@@ -24,7 +24,7 @@ import {sortByPriority} from 'Util/StringUtil';
 
 import emojiBindings from './emoji.json';
 import {PROPERTIES_TYPE} from '../../properties/PropertiesType';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {StorageKey} from '../../storage/StorageKey';
 
 export class EmojiInputViewModel {

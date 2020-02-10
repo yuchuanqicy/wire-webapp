@@ -30,7 +30,7 @@ import {EVENT_TYPE} from './EventType';
 import {ClientEvent} from './Client';
 import {EventTypeHandling} from './EventTypeHandling';
 import {BackendEvent} from './Backend';
-import {WebAppEvents} from './WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {NOTIFICATION_HANDLING_STATE} from './NotificationHandlingState';
 import {WarningsViewModel} from '../view_model/WarningsViewModel';
 import {categoryFromEvent} from '../message/MessageCategorization';

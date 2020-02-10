@@ -22,7 +22,7 @@ import UUID from 'uuidjs';
 import {PreferenceNotificationRepository} from 'src/script/notification/PreferenceNotificationRepository';
 import {PropertiesRepository} from 'src/script/properties/PropertiesRepository';
 import {BackendEvent} from 'src/script/event/Backend';
-import {WebAppEvents} from 'src/script/event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 describe('PreferenceNotificationRepository', () => {
   const user = {id: UUID.genV4().hexString};

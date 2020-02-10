@@ -21,7 +21,7 @@ import {t} from 'Util/LocalizerUtil';
 import {formatLocale} from 'Util/TimeUtil';
 
 import {BasePanelViewModel} from './BasePanelViewModel';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {SuperType} from '../../message/SuperType';
 
 export class MessageDetailsViewModel extends BasePanelViewModel {

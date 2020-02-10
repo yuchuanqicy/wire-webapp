@@ -24,7 +24,7 @@ import {Environment} from 'Util/Environment';
 import {downloadBlob} from 'Util/util';
 
 import {PROPERTIES_TYPE} from '../../properties/PropertiesType';
-import {WebAppEvents} from '../../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 import {Config} from '../../Config';
 import {THEMES as ThemeViewModelThemes} from '../ThemeViewModel';

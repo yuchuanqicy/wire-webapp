@@ -27,7 +27,7 @@ import {afterRender} from 'Util/util';
 import {Config} from '../Config';
 import {ModalsViewModel} from './ModalsViewModel';
 import {PermissionState} from '../notification/PermissionState';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 export class WarningsViewModel {
   static get CONFIG() {

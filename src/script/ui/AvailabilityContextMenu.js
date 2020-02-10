@@ -20,7 +20,7 @@
 import {Availability} from '@wireapp/protocol-messaging';
 import {t} from 'Util/LocalizerUtil';
 
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {Context} from '../ui/ContextMenu';
 
 export const AvailabilityContextMenu = {

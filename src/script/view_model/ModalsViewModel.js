@@ -26,7 +26,7 @@ import {noop, afterRender} from 'Util/util';
 import {formatLocale} from 'Util/TimeUtil';
 
 import {Config} from '../Config';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 const defaultContent = {
   checkboxLabel: '',

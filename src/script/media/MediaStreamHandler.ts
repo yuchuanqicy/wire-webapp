@@ -23,7 +23,7 @@ import {Logger, getLogger} from 'Util/Logger';
 
 import {MediaError} from '../error/MediaError';
 import {PermissionError} from '../error/PermissionError';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {PermissionRepository} from '../permission/PermissionRepository';
 import {PermissionStatusState} from '../permission/PermissionStatusState';
 import {PermissionType} from '../permission/PermissionType';

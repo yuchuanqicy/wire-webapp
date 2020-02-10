@@ -27,7 +27,7 @@ import {compareTransliteration, startsWith, getFirstChar} from 'Util/StringUtil'
 
 import {ACCENT_ID} from '../Config';
 import {ROLE as TEAM_ROLE} from '../user/UserPermission';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {ConnectionEntity} from '../connection/ConnectionEntity';
 
 // Please note: The own user has a "locale"

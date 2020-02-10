@@ -26,7 +26,7 @@ import {amplify} from 'amplify';
 import {Config} from '../Config';
 import {ReceiptMode} from '../conversation/ReceiptMode';
 import {User} from '../entity/User';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {SelfService} from '../self/SelfService';
 import {ConsentType} from '../user/ConsentType';
 import {ConsentValue} from '../user/ConsentValue';

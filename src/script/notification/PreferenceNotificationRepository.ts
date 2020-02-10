@@ -26,7 +26,7 @@ import {loadValue, resetStoreValue, storeValue} from 'Util/StorageUtil';
 import {ClientEntity} from '../client/ClientEntity';
 import {User} from '../entity/User';
 import {BackendEvent} from '../event/Backend';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {PropertiesRepository} from '../properties/PropertiesRepository';
 
 interface Notification {

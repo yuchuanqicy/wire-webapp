@@ -24,7 +24,7 @@ import {Environment} from 'Util/Environment';
 import {Logger, getLogger} from 'Util/Logger';
 import {loadValue, resetStoreValue, storeValue} from 'Util/StorageUtil';
 import {TIME_IN_MILLIS, formatTimestamp} from 'Util/TimeUtil';
-import {WebAppEvents} from '../event/WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 import {QUEUE_STATE} from '../service/QueueState';
 import {StorageKey} from '../storage/StorageKey';
 import {WarningsViewModel} from '../view_model/WarningsViewModel';

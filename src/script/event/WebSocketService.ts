@@ -28,7 +28,7 @@ import {AuthRepository} from '../auth/AuthRepository';
 import {BackendClient} from '../service/BackendClient';
 import {StorageKey} from '../storage/StorageKey';
 import {WarningsViewModel} from '../view_model/WarningsViewModel';
-import {WebAppEvents} from './WebApp';
+import {WebAppEvents} from '@wireapp/webapp-events';
 
 enum CHANGE_TRIGGER {
   CLEANUP = 'CHANGE_TRIGGER.CLEANUP',
