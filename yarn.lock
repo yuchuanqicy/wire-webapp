@@ -1915,6 +1915,11 @@
   dependencies:
     "@types/node" "~12"
 
+"@wireapp/webapp-events@0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@wireapp/webapp-events/-/webapp-events-0.0.0.tgz#1937048e31e60f14582e6732a2e84290fea31739"
+  integrity sha512-Oan/ARoq6CbtOHTdI2iqaWUrN1lw+OPnE4hh+08p6qbdnm3mfys0sFxL2HIZ9fhjgoKnwDE/rnMcfeDaX066+g==
+
 "@wireapp/websql@0.0.15":
   version "0.0.15"
   resolved "https://registry.yarnpkg.com/@wireapp/websql/-/websql-0.0.15.tgz#0bf3f284379db5019a950bafcc1e409039cd8bbf"
