@@ -48,8 +48,9 @@ import * as ClientSelector from '../module/selector/ClientSelector';
 import {QUERY_KEY, ROUTE} from '../route';
 import {isDesktopApp} from '../Runtime';
 import {parseError, parseValidationErrors} from '../util/errorUtil';
+import {Redirect} from 'react-router';
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface SingleSignOnFormProps extends React.HTMLAttributes<HTMLDivElement> {
   doLogin: (code: string) => Promise<void>;
   initialCode?: string;
 }
@@ -67,7 +68,9 @@ const SingleSignOnForm = ({
   doSendNavigationEvent,
   doGetDomainInfo,
   doNavigate,
-}: Props & ConnectedProps & DispatchProps) => {
+  doCheckConversationCode,
+  doJoinConversationByCode,
+}: SingleSignOnFormProps & ConnectedProps & DispatchProps) => {
   const codeOrMailInput = useRef<HTMLInputElement>();
   const [codeOrMail, setCodeOrMail] = useState('');
   const [disableInput, setDisableInput] = useState(false);
@@ -78,6 +81,10 @@ const SingleSignOnForm = ({
   const [isCodeOrMailInputValid, setIsCodeOrMailInputValid] = useState(true);
   const [validationError, setValidationError] = useState();
   const [logoutReason, setLogoutReason] = useState();
+
+  const [conversationCode, setConversationCode] = useState();
+  const [conversationKey, setConversationKey] = useState();
+  const [isValidLink, setIsValidLink] = useState(true);
 
   useEffect(() => {
     const queryClientType = UrlUtil.getURLParameter(QUERY_KEY.CLIENT_TYPE);
@@ -90,6 +97,22 @@ const SingleSignOnForm = ({
     const queryLogoutReason = UrlUtil.getURLParameter(QUERY_KEY.LOGOUT_REASON) || null;
     if (queryLogoutReason) {
       setLogoutReason(queryLogoutReason);
+    }
+  }, []);
+
+  useEffect(() => {
+    const queryConversationCode = UrlUtil.getURLParameter(QUERY_KEY.CONVERSATION_CODE) || null;
+    const queryConversationKey = UrlUtil.getURLParameter(QUERY_KEY.CONVERSATION_KEY) || null;
+
+    const keyAndCodeExistent = queryConversationKey && queryConversationCode;
+    if (keyAndCodeExistent) {
+      setConversationCode(queryConversationCode);
+      setConversationKey(queryConversationKey);
+      setIsValidLink(true);
+      doCheckConversationCode(queryConversationKey, queryConversationCode).catch(error => {
+        console.warn('Invalid conversation code', error);
+        setIsValidLink(false);
+      });
     }
   }, []);
 
@@ -133,8 +156,9 @@ const SingleSignOnForm = ({
       if (currentValidationError) {
         throw currentValidationError;
       }
-      if (isValidEmail(codeOrMail)) {
-        const domain = codeOrMail.split('@')[1];
+      const email = codeOrMail.trim();
+      if (isValidEmail(email)) {
+        const domain = email.split('@')[1];
         const {webapp_welcome_url} = await doGetDomainInfo(domain);
         const [path, query = ''] = webapp_welcome_url.split('?');
         const welcomeUrl = pathWithParams(path, {[QUERY_KEY.CLIENT_TYPE]: clientType}, null, query);
@@ -148,6 +172,11 @@ const SingleSignOnForm = ({
         await validateSSOCode(strippedCode);
         await doLogin(strippedCode);
         await doFinalizeSSOLogin({clientType});
+        const hasKeyAndCode = conversationKey && conversationCode;
+        if (hasKeyAndCode) {
+          await doJoinConversationByCode(conversationKey, conversationCode);
+        }
+
         history.push(ROUTE.HISTORY_INFO);
       }
     } catch (error) {
@@ -189,6 +218,7 @@ const SingleSignOnForm = ({
 
   return (
     <Form style={{marginTop: 30}} data-uie-name="sso" onSubmit={handleSubmit}>
+      {!isValidLink && <Redirect to={ROUTE.CONVERSATION_JOIN_INVALID} />}
       <InputSubmitCombo>
         <Input
           name={
@@ -273,9 +303,11 @@ type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
   bindActionCreators(
     {
+      doCheckConversationCode: ROOT_ACTIONS.conversationAction.doCheckConversationCode,
       doFinalizeSSOLogin: ROOT_ACTIONS.authAction.doFinalizeSSOLogin,
       doGetAllClients: ROOT_ACTIONS.clientAction.doGetAllClients,
       doGetDomainInfo: ROOT_ACTIONS.authAction.doGetDomainInfo,
+      doJoinConversationByCode: ROOT_ACTIONS.conversationAction.doJoinConversationByCode,
       doNavigate: ROOT_ACTIONS.navigationAction.doNavigate,
       doSendNavigationEvent: ROOT_ACTIONS.wrapperEventAction.doSendNavigationEvent,
       resetAuthError: ROOT_ACTIONS.authAction.resetAuthError,
