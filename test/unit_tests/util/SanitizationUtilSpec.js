@@ -17,14 +17,18 @@
  *
  */
 
-import {LocalizerUtil, Declension} from 'Util/LocalizerUtil';
+import {LocalizerUtil, Declension, setStrings} from 'Util/LocalizerUtil';
 
 import 'src/script/localization/Localizer';
 
-import {escapeRegex, getFirstName, getSelfName, safeWindowOpen} from 'src/script/util/SanitizationUtil';
+import {escapeRegex, getSelfName, getUserName, safeWindowOpen} from 'src/script/util/SanitizationUtil';
 import {User} from 'src/script/entity/User';
 
 describe('SanitizationUtil', () => {
+  beforeEach(() => {
+    setStrings({en: z.string});
+  });
+
   describe('escapeRegex', () => {
     it('will return escaped regex strings', () => {
       const escapedRegex = escapeRegex(':)');
@@ -33,18 +37,18 @@ describe('SanitizationUtil', () => {
     });
   });
 
-  describe('getFirstName', () => {
-    it('will return the first name of the given user', () => {
+  describe('getUserName', () => {
+    it('will return the name of the given user', () => {
       const userEntity = new User();
       userEntity.name(`<script>alert('Unsanitzed');</script>`);
-      const escapedFirstName = getFirstName(userEntity);
+      const escapedFirstName = getUserName(userEntity);
 
       expect(escapedFirstName).toEqual('&lt;script&gt;alert(&#x27;Unsanitzed&#x27;);&lt;/script&gt;');
-      const unescapedFirstName = getFirstName(userEntity, undefined, true);
+      const unescapedFirstName = getUserName(userEntity, undefined, true);
 
       expect(unescapedFirstName).toEqual(`<script>alert('Unsanitzed');</script>`);
       userEntity.is_me = true;
-      const escapedSelfName = getFirstName(userEntity);
+      const escapedSelfName = getUserName(userEntity);
 
       expect(escapedSelfName).toEqual('you');
     });

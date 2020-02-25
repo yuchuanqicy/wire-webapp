@@ -17,6 +17,7 @@
  *
  */
 
+import {container} from 'tsyringe';
 import {escape} from 'underscore';
 import {Availability} from '@wireapp/protocol-messaging';
 
@@ -28,7 +29,6 @@ import {renderMessage} from 'Util/messageRenderer';
 import {KEY, isFunctionKey, insertAtCaret} from 'Util/KeyboardUtil';
 import {ParticipantAvatar} from 'Components/participantAvatar';
 
-import {resolve, graph} from '../../config/appResolver';
 import {ModalsViewModel} from '../ModalsViewModel';
 
 import {StorageKey} from '../../storage/StorageKey';
@@ -43,6 +43,7 @@ import {ShortcutType} from '../../ui/ShortcutType';
 import {Config} from '../../Config';
 import {AssetUploader} from '../../assets/AssetUploader';
 import {AssetService} from '../../assets/AssetService';
+import {BackendClient} from '../../service/BackendClient';
 
 window.z = window.z || {};
 window.z.viewModel = z.viewModel || {};
@@ -76,7 +77,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.onWindowClick = this.onWindowClick.bind(this);
     this.setElements = this.setElements.bind(this);
     this.updateSelectionState = this.updateSelectionState.bind(this);
-    this.assetUploader = new AssetUploader(new AssetService(resolve(graph.BackendClient)));
+    this.assetUploader = new AssetUploader(new AssetService(container.resolve(BackendClient)));
 
     this.shadowInput = null;
     this.textarea = null;
@@ -221,7 +222,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
     this.inputPlaceholder = ko.pureComputed(() => {
       if (this.showAvailabilityTooltip()) {
         const userEntity = this.conversationEntity().firstUserEntity();
-        const name = userEntity.first_name();
+        const name = userEntity.name();
         const availabilityStrings = {
           [Availability.Type.AVAILABLE]: t('tooltipConversationInputPlaceholderAvailable', name),
           [Availability.Type.AWAY]: t('tooltipConversationInputPlaceholderAway', name),
@@ -324,6 +325,7 @@ z.viewModel.content.InputBarViewModel = class InputBarViewModel {
       const previousSessionData = await this._loadDraftState(conversationEntity);
       this.input(previousSessionData.text);
       this.currentMentions(previousSessionData.mentions);
+      this.updateSelectionState();
 
       if (previousSessionData.replyEntityPromise) {
         previousSessionData.replyEntityPromise.then(replyEntity => {
